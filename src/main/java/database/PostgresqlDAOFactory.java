@@ -1,5 +1,10 @@
 package database;
 
+import dao.CategoriaDAO;
+import dao.ContaDAO;
+import dao.DAOFactory;
+import dao.ParcelaDAO;
+import dao.ProdutoDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,8 +12,75 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ConexaoBD {
-	
+public class PostgresqlDAOFactory extends DAOFactory {
+
+    public static DAOFactory getInstancia() {
+
+        if (instancia == null) {
+            instancia = new PostgresqlDAOFactory();
+        }
+
+        return instancia;
+    }
+
+    private PostgresqlDAOFactory() {
+        this.openConnection();
+    }
+
+    private void openConnection() {
+        String driver = "org.postgresql.Driver";
+        String url = "jdbc:postgresql://motty.db.elephantsql.com:5432/doukhcto";
+        String user = "doukhcto";
+        String pwd = "tvg0xweZPbBrEO7dl5GvNE0sqHhBQLzI";
+
+        try {
+
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url, user, pwd);
+
+            //insertProduct(conn, 100, "produto100", "descricao produto100");
+            //updateProduct(conn, 100, "produtonovo", "produto massa");
+            //getProducts(conn);
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println("Nï¿½o foi possï¿½vel encontrar o driver JDBC");
+        } catch (SQLException se) {
+            System.out.println("Nï¿½o foi possï¿½vel conectar ao Banco de Dados");
+        }
+    }
+
+    @Override
+    public void closeConnection() {
+        try {
+            if (this.conn != null) {
+                this.conn.close();
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
+    
+    @Override
+    public ProdutoDAO getProdutoDAO() {
+        return new PostgresqlProdutoDAO(conn);
+    }
+
+    @Override
+    public ParcelaDAO getParcelaDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ContaDAO getContaDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public CategoriaDAO getCategoriaDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /*
 	public static void main(String[] args) {
 		
 		Connection conn = null;
@@ -30,9 +102,9 @@ public class ConexaoBD {
 		
 		
 		} catch (ClassNotFoundException cnfe) {
-			System.out.println("Não foi possível encontrar o driver JDBC");
+			System.out.println("Nï¿½o foi possï¿½vel encontrar o driver JDBC");
 		} catch (SQLException se) {
-			System.out.println("Não foi possível conectar ao Banco de Dados");
+			System.out.println("Nï¿½o foi possï¿½vel conectar ao Banco de Dados");
 		} finally {
 			try {
 				
@@ -124,5 +196,6 @@ public class ConexaoBD {
 			}
 		}
 		
-	}
+	}*/
+
 }

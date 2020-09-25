@@ -5,14 +5,35 @@
  */
 package model;
 
-public class Produto
+import java.io.Serializable;
+
+public class Produto implements Serializable
 {
     private String nomeProduto;
-    private Categoria categoria;
-
-    public Produto(String nome, Categoria categoria)
+    private String categoria;
+    
+    public Produto(){}
+    
+    public Produto(String nome, String categoria)
     {
+        super();
         nomeProduto = nome;
+        categoria = categoria;
+    }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 }
