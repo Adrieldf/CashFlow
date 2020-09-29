@@ -5,7 +5,12 @@
  */
 package model;
 
+import dao.DAOFactory;
+import dao.ProdutoDAO;
+import database.PostgresqlDAOFactory;
+import database.PostgresqlProdutoDAO;
 import java.io.Serializable;
+import java.util.List;
 
 public class Produto implements Serializable
 {
@@ -35,5 +40,19 @@ public class Produto implements Serializable
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+    
+    public void criarProduto() {
+        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
+        ProdutoDAO produtoDAO = fabrica.getProdutoDAO();
+        produtoDAO.insere(this);
+
+    }
+
+    public List<Produto> buscaProdutos() {
+        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
+        ProdutoDAO produtoDAO = fabrica.getProdutoDAO();
+
+        return produtoDAO.buscaTodos();
     }
 }

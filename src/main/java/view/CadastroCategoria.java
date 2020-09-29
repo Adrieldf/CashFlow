@@ -5,12 +5,29 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import controller.CadastroCategoriaController;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Categoria;
 
 public class CadastroCategoria extends javax.swing.JFrame {
 
     public CadastroCategoria() {
         initComponents();
+
+        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+        linha.getDataVector().removeAllElements();
+        linha.setRowCount(0);
+
+        CadastroCategoriaController cadastro = new CadastroCategoriaController();
+        List<Categoria> listaCategorias = cadastro.buscaCategorias();
+
+        for (Categoria categoria : listaCategorias) {
+            Object[] dados = {
+                categoria.getNomeCategoria()
+            };
+            linha.addRow(dados);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -22,7 +39,7 @@ public class CadastroCategoria extends javax.swing.JFrame {
         btnNovo2 = new javax.swing.JButton();
         btnNovo3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        input_categoria = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,9 +98,9 @@ public class CadastroCategoria extends javax.swing.JFrame {
 
         jLabel1.setText("Categoria:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        input_categoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                input_categoriaActionPerformed(evt);
             }
         });
         setJMenuBar(jMenuBar1);
@@ -108,7 +125,7 @@ public class CadastroCategoria extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(input_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(249, 249, 249))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNovo2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,7 +138,7 @@ public class CadastroCategoria extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(input_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -139,20 +156,22 @@ public class CadastroCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
-        // TODO add your handling code here:
+        //Salvar
+        CadastroCategoriaController cadastro = new CadastroCategoriaController();
+        cadastro.salvarCategotegoria(input_categoria.getText());
     }//GEN-LAST:event_btnNovo3ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void input_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_categoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_input_categoriaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovo2;
     private javax.swing.JButton btnNovo3;
     private javax.swing.JTable grid;
+    private javax.swing.JTextField input_categoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

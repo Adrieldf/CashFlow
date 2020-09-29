@@ -9,10 +9,13 @@ import java.util.List;
 import model.Categoria;
 
 public interface CategoriaDAO {
-    
-    List<Categoria> buscaTodos( );
+
+    List<Categoria> buscaTodos();
+
     void insere(Categoria categoria);
+
     void remove(Categoria categoria);
+
     void altera(Categoria categoria);
-    
+
 }
