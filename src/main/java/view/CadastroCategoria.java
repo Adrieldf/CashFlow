@@ -11,7 +11,12 @@ import javax.swing.table.DefaultTableModel;
 import model.Categoria;
 
 public class CadastroCategoria extends javax.swing.JFrame {
-
+    
+    public void exibir()
+    {
+        setVisible(true);
+    }
+    
     public CadastroCategoria() {
         initComponents();
 

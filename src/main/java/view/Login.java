@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import controller.TelaPrincipalController;
 
 public class Login extends javax.swing.JFrame {
 
@@ -205,16 +206,16 @@ public class Login extends javax.swing.JFrame {
        
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
-
-    public void login()
+    
+    public void exibir()
     {
-        java.awt.event.ActionEvent evt = null;
-        btnLoginActionPerformed(evt);
+        setVisible(true);
     }
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-
-      
+        TelaPrincipalController principal = new TelaPrincipalController();
+        principal.chamarTela();
+        dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void input_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_userActionPerformed
