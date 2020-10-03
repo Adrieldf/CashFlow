@@ -9,6 +9,7 @@ import controller.CadastroCategoriaController;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Categoria;
+import controller.*;
 
 public class CadastroCategoria extends javax.swing.JFrame {
     
@@ -157,13 +158,25 @@ public class CadastroCategoria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
-        // TODO add your handling code here:
+        //Voltar
+        TelaPrincipalController principal = new TelaPrincipalController();
+        principal.chamarTela();
+        dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
         //Salvar
         CadastroCategoriaController cadastro = new CadastroCategoriaController();
         cadastro.salvarCategotegoria(input_categoria.getText());
+        
+        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+        linha.getDataVector().removeAllElements();
+        linha.setRowCount(0);
+        
+        Object[] dados = {
+                input_categoria.getText()
+            };
+            linha.addRow(dados);
     }//GEN-LAST:event_btnNovo3ActionPerformed
 
     private void input_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_categoriaActionPerformed

@@ -1,6 +1,7 @@
 package view;
 
 //import controller.Controller;
+import controller.TelaPrincipalController;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -121,9 +122,17 @@ public class CadastroPessoa extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void exibir()
+    {
+        setVisible(true);
+    }
+    
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
-        // TODO add your handling code here:
+        //Voltar
+        TelaPrincipalController principal = new TelaPrincipalController();
+        principal.chamarTela();
+        dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed

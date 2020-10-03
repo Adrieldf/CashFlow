@@ -1,6 +1,6 @@
 package view;
 
-import controller.CadastroCategoriaController;
+import controller.*;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -15,46 +15,51 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         btnCadastar = new javax.swing.JMenu();
-        btnLocal = new javax.swing.JMenuItem();
-        btnColetaResiduo = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        btnCategoria = new javax.swing.JMenuItem();
+        btnProduto = new javax.swing.JMenuItem();
+        btnPessoa = new javax.swing.JMenuItem();
+        btnContasAReceber = new javax.swing.JMenuItem();
+        btnContasAPagar = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnCadastar.setText("Cadastros");
-
-        btnLocal.setText("Categoria");
-        btnLocal.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLocalActionPerformed(evt);
+                btnCadastarActionPerformed(evt);
             }
         });
-        btnCadastar.add(btnLocal);
 
-        btnColetaResiduo.setText("Produto");
-        btnColetaResiduo.addActionListener(new java.awt.event.ActionListener() {
+        btnCategoria.setText("Categoria");
+        btnCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnColetaResiduoActionPerformed(evt);
+                btnCategoriaActionPerformed(evt);
             }
         });
-        btnCadastar.add(btnColetaResiduo);
+        btnCadastar.add(btnCategoria);
 
-        jMenuItem3.setText("Pessoa");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        btnProduto.setText("Produto");
+        btnProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                btnProdutoActionPerformed(evt);
             }
         });
-        btnCadastar.add(jMenuItem3);
+        btnCadastar.add(btnProduto);
 
-        jMenuItem1.setText("Contas a recerber");
-        btnCadastar.add(jMenuItem1);
+        btnPessoa.setText("Pessoa");
+        btnPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPessoaActionPerformed(evt);
+            }
+        });
+        btnCadastar.add(btnPessoa);
 
-        jMenuItem2.setText("Conta a pagar");
-        btnCadastar.add(jMenuItem2);
+        btnContasAReceber.setText("Contas a recerber");
+        btnCadastar.add(btnContasAReceber);
+
+        btnContasAPagar.setText("Conta a pagar");
+        btnCadastar.add(btnContasAPagar);
 
         jMenuBar1.add(btnCadastar);
 
@@ -84,19 +89,27 @@ public class Principal extends javax.swing.JFrame {
     }
             
     
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void btnPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPessoaActionPerformed
+        CadastroPessoaController pessoa = new CadastroPessoaController();
+        pessoa.chamarTela();
+        dispose();
+    }//GEN-LAST:event_btnPessoaActionPerformed
 
-    private void btnColetaResiduoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColetaResiduoActionPerformed
-        
-    }//GEN-LAST:event_btnColetaResiduoActionPerformed
+    private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
+        CadastroProdutoController produto = new CadastroProdutoController();
+        produto.chamarTela();
+        dispose();
+    }//GEN-LAST:event_btnProdutoActionPerformed
 
-    private void btnLocalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalActionPerformed
+    private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
         CadastroCategoriaController categoria = new CadastroCategoriaController();
         categoria.chamarTela();
-        
-    }//GEN-LAST:event_btnLocalActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCategoriaActionPerformed
+
+    private void btnCadastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCadastarActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -127,12 +140,12 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnCadastar;
-    private javax.swing.JMenuItem btnColetaResiduo;
-    private javax.swing.JMenuItem btnLocal;
+    private javax.swing.JMenuItem btnCategoria;
+    private javax.swing.JMenuItem btnContasAPagar;
+    private javax.swing.JMenuItem btnContasAReceber;
+    private javax.swing.JMenuItem btnPessoa;
+    private javax.swing.JMenuItem btnProduto;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }

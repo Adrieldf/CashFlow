@@ -7,10 +7,7 @@ import dao.ParcelaDAO;
 import dao.ProdutoDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class PostgresqlDAOFactory extends DAOFactory {
 
@@ -27,7 +24,7 @@ public class PostgresqlDAOFactory extends DAOFactory {
         this.openConnection();
     }
 
-    private void openConnection() {
+    private void openConnection(){
         String driver = "org.postgresql.Driver";
         String url = "jdbc:postgresql://motty.db.elephantsql.com:5432/doukhcto";
         String user = "doukhcto";
