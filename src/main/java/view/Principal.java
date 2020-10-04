@@ -56,9 +56,19 @@ public class Principal extends javax.swing.JFrame {
         btnCadastar.add(btnPessoa);
 
         btnContasAReceber.setText("Contas a recerber");
+        btnContasAReceber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContasAReceberActionPerformed(evt);
+            }
+        });
         btnCadastar.add(btnContasAReceber);
 
         btnContasAPagar.setText("Conta a pagar");
+        btnContasAPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContasAPagarActionPerformed(evt);
+            }
+        });
         btnCadastar.add(btnContasAPagar);
 
         jMenuBar1.add(btnCadastar);
@@ -110,6 +120,18 @@ public class Principal extends javax.swing.JFrame {
     private void btnCadastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastarActionPerformed
+
+    private void btnContasAReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasAReceberActionPerformed
+        CadastroContaAReceberController conta = new CadastroContaAReceberController();
+        conta.chamarTela();
+        dispose();
+    }//GEN-LAST:event_btnContasAReceberActionPerformed
+
+    private void btnContasAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasAPagarActionPerformed
+        CadastroContaAPagarController conta = new CadastroContaAPagarController();
+        conta.chamarTela();
+        dispose();
+    }//GEN-LAST:event_btnContasAPagarActionPerformed
 
 //    /**
 //     * @param args the command line arguments
