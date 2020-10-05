@@ -158,10 +158,11 @@
         <Component class="javax.swing.JTable" name="grid">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="17">
+              <Table columnCount="7" rowCount="17">
                 <Column editable="true" title="Tipo" type="java.lang.String"/>
                 <Column editable="false" title="Conta" type="java.lang.String"/>
                 <Column editable="false" title="Valor total" type="java.lang.String"/>
+                <Column editable="false" title="Categoria" type="java.lang.String"/>
                 <Column editable="false" title="Produto" type="java.lang.String"/>
                 <Column editable="true" title="Efetuado" type="java.lang.Boolean"/>
                 <Column editable="true" title="Renegociado" type="java.lang.Boolean"/>
@@ -169,6 +170,11 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
