@@ -34,12 +34,12 @@ public class PostgresqlProdutoDAO implements ProdutoDAO {
 
             stmt = conn.createStatement();
             rs = stmt
-                    .executeQuery("select nome, categoria from produto");
+                    .executeQuery("select produto, categoria from produto");
 
             while (rs.next()) {
                 Produto p = new Produto();
-                p.setNomeProduto("nome");
-                p.setCategoria("categoria");
+                p.setNomeProduto(rs.getString("produto"));
+                p.setCategoria(rs.getString("categoria"));
                 produtos.add(p);
             }
 
@@ -66,14 +66,14 @@ public class PostgresqlProdutoDAO implements ProdutoDAO {
 
         try {
 
-            pstmt = conn.prepareStatement("select codigo, categoria from produto where categoria = ?");
+            pstmt = conn.prepareStatement("select produto, categoria from produto where categoria = ?");
             pstmt.setString(1, categoria);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Produto p = new Produto();
-                p.setNomeProduto("nome");
-                p.setCategoria("categoria");
+                p.setNomeProduto(rs.getString("produto"));
+                p.setCategoria(rs.getString("categoria"));
                 produtos.add(p);
             }
 
@@ -93,17 +93,82 @@ public class PostgresqlProdutoDAO implements ProdutoDAO {
 
     @Override
     public void insere(Produto produto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (produto == null) {
+            return;
+        }
+
+        PreparedStatement pstmt = null;
+
+        try {
+            pstmt = conn.prepareStatement("insert into produto values (?,?)");
+
+            pstmt.setString(1, produto.getNomeProduto());
+            pstmt.setString(2, produto.getCategoria());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException se) {
+            System.out.println("Ocorreu um erro : " + se.getMessage());
+        } finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     @Override
     public void remove(Produto produto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (produto == null) {
+            return;
+        }
+
+        PreparedStatement pstmt = null;
+
+        try {
+            pstmt = conn.prepareStatement("delete from produto where produto = ? and categoria = ?");
+            pstmt.setString(1, produto.getNomeProduto());
+            pstmt.setString(2, produto.getCategoria());
+            pstmt.executeUpdate();
+        } catch (SQLException se) {
+            System.out.println("Ocorreu um erro : " + se.getMessage());
+        } finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     @Override
     public void altera(Produto produto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (produto == null) {
+            return;
+        }
+
+        PreparedStatement pstmt = null;
+
+        try {
+            pstmt = conn.prepareStatement("update produto set produto = ?, categoria = ? where produto = ? and categoria = ?");
+
+            pstmt.setString(1, produto.getNomeProduto());
+            pstmt.setString(2, produto.getCategoria());
+            pstmt.setString(3, produto.getNomeProduto());
+            pstmt.setString(4, produto.getCategoria());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException se) {
+            System.out.println("Ocorreu um erro : " + se.getMessage());
+        } finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
 }

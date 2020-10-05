@@ -7,6 +7,7 @@ package controller;
 
 import java.util.List;
 import model.Produto;
+import view.*;
 
 public class CadastroProdutoController {
     
@@ -17,9 +18,13 @@ public class CadastroProdutoController {
     
     public List<Produto> buscaProdutos()
     {
-        
         Produto produto = new Produto();
         return produto.buscaProdutos();
+    }
+    
+    public void chamarTela(){
+        CadastroProduto produto = new CadastroProduto();
+        produto.exibir();
     }
     
 }

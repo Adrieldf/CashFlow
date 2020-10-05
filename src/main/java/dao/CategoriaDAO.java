@@ -16,6 +16,4 @@ public interface CategoriaDAO {
 
     void remove(Categoria categoria);
 
-    void altera(Categoria categoria);
-
 }

@@ -7,6 +7,7 @@ package controller;
 
 import java.util.List;
 import model.Categoria;
+import view.CadastroCategoria;
 
 public class CadastroCategoriaController {
 
@@ -19,6 +20,11 @@ public class CadastroCategoriaController {
     {
         Categoria categoria = new Categoria("");
         return categoria.buscaCategorias();
+    }
+    
+    public void chamarTela(){
+        CadastroCategoria categoria = new CadastroCategoria();
+        categoria.exibir();
     }
 
 }
