@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.DadosListaDeContas;
 import controller.ContaController;
+import controller.TelaPrincipalController;
 
 
 public class ListaDeContas extends javax.swing.JFrame {
@@ -231,7 +232,10 @@ public class ListaDeContas extends javax.swing.JFrame {
     }
     
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
-        // TODO add your handling code here:
+        //Voltar
+        TelaPrincipalController principal = new TelaPrincipalController();
+        principal.chamarTela();
+        dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void ckbnPagasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbnPagasActionPerformed
