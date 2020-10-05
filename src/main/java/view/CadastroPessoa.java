@@ -30,7 +30,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menu");
+        setTitle("Pessoa");
 
         btnNovo2.setText("Voltar");
         btnNovo2.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +58,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jLabel3.setText("Email:");
 
-        jLabel4.setText("Endereço:");
+        jLabel4.setText("Endere\u00E7o:");
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
