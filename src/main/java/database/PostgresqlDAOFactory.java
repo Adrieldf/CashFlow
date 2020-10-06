@@ -74,7 +74,7 @@ public class PostgresqlDAOFactory extends DAOFactory {
 
     @Override
     public CategoriaDAO getCategoriaDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new PostgresqlCategoriaDAO(conn);
     }
 
     /*
