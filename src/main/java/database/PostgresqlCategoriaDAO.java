@@ -37,7 +37,7 @@ public class PostgresqlCategoriaDAO implements CategoriaDAO {
                     .executeQuery("select nome from categoria");
 
             while (rs.next()) {
-                Categoria p = new Categoria("");
+                Categoria p = new Categoria(rs.getString("nome"));
 
                 categoria.add(p);
             }
@@ -65,7 +65,7 @@ public class PostgresqlCategoriaDAO implements CategoriaDAO {
         PreparedStatement pstmt = null;
 
         try {
-            pstmt = conn.prepareStatement("insert into categoria values (?)");
+            pstmt = conn.prepareStatement("insert into categoria (nome) values (?)");
 
             pstmt.setString(1, categoria.getNomeCategoria());
 
