@@ -34,7 +34,7 @@ public class PostgresqlCategoriaDAO implements CategoriaDAO {
 
             stmt = conn.createStatement();
             rs = stmt
-                    .executeQuery("select categoria, from categoria");
+                    .executeQuery("select nome from categoria");
 
             while (rs.next()) {
                 Categoria p = new Categoria("");
