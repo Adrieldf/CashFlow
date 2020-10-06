@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.DadosListaDeContas;
 import controller.ContaController;
+import controller.TelaPrincipalController;
 
 
 public class ListaDeContas extends javax.swing.JFrame {
@@ -56,33 +57,33 @@ public class ListaDeContas extends javax.swing.JFrame {
 
         grid.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tipo", "Conta", "Valor total", "Produto", "Efetuado", "Renegociado"
+                "Tipo", "Conta", "Valor total", "Categoria", "Produto", "Efetuado", "Renegociado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, true, true
+                true, false, false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -224,9 +225,17 @@ public class ListaDeContas extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void exibir()
+    {
+        setVisible(true);
+    }
+    
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
-        // TODO add your handling code here:
+        //Voltar
+        TelaPrincipalController principal = new TelaPrincipalController();
+        principal.chamarTela();
+        dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void ckbnPagasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbnPagasActionPerformed
@@ -265,8 +274,16 @@ public class ListaDeContas extends javax.swing.JFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ContaController conta = new ContaController();
-        conta.executaFiltro(Integer.parseInt(input_conta.getText()), ckbReceber.isSelected(), ckbPagar.isSelected(), ckbnPagas.isSelected(), ckbPagas.isSelected(), ckbRenegociadas.isSelected(), ckbAtrasadas.isSelected(), (DefaultTableModel) grid.getModel());
+
+        int valor;
+        if(input_conta.getText().isEmpty()){
+            valor = 0;
+        }
+        else{
+            valor = Integer.parseInt(input_conta.getText());
+        }
+        ContaController conta = new ContaController();      
+        conta.executaFiltro(valor, ckbReceber.isSelected(), ckbPagar.isSelected(), ckbnPagas.isSelected(), ckbPagas.isSelected(), ckbRenegociadas.isSelected(), ckbAtrasadas.isSelected(), (DefaultTableModel) grid.getModel());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

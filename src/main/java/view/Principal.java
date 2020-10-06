@@ -21,6 +21,7 @@ public class Principal extends javax.swing.JFrame {
         btnContasAReceber = new javax.swing.JMenuItem();
         btnContasAPagar = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        btnContas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +75,20 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(btnCadastar);
 
         jMenu1.setText("Informações");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        btnContas.setText("Contas");
+        btnContas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnContas);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -133,6 +148,16 @@ public class Principal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnContasAPagarActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void btnContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasActionPerformed
+        ListaDeContasController lista = new ListaDeContasController();
+        lista.chamarTela();
+        dispose();
+    }//GEN-LAST:event_btnContasActionPerformed
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -163,6 +188,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu btnCadastar;
     private javax.swing.JMenuItem btnCategoria;
+    private javax.swing.JMenuItem btnContas;
     private javax.swing.JMenuItem btnContasAPagar;
     private javax.swing.JMenuItem btnContasAReceber;
     private javax.swing.JMenuItem btnPessoa;

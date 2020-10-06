@@ -12,5 +12,5 @@ public class Parcela
     public String data;
     public float valorTotal;
     public float valorPago;
-    public String finalizada = "";
+    public String finalizada;
 }

@@ -10,6 +10,7 @@ public class DadosListaDeContas {
     public String tipo; //1 pagar; 2 receber
     public int numero;
     public float valor;
+    public String categoria;
     public String produto;
     public boolean efetuado;
     public boolean renegociado;
@@ -61,11 +62,52 @@ public class DadosListaDeContas {
     public void setRenegociado(boolean renegociado) {
         this.renegociado = renegociado;
     }
-    
-    public String montaQuery(int conta, boolean receber, boolean pagar, boolean nPagas, boolean pagas, boolean renegociadas, boolean atrasadas)
-    {
-        String query = new String();
-        return query;
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
     
+
+    public String montaWhere(int conta, boolean receber, boolean pagar, boolean nPagas, boolean pagas, boolean renegociadas, boolean atrasadas) {
+        String query = "where";
+        boolean addAnd = false;
+
+        if (conta > 0) {
+            query = query + " conta =" + conta;
+            addAnd = true;
+        }
+        
+        if (receber != pagar) {
+            if(addAnd){
+                query = query + " and";
+            }
+            if(receber){
+                query = query + " tipo =" + "1";addAnd = true;
+            }
+            else
+            {
+                query = query + " tipo =" + "2";addAnd = true;
+            }
+        }
+        
+        if (nPagas != pagas) {
+            if(addAnd){
+                query = query + " and";
+            }
+            if(nPagas){
+                query = query + " finalizada =" + "is null";addAnd = true;
+            }
+            else
+            {
+                query = query + " finalizada =" + "is not null";addAnd = true;
+            }
+        }
+
+        return query;
+    }
+
 }
