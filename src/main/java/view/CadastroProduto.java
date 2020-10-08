@@ -13,10 +13,9 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     public CadastroProduto() {
         initComponents();
-        combobox_categoria.addItem("teste");
         
         CadastroProdutoController cadastro = new CadastroProdutoController();
-        //cadastro.montaDados(grid);
+        //cadastro.montaDados(grid);//DESCOMENTAR APÓS AJUSTAR BANCO
         cadastro.montaComboBox(combobox_categoria);
     }
 
