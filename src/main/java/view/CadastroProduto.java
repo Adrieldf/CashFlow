@@ -13,6 +13,11 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     public CadastroProduto() {
         initComponents();
+        combobox_categoria.addItem("teste");
+        
+        CadastroProdutoController cadastro = new CadastroProdutoController();
+        //cadastro.montaDados(grid);
+        cadastro.montaComboBox(combobox_categoria);
     }
 
     @SuppressWarnings("unchecked")
@@ -93,7 +98,6 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jLabel2.setText("Categoria:");
 
-        combobox_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

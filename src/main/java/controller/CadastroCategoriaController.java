@@ -6,6 +6,8 @@
 package controller;
 
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import model.Categoria;
 import view.CadastroCategoria;
 
@@ -26,5 +28,24 @@ public class CadastroCategoriaController {
         CadastroCategoria categoria = new CadastroCategoria();
         categoria.exibir();
     }
+    
+    public DefaultTableModel montaDados(JTable grid)
+    {
+        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+        linha.getDataVector().removeAllElements();
+        linha.setRowCount(0);
+        
+         List<Categoria> listaCategorias = buscaCategorias();
+         
+        for (Categoria categoria : listaCategorias) {
+            Object[] dados = {
+                categoria.getNomeCategoria()
+            };
+            linha.addRow(dados);
+        }
+        
+        return linha;
+    }
+
 
 }

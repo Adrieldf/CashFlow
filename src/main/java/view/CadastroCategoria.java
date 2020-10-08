@@ -20,7 +20,7 @@ public class CadastroCategoria extends javax.swing.JFrame {
     
     public CadastroCategoria() {
         initComponents();
-
+/*
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
         linha.getDataVector().removeAllElements();
         linha.setRowCount(0);
@@ -33,7 +33,9 @@ public class CadastroCategoria extends javax.swing.JFrame {
                 categoria.getNomeCategoria()
             };
             linha.addRow(dados);
-        }
+        }*/
+        CadastroCategoriaController cadastro = new CadastroCategoriaController();
+        cadastro.montaDados(grid);
     }
 
     @SuppressWarnings("unchecked")
