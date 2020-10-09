@@ -5,6 +5,11 @@
  */
 package model;
 
+import dao.DAOFactory;
+import dao.ParcelaDAO;
+import database.PostgresqlDAOFactory;
+import java.util.List;
+
 
 public class Parcela 
 {
@@ -14,4 +19,12 @@ public class Parcela
     public float valorTotal;
     public float valorPago;
     public String finalizada;
+    
+    public List<Parcela> buscaTodasParcelas()
+    {
+        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
+        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
+        return parcelaDAO.buscaTodasParcelas();
+    }
+    
 }

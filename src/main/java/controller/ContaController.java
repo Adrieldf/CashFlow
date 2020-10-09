@@ -1,15 +1,17 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import model.DadosListaDeContas;
+import model.Conta;
 
 public class ContaController {
     
-    public void executaFiltro(int conta, boolean receber, boolean pagar, boolean nPagas, boolean pagas, boolean renegociadas, boolean atrasadas,  DefaultTableModel grid)
+    
+    public List<Conta> buscaTodos()
     {
-        DadosListaDeContas dados = new DadosListaDeContas();
-        String query = dados.montaWhere(conta, receber, pagar, nPagas, pagas, renegociadas, atrasadas);
-        System.out.println(query);
+        Conta conta = new Conta();
+        return conta.buscaContas();
     }
 
 }

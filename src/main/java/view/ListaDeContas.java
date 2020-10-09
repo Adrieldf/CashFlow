@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import model.DadosListaDeContas;
 import controller.ContaController;
 import controller.ListaDeContasController;
 import controller.TelaPrincipalController;
@@ -15,11 +14,11 @@ import controller.TelaPrincipalController;
 
 public class ListaDeContas extends javax.swing.JFrame {
     
-    public ListaDeContasController contasController;
+    public ListaDeContasController contasController = new ListaDeContasController();
     
     public ListaDeContas() {
         initComponents();
-        //contasController.
+        contasController.buscaTodosDados();
     }
 
     @SuppressWarnings("unchecked")
@@ -257,7 +256,7 @@ public class ListaDeContas extends javax.swing.JFrame {
     private void ckbReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbReceberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ckbReceberActionPerformed
-    
+    /*
     public void exibirDados(List<DadosListaDeContas> listaDados)
     {
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
@@ -275,7 +274,7 @@ public class ListaDeContas extends javax.swing.JFrame {
             };
             linha.addRow(dados);
         }
-    }
+    }*/
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -287,7 +286,7 @@ public class ListaDeContas extends javax.swing.JFrame {
             valor = Integer.parseInt(input_conta.getText());
         }
         ContaController conta = new ContaController();      
-        conta.executaFiltro(valor, ckbReceber.isSelected(), ckbPagar.isSelected(), ckbnPagas.isSelected(), ckbPagas.isSelected(), ckbRenegociadas.isSelected(), ckbAtrasadas.isSelected(), (DefaultTableModel) grid.getModel());
+       // conta.executaFiltro(valor, ckbReceber.isSelected(), ckbPagar.isSelected(), ckbnPagas.isSelected(), ckbPagas.isSelected(), ckbRenegociadas.isSelected(), ckbAtrasadas.isSelected(), (DefaultTableModel) grid.getModel());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
