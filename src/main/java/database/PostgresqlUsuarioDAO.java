@@ -29,17 +29,13 @@ public class PostgresqlUsuarioDAO implements UsuarioDAO {
         try {
 
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(
-            		"select u.id as \"idUsuario\", u.\"idPessoa\", u.login, u.senha, p.* " + 
-            		"from usuario as u " + 
-            		"left outer join \"pessoaFornecedor\" as p on (u.\"idPessoa\" = p.id)");
+            rs = stmt.executeQuery("select * from usuario as u ");
 
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setId(rs.getInt("idUsuario"));
+                u.setId(rs.getInt("id"));
                 u.setLogin(rs.getString("login"));
                 u.setSenha(rs.getString("senha"));
-                u.setIdPessoa(rs.getInt("idPessoa"));
                 u.setNome(rs.getString("nome"));
                 u.setTelefone(rs.getString("telefone"));
                 u.setEmail(rs.getString("email"));
@@ -72,19 +68,15 @@ public class PostgresqlUsuarioDAO implements UsuarioDAO {
 
             stmt = conn.createStatement();
             rs = stmt.executeQuery(
-            		"select u.id as \"idUsuario\", u.\"idPessoa\", u.login, u.senha, p.* " + 
-            		"from usuario as u " + 
-            		"left outer join \"pessoaFornecedor\" as p on (u.\"idPessoa\" = p.id) " +
-            		 "where u.login = ?");
+            		"select * from usuario as u where u.login = ?");
             
            // stmt.setString(1, login);
             
             while (rs.next()) {
                 Usuario u = new Usuario();
-                u.setId(rs.getInt("idUsuario"));
+                u.setId(rs.getInt("id"));
                 u.setLogin(rs.getString("login"));
                 u.setSenha(rs.getString("senha"));
-                u.setIdPessoa(rs.getInt("idPessoa"));
                 u.setNome(rs.getString("nome"));
                 u.setTelefone(rs.getString("telefone"));
                 u.setEmail(rs.getString("email"));
@@ -115,17 +107,14 @@ public class PostgresqlUsuarioDAO implements UsuarioDAO {
 	        PreparedStatement pstmt = null;
 
 	        try {
-	        	PostgresqlPessoaDAO pessoa = new PostgresqlPessoaDAO(this.conn);
-	        	pessoa.insere(usuario);
-	        	
-	        	int idPessoa = 0;//pegar depois de inserir a pessoa
-	        	
-	        	usuario.setIdPessoa(idPessoa);
-	            pstmt = conn.prepareStatement("insert into usuario (\"idPessoa\", login , senha ) values (?, ?, ?)");
+	            pstmt = conn.prepareStatement("insert into usuario (login, senha, nome, telefone, email, endereco) values (?, ?, ?, ?, ?, ?)");
 
-	            pstmt.setInt(1, usuario.getIdPessoa());
-	            pstmt.setString(2, usuario.getLogin());
-	            pstmt.setString(3, usuario.getSenha());
+	            pstmt.setString(1, usuario.getLogin());
+	            pstmt.setString(2, usuario.getSenha());
+	            pstmt.setString(3, usuario.getNome());
+	            pstmt.setString(4, usuario.getTelefone());
+	            pstmt.setString(5, usuario.getEmail());
+	            pstmt.setString(6, usuario.getEndereco());
 
 	            pstmt.executeUpdate();
 

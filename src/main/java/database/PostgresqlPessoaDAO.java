@@ -37,7 +37,7 @@ public class PostgresqlPessoaDAO implements PessoaDAO {
         PreparedStatement pstmt = null;
 
         try {
-            pstmt = conn.prepareStatement("insert into \"pessoaFornecedor\" (nome, telefone, email, endereco) values (?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("insert into fornecedor (nome, telefone, email, endereco) values (?, ?, ?, ?)");
 
             pstmt.setString(1, pessoa.getNome());
             pstmt.setString(2, pessoa.getTelefone());
