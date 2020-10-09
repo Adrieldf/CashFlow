@@ -6,7 +6,7 @@ import model.Usuario;
 
 public interface UsuarioDAO {
 	
-	List<Usuario> buscaTodas();
+	List<Usuario> buscaTodos();
     Usuario buscaPorLogin(String login);
     void insere(Usuario usuario);
     void remove(Usuario usuario);
