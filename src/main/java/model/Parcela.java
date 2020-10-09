@@ -8,6 +8,7 @@ package model;
 
 public class Parcela 
 {
+    public int numeroConta;
     public int numParcela;
     public String data;
     public float valorTotal;

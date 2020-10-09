@@ -9,13 +9,17 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.DadosListaDeContas;
 import controller.ContaController;
+import controller.ListaDeContasController;
 import controller.TelaPrincipalController;
 
 
 public class ListaDeContas extends javax.swing.JFrame {
-
+    
+    public ListaDeContasController contasController;
+    
     public ListaDeContas() {
         initComponents();
+        //contasController.
     }
 
     @SuppressWarnings("unchecked")

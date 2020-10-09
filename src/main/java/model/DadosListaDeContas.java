@@ -5,6 +5,12 @@
  */
 package model;
 
+import dao.ContaDAO;
+import dao.DAOFactory;
+import database.PostgresqlDAOFactory;
+import database.PostgresqlContaDAO;
+import java.util.List;
+
 public class DadosListaDeContas {
 
     public String tipo; //1 pagar; 2 receber
@@ -70,7 +76,6 @@ public class DadosListaDeContas {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
 
     public String montaWhere(int conta, boolean receber, boolean pagar, boolean nPagas, boolean pagas, boolean renegociadas, boolean atrasadas) {
         String query = "where";

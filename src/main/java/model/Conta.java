@@ -1,6 +1,10 @@
 package model;
 
+import dao.ContaDAO;
+import dao.DAOFactory;
+import database.PostgresqlDAOFactory;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Conta 
 {
@@ -11,4 +15,11 @@ public class Conta
     public float valor;
     public boolean finalizada;
     public boolean renegociada;
+    
+     public List<Conta> buscaContas()
+    {
+        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
+        ContaDAO contaDAO = fabrica.getContaDAO();
+        return contaDAO.buscaTodos();
+    }
 }
