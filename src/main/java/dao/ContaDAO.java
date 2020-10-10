@@ -8,14 +8,18 @@ package dao;
 import model.Conta;
 import java.util.List;
 
-
 public interface ContaDAO {
-    
+
     Conta buscaConta(int numConta);
+
     List<Conta> buscaTodos();
+
     List<Conta> buscaContaPorTipo(int tipo);
+
     void insere(Conta conta);
+
     void remove(Conta conta);
+
     void altera(Conta conta);
-    
+
 }

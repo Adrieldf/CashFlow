@@ -5,47 +5,41 @@
  */
 package database;
 
-import dao.ParcelaDAO;
+import dao.ClienteFornecedorDAO;
 import java.sql.Connection;
 import java.util.List;
-import model.Parcela;
+import model.ClienteFornecedor;
 
-public class PostgresqlParcelaDAO implements ParcelaDAO{
-    
+public class PostgresqlClienteFornecedorDAO implements ClienteFornecedorDAO {
+
     private Connection conn;
-    
-    public PostgresqlParcelaDAO(Connection conn) {
+
+    public PostgresqlClienteFornecedorDAO(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public Parcela buscaPorParcela(int parcela) {
+    public List<ClienteFornecedor> buscaTodas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Parcela> buscaParcelasDaConta(int numeroConta) {
+    public List<ClienteFornecedor> buscaPorNome(String nome) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insere(Parcela parcela) {
+    public void insere(ClienteFornecedor clienteFornecedor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void remove(Parcela parcela) {
+    public void remove(ClienteFornecedor clienteFornecedor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void altera(Parcela parcela) {
+    public void altera(ClienteFornecedor clienteFornecedor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public List<Parcela> buscaTodasParcelas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

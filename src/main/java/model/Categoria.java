@@ -20,25 +20,12 @@ public class Categoria {
         nomeCategoria = nome;
     }
 
-
     public String getNomeCategoria() {
         return nomeCategoria;
     }
 
     public void setNomeCategoria(String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
-    }
-
-    public void criarCategoria() {
-        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
-        CategoriaDAO categoriaDAO = fabrica.getCategoriaDAO();
-        categoriaDAO.insere(this);
-    }
-
-    public List<Categoria> buscaCategorias() {
-        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
-        CategoriaDAO categoriaDAO = fabrica.getCategoriaDAO();
-        return categoriaDAO.buscaTodos();
     }
 
 }

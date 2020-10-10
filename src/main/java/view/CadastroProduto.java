@@ -3,20 +3,45 @@ package view;
 //import controller.Controller;
 import controller.CadastroProdutoController;
 import controller.TelaPrincipalController;
+import facade.CategoriaFacade;
+import facade.ProdutoFacade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.table.DefaultTableModel;
+import model.Categoria;
+import model.Produto;
 
 public class CadastroProduto extends javax.swing.JFrame {
 
     public CadastroProduto() {
         initComponents();
-        
-        CadastroProdutoController cadastro = new CadastroProdutoController();
+
+        //CadastroProdutoController cadastro = new CadastroProdutoController();
         //cadastro.montaDados(grid);//DESCOMENTAR APÓS AJUSTAR BANCO
-        cadastro.montaComboBox(combobox_categoria);
+        //cadastro.montaComboBox(combobox_categoria);
+        CategoriaFacade facadeCategoria = new CategoriaFacade();
+        List<Categoria> listaCategorias = facadeCategoria.buscaTodos();
+
+        for (Categoria categoria : listaCategorias) {
+            combobox_categoria.addItem(categoria.getNomeCategoria());
+        }
+
+        ProdutoFacade facadeProduto = new ProdutoFacade();
+        List<Produto> listaProdutos = facadeProduto.buscaTodos();
+
+        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+        linha.getDataVector().removeAllElements();
+        linha.setRowCount(0);
+
+        for (Produto produto : listaProdutos) {
+            Object[] dados = {
+                produto.getNomeProduto()
+            };
+            linha.addRow(dados);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -151,11 +176,10 @@ public class CadastroProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void exibir()
-    {
+    public void exibir() {
         setVisible(true);
     }
-    
+
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
         TelaPrincipalController principal = new TelaPrincipalController();
@@ -164,8 +188,10 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
-        CadastroProdutoController cadastro = new CadastroProdutoController();
-        cadastro.salvarProduto(input_produto.getText(), (String) combobox_categoria.getSelectedItem());
+        Produto produto = new Produto(input_produto.getText(), (String) combobox_categoria.getSelectedItem());
+        ProdutoFacade facadeProduto = new ProdutoFacade();
+
+        facadeProduto.insere(produto);
     }//GEN-LAST:event_btnNovo3ActionPerformed
 
     private void input_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_produtoActionPerformed

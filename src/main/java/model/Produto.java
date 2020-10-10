@@ -12,18 +12,18 @@ import database.PostgresqlProdutoDAO;
 import java.io.Serializable;
 import java.util.List;
 
-public class Produto implements Serializable
-{
+public class Produto implements Serializable {
+
     private String nomeProduto;
     private String categoria;
-    
-    public Produto(){}
-    
-    public Produto(String nome, String categoria)
-    {
+
+    public Produto() {
+    }
+
+    public Produto(String nome, String categoria) {
         super();
         nomeProduto = nome;
-        categoria = categoria;
+        this.categoria = categoria;
     }
 
     public String getNomeProduto() {
@@ -41,18 +41,5 @@ public class Produto implements Serializable
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
-    public void criarProduto() {
-        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
-        ProdutoDAO produtoDAO = fabrica.getProdutoDAO();
-        produtoDAO.insere(this);
 
-    }
-
-    public List<Produto> buscaProdutos() {
-        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
-        ProdutoDAO produtoDAO = fabrica.getProdutoDAO();
-
-        return produtoDAO.buscaTodos();
-    }
 }

@@ -6,14 +6,19 @@
 package dao;
 
 import java.util.List;
+import model.Categoria;
 import model.Produto;
 
 public interface ProdutoDAO {
-    
-    List<Produto> buscaTodos( );
-    List<Produto> buscaPorCategoria(String categoria);
+
+    List<Produto> buscaTodos();
+
+    List<Produto> buscaPorCategoria(Categoria categoria);
+
     void insere(Produto produto);
+
     void remove(Produto produto);
+
     void altera(Produto produto);
-    
+
 }

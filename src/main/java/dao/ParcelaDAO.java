@@ -8,14 +8,18 @@ package dao;
 import java.util.List;
 import model.Parcela;
 
-
 public interface ParcelaDAO {
-    
+
     Parcela buscaPorParcela(int parcela);
+
     List<Parcela> buscaParcelasDaConta(int numeroConta);
+
     List<Parcela> buscaTodasParcelas();
+
     void insere(Parcela parcela);
+
     void remove(Parcela parcela);
+
     void altera(Parcela parcela);
-    
+
 }

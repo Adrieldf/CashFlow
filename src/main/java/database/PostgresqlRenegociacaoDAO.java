@@ -5,47 +5,42 @@
  */
 package database;
 
-import dao.ParcelaDAO;
+import dao.RenegociacaoDAO;
 import java.sql.Connection;
 import java.util.List;
-import model.Parcela;
+import model.Renegociacao;
 
-public class PostgresqlParcelaDAO implements ParcelaDAO{
-    
+public class PostgresqlRenegociacaoDAO implements RenegociacaoDAO {
+
     private Connection conn;
-    
-    public PostgresqlParcelaDAO(Connection conn) {
+
+    public PostgresqlRenegociacaoDAO(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public Parcela buscaPorParcela(int parcela) {
+    public List<Renegociacao> buscaTodas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Parcela> buscaParcelasDaConta(int numeroConta) {
+    public List<Renegociacao> buscaPorCodigo(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insere(Parcela parcela) {
+    public void insere(Renegociacao renegociacao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void remove(Parcela parcela) {
+    public void remove(Renegociacao renegociacao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void altera(Parcela parcela) {
+    public void altera(Renegociacao renegociacao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Parcela> buscaTodasParcelas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

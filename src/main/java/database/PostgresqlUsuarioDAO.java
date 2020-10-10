@@ -13,15 +13,15 @@ import model.Usuario;
 
 public class PostgresqlUsuarioDAO implements UsuarioDAO {
 
-	private Connection conn;
+    private Connection conn;
 
     public PostgresqlUsuarioDAO(Connection conn) {
         this.conn = conn;
     }
-    
-	@Override
-	public List<Usuario> buscaTodos() {
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+
+    @Override
+    public List<Usuario> buscaTodos() {
+        List<Usuario> usuarios = new ArrayList<Usuario>();
 
         Statement stmt = null;
         ResultSet rs = null;
@@ -55,11 +55,11 @@ public class PostgresqlUsuarioDAO implements UsuarioDAO {
         }
 
         return usuarios;
-	}
+    }
 
-	@Override
-	public Usuario buscaPorLogin(String login) {
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+    @Override
+    public Usuario buscaPorLogin(String login) {
+        List<Usuario> usuarios = new ArrayList<Usuario>();
 
         Statement stmt = null;
         ResultSet rs = null;
@@ -68,10 +68,9 @@ public class PostgresqlUsuarioDAO implements UsuarioDAO {
 
             stmt = conn.createStatement();
             rs = stmt.executeQuery(
-            		"select * from usuario as u where u.login = ?");
-            
-           // stmt.setString(1, login);
-            
+                    "select * from usuario as u where u.login = ?");
+
+            // stmt.setString(1, login);
             while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getInt("id"));
@@ -96,67 +95,67 @@ public class PostgresqlUsuarioDAO implements UsuarioDAO {
         }
 
         return usuarios.get(0);
-	}
+    }
 
-	@Override
-	public void insere(Usuario usuario) {
-		  if (usuario == null) {
-	            return;
-	        }
+    @Override
+    public void insere(Usuario usuario) {
+        if (usuario == null) {
+            return;
+        }
 
-	        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = null;
 
-	        try {
-	            pstmt = conn.prepareStatement("insert into usuario (login, senha, nome, telefone, email, endereco) values (?, ?, ?, ?, ?, ?)");
+        try {
+            pstmt = conn.prepareStatement("insert into usuario (login, senha, nome, telefone, email, endereco) values (?, ?, ?, ?, ?, ?)");
 
-	            pstmt.setString(1, usuario.getLogin());
-	            pstmt.setString(2, usuario.getSenha());
-	            pstmt.setString(3, usuario.getNome());
-	            pstmt.setString(4, usuario.getTelefone());
-	            pstmt.setString(5, usuario.getEmail());
-	            pstmt.setString(6, usuario.getEndereco());
+            pstmt.setString(1, usuario.getLogin());
+            pstmt.setString(2, usuario.getSenha());
+            pstmt.setString(3, usuario.getNome());
+            pstmt.setString(4, usuario.getTelefone());
+            pstmt.setString(5, usuario.getEmail());
+            pstmt.setString(6, usuario.getEndereco());
 
-	            pstmt.executeUpdate();
+            pstmt.executeUpdate();
 
-	        } catch (SQLException se) {
-	            System.out.println("Ocorreu um erro : " + se.getMessage());
-	        } finally {
-	            try {
-	                pstmt.close();
-	            } catch (SQLException e) {
-	                System.out.println(e.getMessage());
-	            }
-	        }
-	}
+        } catch (SQLException se) {
+            System.out.println("Ocorreu um erro : " + se.getMessage());
+        } finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
-	@Override
-	public void remove(Usuario usuario) {
-		 if (usuario == null) {
-	            return;
-	        }
+    @Override
+    public void remove(Usuario usuario) {
+        if (usuario == null) {
+            return;
+        }
 
-	        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = null;
 
-	        try {
-	            pstmt = conn.prepareStatement("delete from usuario where id = ?");
-	            pstmt.setInt(1, usuario.getId());
-	            pstmt.executeUpdate();
-	        } catch (SQLException se) {
-	            System.out.println("Ocorreu um erro : " + se.getMessage());
-	        } finally {
-	            try {
-	                pstmt.close();
-	            } catch (SQLException e) {
-	                System.out.println(e.getMessage());
-	            }
-	        }
+        try {
+            pstmt = conn.prepareStatement("delete from usuario where id = ?");
+            pstmt.setInt(1, usuario.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException se) {
+            System.out.println("Ocorreu um erro : " + se.getMessage());
+        } finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
-	}
+    }
 
-	@Override
-	public void altera(Usuario usuario) {
-		// TODO Auto-generated method stub
+    @Override
+    public void altera(Usuario usuario) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

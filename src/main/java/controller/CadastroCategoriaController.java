@@ -12,7 +12,8 @@ import model.Categoria;
 import view.CadastroCategoria;
 
 public class CadastroCategoriaController {
-
+    
+    /*
     public void salvarCategotegoria(String nomeCategoria) {
         Categoria categoria = new Categoria(nomeCategoria);
         categoria.criarCategoria();
@@ -22,13 +23,13 @@ public class CadastroCategoriaController {
     {
         Categoria categoria = new Categoria("");
         return categoria.buscaCategorias();
-    }
+    }*/
     
     public void chamarTela(){
         CadastroCategoria categoria = new CadastroCategoria();
         categoria.exibir();
     }
-    
+    /*
     public DefaultTableModel montaDados(JTable grid)
     {
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
@@ -45,7 +46,7 @@ public class CadastroCategoriaController {
         }
         
         return linha;
-    }
+    }*/
 
 
 }

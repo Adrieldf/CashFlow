@@ -7,7 +7,6 @@ package dao;
 
 import java.sql.Connection;
 
-
 public abstract class DAOFactory {
 
     protected static DAOFactory instancia;
@@ -15,13 +14,23 @@ public abstract class DAOFactory {
     public static DAOFactory getInstancia() {
         return null;
     }
-    
+
     protected Connection conn;
+
     public abstract void closeConnection();
-    
+
     public abstract ProdutoDAO getProdutoDAO();
+
     public abstract ParcelaDAO getParcelaDAO();
+
     public abstract ContaDAO getContaDAO();
+
     public abstract CategoriaDAO getCategoriaDAO();
+
+    public abstract ClienteFornecedorDAO getClienteFornecedorDAO();
+    
+    public abstract UsuarioDAO getUsuarioDAO();
+    
+    public abstract RenegociacaoDAO getRenegociacaoDAO();
 
 }

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Categoria;
 import model.Produto;
 
 public class PostgresqlProdutoDAO implements ProdutoDAO {
@@ -58,7 +59,7 @@ public class PostgresqlProdutoDAO implements ProdutoDAO {
     }
 
     @Override
-    public List<Produto> buscaPorCategoria(String categoria) {
+    public List<Produto> buscaPorCategoria(Categoria categoria) {
         List<Produto> produtos = new ArrayList<Produto>();
 
         PreparedStatement pstmt = null;
@@ -67,7 +68,7 @@ public class PostgresqlProdutoDAO implements ProdutoDAO {
         try {
 
             pstmt = conn.prepareStatement("select produto, categoria from produto where categoria = ?");
-            pstmt.setString(1, categoria);
+            pstmt.setString(1, categoria.getNomeCategoria());
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
