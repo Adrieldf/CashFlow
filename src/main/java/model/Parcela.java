@@ -19,12 +19,12 @@ public class Parcela
     public float valorTotal;
     public float valorPago;
     public String finalizada;
-    
+   /*
     public List<Parcela> buscaTodasParcelas()
     {
         DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
         ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
         return parcelaDAO.buscaTodasParcelas();
     }
-    
+    */
 }

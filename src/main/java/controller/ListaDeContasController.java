@@ -22,16 +22,6 @@ public class ListaDeContasController {
         ListaDeContas lista = new ListaDeContas();
         lista.exibir();
     }
-    
-    public void buscaTodosDados()
-    {
-        ContaController conta = new ContaController();
-        ParcelaController parcela = new ParcelaController();
-        
-        setListaContas(conta.buscaTodos());   
-        setListaParcela(parcela.buscaTodos());
-        
-    }
 
     public List<Conta> getListaContas() {
         return listaContas;

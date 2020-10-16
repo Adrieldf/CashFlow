@@ -8,10 +8,5 @@ import model.Conta;
 public class ContaController {
     
     
-    public List<Conta> buscaTodos()
-    {
-        Conta conta = new Conta();
-        return conta.buscaContas();
-    }
 
 }

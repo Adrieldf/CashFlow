@@ -11,10 +11,5 @@ import model.Parcela;
 
 public class ParcelaController {
     
-    public List<Parcela> buscaTodos()
-    {
-        Parcela parcela = new Parcela();
-        return parcela.buscaTodasParcelas();
-    }
     
 }

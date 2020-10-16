@@ -15,10 +15,5 @@ public class Conta {
     public float valor;
     public boolean finalizada;
     public boolean renegociada;
-
-    public List<Conta> buscaContas() {
-        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
-        ContaDAO contaDAO = fabrica.getContaDAO();
-        return contaDAO.buscaTodos();
-    }
+    
 }
