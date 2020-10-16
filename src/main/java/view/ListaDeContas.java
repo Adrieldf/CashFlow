@@ -18,7 +18,7 @@ public class ListaDeContas extends javax.swing.JFrame {
     
     public ListaDeContas() {
         initComponents();
-        contasController.buscaTodosDados();
+        //contasController.buscaTodosDados();
     }
 
     @SuppressWarnings("unchecked")

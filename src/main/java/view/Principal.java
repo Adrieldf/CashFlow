@@ -127,8 +127,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
-        CadastroCategoriaController categoria = new CadastroCategoriaController();
-        categoria.chamarTela();
+        //CadastroCategoriaController categoria = new CadastroCategoriaController();
+        //categoria.chamarTela();
+        CadastroCategoria categoria = new CadastroCategoria();
+        categoria.exibir();
         dispose();
     }//GEN-LAST:event_btnCategoriaActionPerformed
 
