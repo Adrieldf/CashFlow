@@ -3,8 +3,7 @@ package view;
 //import controller.Controller;
 import controller.CadastroProdutoController;
 import controller.TelaPrincipalController;
-import facade.CategoriaFacade;
-import facade.ProdutoFacade;
+import facade.Facade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -16,32 +15,11 @@ import model.Produto;
 
 public class CadastroProduto extends javax.swing.JFrame {
 
+    public Facade facade = new Facade();
+
     public CadastroProduto() {
         initComponents();
 
-        //CadastroProdutoController cadastro = new CadastroProdutoController();
-        //cadastro.montaDados(grid);//DESCOMENTAR APÓS AJUSTAR BANCO
-        //cadastro.montaComboBox(combobox_categoria);
-        CategoriaFacade facadeCategoria = new CategoriaFacade();
-        List<Categoria> listaCategorias = facadeCategoria.buscaTodos();
-
-        for (Categoria categoria : listaCategorias) {
-            combobox_categoria.addItem(categoria.getNomeCategoria());
-        }
-
-        ProdutoFacade facadeProduto = new ProdutoFacade();
-        List<Produto> listaProdutos = facadeProduto.buscaTodos();
-
-        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
-        linha.getDataVector().removeAllElements();
-        linha.setRowCount(0);
-
-        for (Produto produto : listaProdutos) {
-            Object[] dados = {
-                produto.getNomeProduto()
-            };
-            linha.addRow(dados);
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -176,22 +154,38 @@ public class CadastroProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void exibir() {
-        setVisible(true);
+    public void preencheGrid() {
+        List<Categoria> listaCategorias = facade.buscaTodasCategorias();
+
+        for (Categoria categoria : listaCategorias) {
+            combobox_categoria.addItem(categoria.getNomeCategoria());
+        }
+
+        List<Produto> listaProdutos = facade.buscaTodosProdutos();
+
+        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+        linha.getDataVector().removeAllElements();
+        linha.setRowCount(0);
+
+        for (Produto produto : listaProdutos) {
+            Object[] dados = {
+                produto.getNomeProduto()
+            };
+            linha.addRow(dados);
+        }
     }
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
-        TelaPrincipalController principal = new TelaPrincipalController();
-        principal.chamarTela();
+        Principal principal = new Principal();
+        principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
         Produto produto = new Produto(input_produto.getText(), (String) combobox_categoria.getSelectedItem());
-        ProdutoFacade facadeProduto = new ProdutoFacade();
 
-        facadeProduto.insere(produto);
+        facade.insereProdutos(produto);
     }//GEN-LAST:event_btnNovo3ActionPerformed
 
     private void input_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_produtoActionPerformed

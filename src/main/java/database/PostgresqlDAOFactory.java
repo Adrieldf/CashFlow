@@ -5,6 +5,7 @@ import dao.ClienteFornecedorDAO;
 import dao.ContaDAO;
 import dao.DAOFactory;
 import dao.ParcelaDAO;
+import dao.PessoaDAO;
 import dao.ProdutoDAO;
 import dao.RenegociacaoDAO;
 import dao.UsuarioDAO;
@@ -93,6 +94,11 @@ public class PostgresqlDAOFactory extends DAOFactory {
     @Override
     public RenegociacaoDAO getRenegociacaoDAO() {
         return new PostgresqlRenegociacaoDAO(conn);
+    }
+
+    @Override
+    public PessoaDAO getPessoaDAO() {
+        return new PostgresqlPessoaDAO(conn);
     }
 
 }

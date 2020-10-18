@@ -207,14 +207,10 @@ public class Login extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
     
-    public void exibir()
-    {
-        setVisible(true);
-    }
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        TelaPrincipalController principal = new TelaPrincipalController();
-        principal.chamarTela();
+        Principal principal = new Principal();
+        principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 

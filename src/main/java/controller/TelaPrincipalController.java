@@ -9,10 +9,6 @@ import view.Principal;
 
 public class TelaPrincipalController {
     
-    public void chamarTela()
-    {
-        Principal principal = new Principal();
-        principal.exibir();
-    }
+
     
 }

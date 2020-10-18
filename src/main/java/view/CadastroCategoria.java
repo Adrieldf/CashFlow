@@ -9,25 +9,21 @@ import controller.CadastroCategoriaController;
 import controller.TelaPrincipalController;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import facade.CategoriaFacade;
+import facade.Facade;
 import model.Categoria;
 
 public class CadastroCategoria extends javax.swing.JFrame {
-    
-    public void exibir()
-    {
-        setVisible(true);
-    }
-    
+
+    public Facade facade = new Facade();
+
     public CadastroCategoria() {
         initComponents();
-        
+
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
         linha.getDataVector().removeAllElements();
         linha.setRowCount(0);
 
-        CategoriaFacade facade = new CategoriaFacade();
-        List<Categoria> listaCategorias = facade.buscaTodos();
+        List<Categoria> listaCategorias = this.facade.buscaTodasCategorias();
 
         for (Categoria categoria : listaCategorias) {
             Object[] dados = {
@@ -35,7 +31,6 @@ public class CadastroCategoria extends javax.swing.JFrame {
             };
             linha.addRow(dados);
         }
-        
 
     }
 
@@ -162,27 +157,26 @@ public class CadastroCategoria extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
-        TelaPrincipalController principal = new TelaPrincipalController();
-        principal.chamarTela();
+        Principal principal = new Principal();
+        principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
         //Salvar
-        
+
         Categoria categoria = new Categoria(input_categoria.getText());
-        CategoriaFacade facade = new CategoriaFacade();
-        
-        facade.insere(categoria);
-        
+
+        facade.insereCategoria(categoria);
+
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
-        
+
         Object[] dados = {
-                input_categoria.getText()
-            };
-            linha.addRow(dados);
-        
-            input_categoria.setText("");
+            input_categoria.getText()
+        };
+        linha.addRow(dados);
+
+        input_categoria.setText("");
     }//GEN-LAST:event_btnNovo3ActionPerformed
 
     private void input_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_categoriaActionPerformed

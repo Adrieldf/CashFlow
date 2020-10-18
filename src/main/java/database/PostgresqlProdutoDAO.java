@@ -35,7 +35,7 @@ public class PostgresqlProdutoDAO implements ProdutoDAO {
 
             stmt = conn.createStatement();
             rs = stmt
-                    .executeQuery("select produto, categoria from produto");
+                    .executeQuery("select produto from produto");
 
             while (rs.next()) {
                 Produto p = new Produto();

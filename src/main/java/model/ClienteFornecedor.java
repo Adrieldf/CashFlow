@@ -3,6 +3,9 @@ package model;
 public class ClienteFornecedor extends Pessoa {
 	
 	private int id;
+        private String nome;
+        private boolean fornecedor;
+        
 	public ClienteFornecedor() {
 		super();
 		

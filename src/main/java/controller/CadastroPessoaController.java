@@ -9,10 +9,5 @@ import view.*;
 
 public class CadastroPessoaController {
     
-    public void chamarTela()
-    {
-        CadastroPessoa pessoa = new CadastroPessoa();
-        pessoa.exibir();
-    }
-    
+
 }

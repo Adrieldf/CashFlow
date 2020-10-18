@@ -12,41 +12,5 @@ import model.Categoria;
 import view.CadastroCategoria;
 
 public class CadastroCategoriaController {
-    
-    /*
-    public void salvarCategotegoria(String nomeCategoria) {
-        Categoria categoria = new Categoria(nomeCategoria);
-        categoria.criarCategoria();
-    }
-    
-    public List<Categoria> buscaCategorias()
-    {
-        Categoria categoria = new Categoria("");
-        return categoria.buscaCategorias();
-    }*/
-    
-    public void chamarTela(){
-        CadastroCategoria categoria = new CadastroCategoria();
-        categoria.exibir();
-    }
-    /*
-    public DefaultTableModel montaDados(JTable grid)
-    {
-        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
-        linha.getDataVector().removeAllElements();
-        linha.setRowCount(0);
-        
-         List<Categoria> listaCategorias = buscaCategorias();
-         
-        for (Categoria categoria : listaCategorias) {
-            Object[] dados = {
-                categoria.getNomeCategoria()
-            };
-            linha.addRow(dados);
-        }
-        
-        return linha;
-    }*/
-
 
 }

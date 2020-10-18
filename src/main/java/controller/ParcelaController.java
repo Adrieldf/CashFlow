@@ -8,8 +8,6 @@ package controller;
 import java.util.List;
 import model.Parcela;
 
-
 public class ParcelaController {
-    
-    
+
 }

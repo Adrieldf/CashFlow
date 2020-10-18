@@ -4,6 +4,13 @@ import controller.*;
 
 public class Principal extends javax.swing.JFrame {
 
+    ListaDeContas listaDeContas = new ListaDeContas();
+    CadastroCategoria cadastroCategoria = new CadastroCategoria();
+    CadastroProduto cadastroProduto = new CadastroProduto();
+    CadastroPessoa cadastroPessoa = new CadastroPessoa();
+    CadastroContaAReceber contaAReceber = new CadastroContaAReceber();
+    CadastroContaAPagar contaAPagar = new CadastroContaAPagar();
+    
     public Principal() {
         initComponents();
         //setExtendedState(MAXIMIZED_BOTH);
@@ -107,30 +114,22 @@ public class Principal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    public void exibir()
-    {
-        setVisible(true);
-    }
             
     
     private void btnPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPessoaActionPerformed
-        CadastroPessoaController pessoa = new CadastroPessoaController();
-        pessoa.chamarTela();
+        cadastroPessoa.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnPessoaActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
-        CadastroProdutoController produto = new CadastroProdutoController();
-        produto.chamarTela();
+        cadastroProduto.preencheGrid();
+        cadastroProduto.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
-        //CadastroCategoriaController categoria = new CadastroCategoriaController();
-        //categoria.chamarTela();
-        CadastroCategoria categoria = new CadastroCategoria();
-        categoria.exibir();
+
+        cadastroCategoria.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCategoriaActionPerformed
 
@@ -139,14 +138,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastarActionPerformed
 
     private void btnContasAReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasAReceberActionPerformed
-        CadastroContaAReceberController conta = new CadastroContaAReceberController();
-        conta.chamarTela();
+        contaAReceber.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnContasAReceberActionPerformed
 
     private void btnContasAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasAPagarActionPerformed
-        CadastroContaAPagarController conta = new CadastroContaAPagarController();
-        conta.chamarTela();
+        contaAPagar.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnContasAPagarActionPerformed
 
@@ -155,8 +152,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void btnContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasActionPerformed
-        ListaDeContasController lista = new ListaDeContasController();
-        lista.chamarTela();
+        listaDeContas.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnContasActionPerformed
 

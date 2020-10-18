@@ -17,11 +17,6 @@ public class ListaDeContasController {
     public List<Conta> listaContas = new ArrayList<Conta>();
     public List<Parcela> listaParcela = new ArrayList<Parcela>();
 
-    public void chamarTela()
-    {   
-        ListaDeContas lista = new ListaDeContas();
-        lista.exibir();
-    }
 
     public List<Conta> getListaContas() {
         return listaContas;

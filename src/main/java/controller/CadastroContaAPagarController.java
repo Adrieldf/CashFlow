@@ -10,9 +10,5 @@ import view.CadastroContaAPagar;
 
 public class CadastroContaAPagarController {
     
-    public void chamarTela(){
-        CadastroContaAPagar conta = new CadastroContaAPagar();
-        conta.exibir();
-    }
     
 }

@@ -10,9 +10,5 @@ import view.CadastroContaAReceber;
 
 public class CadastroContaAReceberController {
     
-    public void chamarTela(){
-        CadastroContaAReceber conta = new CadastroContaAReceber();
-        conta.exibir();
-    }
-    
+
 }

@@ -15,9 +15,4 @@ import view.*;
 
 public class CadastroProdutoController {
 
-    public void chamarTela() {
-        CadastroProduto produto = new CadastroProduto();
-        produto.exibir();
-    }
-
 }
