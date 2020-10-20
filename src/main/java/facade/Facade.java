@@ -131,6 +131,12 @@ public class Facade {
         PessoaDAO pessoaDAO = fabrica.getPessoaDAO();
         return pessoaDAO.buscaPorNome(nome);
     }
+    
+    public Pessoa buscaPessoaPorId(int id) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        PessoaDAO pessoaDAO = fabrica.getPessoaDAO();
+        return pessoaDAO.buscaPorId(id);
+    }
 
     public void inserePessoa(Pessoa pessoa) {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
