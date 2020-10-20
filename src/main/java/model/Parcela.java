@@ -7,7 +7,7 @@ package model;
 
 import dao.DAOFactory;
 import dao.ParcelaDAO;
-import database.PostgresqlDAOFactory;
+import database.PostgresqlDBFactory;
 import java.util.List;
 
 

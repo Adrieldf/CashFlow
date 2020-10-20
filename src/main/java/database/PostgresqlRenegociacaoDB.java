@@ -5,41 +5,42 @@
  */
 package database;
 
-import dao.ClienteFornecedorDAO;
+import dao.RenegociacaoDAO;
 import java.sql.Connection;
 import java.util.List;
-import model.ClienteFornecedor;
+import model.Renegociacao;
 
-public class PostgresqlClienteFornecedorDAO implements ClienteFornecedorDAO {
+public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 
     private Connection conn;
 
-    public PostgresqlClienteFornecedorDAO(Connection conn) {
+    public PostgresqlRenegociacaoDB(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public List<ClienteFornecedor> buscaTodas() {
+    public List<Renegociacao> buscaTodas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<ClienteFornecedor> buscaPorNome(String nome) {
+    public List<Renegociacao> buscaPorCodigo(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insere(ClienteFornecedor clienteFornecedor) {
+    public void insere(Renegociacao renegociacao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void remove(ClienteFornecedor clienteFornecedor) {
+    public void remove(Renegociacao renegociacao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void altera(ClienteFornecedor clienteFornecedor) {
+    public void altera(Renegociacao renegociacao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

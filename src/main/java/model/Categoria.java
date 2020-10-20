@@ -7,8 +7,8 @@ package model;
 
 import dao.CategoriaDAO;
 import dao.DAOFactory;
-import database.PostgresqlCategoriaDAO;
-import database.PostgresqlDAOFactory;
+import database.PostgresqlCategoriaDB;
+import database.PostgresqlDBFactory;
 import java.util.List;
 
 public class Categoria {

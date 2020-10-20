@@ -11,11 +11,11 @@ import java.util.List;
 import dao.UsuarioDAO;
 import model.Usuario;
 
-public class PostgresqlUsuarioDAO implements UsuarioDAO {
+public class PostgresqlUsuarioDB implements UsuarioDAO {
 
     private Connection conn;
 
-    public PostgresqlUsuarioDAO(Connection conn) {
+    public PostgresqlUsuarioDB(Connection conn) {
         this.conn = conn;
     }
 
@@ -61,16 +61,15 @@ public class PostgresqlUsuarioDAO implements UsuarioDAO {
     public Usuario buscaPorLogin(String login) {
         List<Usuario> usuarios = new ArrayList<Usuario>();
 
-        Statement stmt = null;
+        PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
 
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(
-                    "select * from usuario as u where u.login = ?");
-
-            // stmt.setString(1, login);
+        	pstmt = conn.prepareStatement("select * from usuario as u where u.login = ?");
+            pstmt.setString(1, login);
+            rs = pstmt.executeQuery();
+            
             while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getInt("id"));
@@ -88,7 +87,7 @@ public class PostgresqlUsuarioDAO implements UsuarioDAO {
         } finally {
             try {
                 rs.close();
-                stmt.close();
+                pstmt.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -154,8 +153,34 @@ public class PostgresqlUsuarioDAO implements UsuarioDAO {
 
     @Override
     public void altera(Usuario usuario) {
-        // TODO Auto-generated method stub
+    	if (usuario == null) {
+            return;
+        }
 
+        PreparedStatement pstmt = null;
+
+        try {
+            pstmt = conn.prepareStatement("update usuario set login = ?, senha = ?, nome = ?, telefone = ?, email = ?, endereco = ? where id = ? ");
+
+            pstmt.setString(1, usuario.getLogin());
+            pstmt.setString(2, usuario.getSenha());
+            pstmt.setString(3, usuario.getNome());
+            pstmt.setString(4, usuario.getTelefone());
+            pstmt.setString(5, usuario.getEmail());
+            pstmt.setString(6, usuario.getEndereco());
+            pstmt.setInt(7, usuario.getId());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException se) {
+            System.out.println("Ocorreu um erro : " + se.getMessage());
+        } finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
 }

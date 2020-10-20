@@ -5,42 +5,47 @@
  */
 package database;
 
-import dao.RenegociacaoDAO;
+import dao.ParcelaDAO;
 import java.sql.Connection;
 import java.util.List;
-import model.Renegociacao;
+import model.Parcela;
 
-public class PostgresqlRenegociacaoDAO implements RenegociacaoDAO {
-
+public class PostgresqlParcelaDB implements ParcelaDAO{
+    
     private Connection conn;
-
-    public PostgresqlRenegociacaoDAO(Connection conn) {
+    
+    public PostgresqlParcelaDB(Connection conn) {
         this.conn = conn;
     }
 
     @Override
-    public List<Renegociacao> buscaTodas() {
+    public Parcela buscaPorParcela(int parcela) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Renegociacao> buscaPorCodigo(int id) {
+    public List<Parcela> buscaParcelasDaConta(int numeroConta) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insere(Renegociacao renegociacao) {
+    public void insere(Parcela parcela) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void remove(Renegociacao renegociacao) {
+    public void remove(Parcela parcela) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void altera(Renegociacao renegociacao) {
+    public void altera(Parcela parcela) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List<Parcela> buscaTodasParcelas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

@@ -10,6 +10,8 @@ public interface PessoaDAO {
 
     List<Pessoa> buscaPorNome(String nome);
 
+    Pessoa buscaPorId(int id);
+
     void insere(Pessoa pessoa);
 
     void remove(Pessoa pessoa);

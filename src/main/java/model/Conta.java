@@ -2,7 +2,7 @@ package model;
 
 import dao.ContaDAO;
 import dao.DAOFactory;
-import database.PostgresqlDAOFactory;
+import database.PostgresqlDBFactory;
 import java.util.ArrayList;
 import java.util.List;
 

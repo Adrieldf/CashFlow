@@ -1,7 +1,6 @@
 package database;
 
 import dao.CategoriaDAO;
-import dao.ClienteFornecedorDAO;
 import dao.ContaDAO;
 import dao.DAOFactory;
 import dao.ParcelaDAO;
@@ -13,18 +12,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class PostgresqlDAOFactory extends DAOFactory {
+public class PostgresqlDBFactory extends DAOFactory {
 
     public static DAOFactory getInstancia() {
 
         if (instancia == null) {
-            instancia = new PostgresqlDAOFactory();
+            instancia = new PostgresqlDBFactory();
         }
 
         return instancia;
     }
 
-    private PostgresqlDAOFactory() {
+    private PostgresqlDBFactory() {
         this.openConnection();
     }
 
@@ -63,42 +62,37 @@ public class PostgresqlDAOFactory extends DAOFactory {
     
     @Override
     public ProdutoDAO getProdutoDAO() {
-        return new PostgresqlProdutoDAO(conn);
+        return new PostgresqlProdutoDB(conn);
     }
 
     @Override
     public ParcelaDAO getParcelaDAO() {
-        return new PostgresqlParcelaDAO(conn);
+        return new PostgresqlParcelaDB(conn);
     }
 
     @Override
     public ContaDAO getContaDAO() {
-        return new PostgresqlContaDAO(conn);
+        return new PostgresqlContaDB(conn);
     }
 
     @Override
     public CategoriaDAO getCategoriaDAO() {
-        return new PostgresqlCategoriaDAO(conn);
-    }
-
-    @Override
-    public ClienteFornecedorDAO getClienteFornecedorDAO() {
-        return new PostgresqlClienteFornecedorDAO(conn); 
+        return new PostgresqlCategoriaDB(conn);
     }
 
     @Override
     public UsuarioDAO getUsuarioDAO() {
-        return new PostgresqlUsuarioDAO(conn);
+        return new PostgresqlUsuarioDB(conn);
     }
 
     @Override
     public RenegociacaoDAO getRenegociacaoDAO() {
-        return new PostgresqlRenegociacaoDAO(conn);
+        return new PostgresqlRenegociacaoDB(conn);
     }
 
     @Override
     public PessoaDAO getPessoaDAO() {
-        return new PostgresqlPessoaDAO(conn);
+        return new PostgresqlPessoaDB(conn);
     }
 
 }

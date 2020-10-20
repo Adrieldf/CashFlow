@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Categoria;
 
-public class PostgresqlCategoriaDAO implements CategoriaDAO {
+public class PostgresqlCategoriaDB implements CategoriaDAO {
     
     private Connection conn;
 
-    public PostgresqlCategoriaDAO(Connection conn) {
+    public PostgresqlCategoriaDB(Connection conn) {
         this.conn = conn;
     }
     

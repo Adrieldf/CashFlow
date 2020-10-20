@@ -15,11 +15,11 @@ import java.util.List;
 import model.Conta;
 
 
-public class PostgresqlContaDAO implements ContaDAO{
+public class PostgresqlContaDB implements ContaDAO{
     
     private Connection conn;
     
-    public PostgresqlContaDAO(Connection conn) {
+    public PostgresqlContaDB(Connection conn) {
         this.conn = conn;
     }
     

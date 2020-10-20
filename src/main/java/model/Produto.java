@@ -7,8 +7,8 @@ package model;
 
 import dao.DAOFactory;
 import dao.ProdutoDAO;
-import database.PostgresqlDAOFactory;
-import database.PostgresqlProdutoDAO;
+import database.PostgresqlDBFactory;
+import database.PostgresqlProdutoDB;
 import java.io.Serializable;
 import java.util.List;
 

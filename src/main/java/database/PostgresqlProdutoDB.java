@@ -16,11 +16,11 @@ import java.util.List;
 import model.Categoria;
 import model.Produto;
 
-public class PostgresqlProdutoDAO implements ProdutoDAO {
+public class PostgresqlProdutoDB implements ProdutoDAO {
 
     private Connection conn;
 
-    public PostgresqlProdutoDAO(Connection conn) {
+    public PostgresqlProdutoDB(Connection conn) {
         this.conn = conn;
     }
 
