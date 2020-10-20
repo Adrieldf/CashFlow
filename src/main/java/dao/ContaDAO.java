@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface ContaDAO {
 
-    Conta buscaConta(int numConta);
+    Conta buscaConta(int id, int idUsuario);
 
     List<Conta> buscaTodos();
 
-    List<Conta> buscaContaPorTipo(int tipo);
+    List<Conta> buscaContaPorTipo(int tipo, int idUsuario);
 
     void insere(Conta conta);
 

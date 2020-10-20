@@ -7,40 +7,236 @@ package database;
 
 import dao.RenegociacaoDAO;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import model.Parcela;
 import model.Renegociacao;
 
 public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 
-    private Connection conn;
+	private Connection conn;
 
-    public PostgresqlRenegociacaoDB(Connection conn) {
-        this.conn = conn;
-    }
+	public PostgresqlRenegociacaoDB(Connection conn) {
+		this.conn = conn;
+	}
 
-    @Override
-    public List<Renegociacao> buscaTodas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public Renegociacao buscaPorCodigo(int id, int idParcela, int idConta) {
+		List<Renegociacao> renegociacoes = new ArrayList<Renegociacao>();
 
-    @Override
-    public List<Renegociacao> buscaPorCodigo(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-    @Override
-    public void insere(Renegociacao renegociacao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+		try {
 
-    @Override
-    public void remove(Renegociacao renegociacao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+			pstmt = conn.prepareStatement(
+					"select * from renegociacao where id = ? and \"idParcela\" = ? and \"idConta\" = ?");
+			pstmt.setInt(1, id);
+			pstmt.setInt(2, idParcela);
+			pstmt.setInt(3, idConta);
+			rs = pstmt.executeQuery();
 
-    @Override
-    public void altera(Renegociacao renegociacao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+			while (rs.next()) {
+				Renegociacao r = new Renegociacao();
+				r.setIdRenegociacao(rs.getInt("id"));
+				r.setId(rs.getInt("idParcela"));
+				r.setIdConta(rs.getInt("idConta"));
+				r.setNovaData(rs.getInt("data"));
+				r.setNovoValor(rs.getDouble("valor"));
+				r.setDescricao(rs.getString("descricao"));
+				r.setValida(rs.getInt("descricao") == 1 ? true : false);
+				renegociacoes.add(r);
+			}
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return renegociacoes.get(0);
+	}
+
+	@Override
+	public List<Renegociacao> buscaPorParcela(int idParcela, int idConta) {
+		List<Renegociacao> renegociacoes = new ArrayList<Renegociacao>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			pstmt = conn.prepareStatement("select * from renegociacao where \"idParcela\" = ? and \"idConta\" = ?");
+
+			pstmt.setInt(1, idParcela);
+			pstmt.setInt(2, idConta);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Renegociacao r = new Renegociacao();
+				r.setIdRenegociacao(rs.getInt("id"));
+				r.setId(rs.getInt("idParcela"));
+				r.setIdConta(rs.getInt("idConta"));
+				r.setNovaData(rs.getInt("data"));
+				r.setNovoValor(rs.getDouble("valor"));
+				r.setDescricao(rs.getString("descricao"));
+				r.setValida(rs.getInt("descricao") == 1 ? true : false);
+				renegociacoes.add(r);
+			}
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return renegociacoes;
+	}
+
+	@Override
+	public List<Renegociacao> buscaPorConta(int idConta) {
+		List<Renegociacao> renegociacoes = new ArrayList<Renegociacao>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			pstmt = conn.prepareStatement("select * from renegociacao where \"idConta\" = ?");
+
+			pstmt.setInt(1, idConta);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Renegociacao r = new Renegociacao();
+				r.setIdRenegociacao(rs.getInt("id"));
+				r.setId(rs.getInt("idParcela"));
+				r.setIdConta(rs.getInt("idConta"));
+				r.setNovaData(rs.getInt("data"));
+				r.setNovoValor(rs.getDouble("valor"));
+				r.setDescricao(rs.getString("descricao"));
+				r.setValida(rs.getInt("descricao") == 1 ? true : false);
+				renegociacoes.add(r);
+			}
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return renegociacoes;
+	}
+
+	@Override
+	public void insere(Renegociacao renegociacao) {
+		if (renegociacao == null) {
+			return;
+		}
+
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = conn.prepareStatement(
+					"insert into renegociacao (\"idParcela\", \"idConta\", data, valor, descricao, valida) values (?, ?, ?, ?, ?, ?)");
+
+			pstmt.setInt(1, renegociacao.getId());
+			pstmt.setInt(2, renegociacao.getIdConta());
+			pstmt.setInt(3, renegociacao.getNovaData());
+			pstmt.setDouble(4, renegociacao.getNovoValor());
+			pstmt.setString(5, renegociacao.getDescricao());
+			pstmt.setInt(5, renegociacao.isValida() ? 1 : 0);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	@Override
+	public void remove(Renegociacao renegociacao) {
+		if (renegociacao == null) {
+			return;
+		}
+
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = conn.prepareStatement("delete from renegociacao where id = ? and \"idParcela\" = ? and \"idConta\" = ?");
+			pstmt.setInt(1, renegociacao.getIdRenegociacao());
+			pstmt.setInt(2, renegociacao.getId());
+			pstmt.setInt(3, renegociacao.getIdConta());
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	@Override
+	public void altera(Renegociacao renegociacao) {
+		if (renegociacao == null) {
+			return;
+		}
+
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = conn.prepareStatement("update renegociacao set data = ?, valor = ?, descricao = ?, valida = ? where id = ? and \"idParcela\" = ? and \"idConta\" = ?");
+
+			
+			
+			pstmt.setInt(1, renegociacao.getNovaData());
+			pstmt.setDouble(2, renegociacao.getNovoValor());
+			pstmt.setString(3, renegociacao.getDescricao());
+			pstmt.setInt(4, renegociacao.isValida() ? 1 : 0);
+
+			pstmt.setInt(5, renegociacao.getIdRenegociacao());
+			pstmt.setInt(6, renegociacao.getId());
+			pstmt.setInt(7, renegociacao.getIdConta());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 
 }

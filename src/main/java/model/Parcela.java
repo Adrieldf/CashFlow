@@ -13,18 +13,55 @@ import java.util.List;
 
 public class Parcela 
 {
-    public int numeroConta;
+	private int id;
+	private int idConta;
+	private int data;
+	private double valor;
+	private double valorPago;
+	private double desconto;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getIdConta() {
+		return idConta;
+	}
+	public void setIdConta(int idConta) {
+		this.idConta = idConta;
+	}
+	public int getData() {
+		return data;
+	}
+	public void setData(int data) {
+		this.data = data;
+	}
+	public double getValor() {
+		return valor;
+	}
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+	public double getValorPago() {
+		return valorPago;
+	}
+	public void setValorPago(double valorPago) {
+		this.valorPago = valorPago;
+	}
+	public double getDesconto() {
+		return desconto;
+	}
+	public void setDesconto(double desconto) {
+		this.desconto = desconto;
+	}
+	
+  /*  public int numeroConta;
     public int numParcela;
     public String data;
     public float valorTotal;
     public float valorPago;
-    public String finalizada;
-   /*
-    public List<Parcela> buscaTodasParcelas()
-    {
-        DAOFactory fabrica = PostgresqlDAOFactory.getInstancia();
-        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
-        return parcelaDAO.buscaTodasParcelas();
-    }
-    */
+    public String finalizada;*/
+   
 }

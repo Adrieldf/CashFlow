@@ -10,12 +10,10 @@ import model.Parcela;
 
 public interface ParcelaDAO {
 
-    Parcela buscaPorParcela(int parcela);
+    Parcela buscaPorParcela(int id, int idConta);
 
-    List<Parcela> buscaParcelasDaConta(int numeroConta);
-
-    List<Parcela> buscaTodasParcelas();
-
+    List<Parcela> buscaParcelasDaConta(int idConta);
+    
     void insere(Parcela parcela);
 
     void remove(Parcela parcela);

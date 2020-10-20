@@ -60,16 +60,32 @@ public class Facade {
         produtoDAO.remove(produto);
     }
 
-    public List<Renegociacao> buscaTodasRenegociacao() {
+    public Parcela buscaParcelaPorCodigo(int id, int idConta) {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
-        RenegociacaoDAO renegociacaoDAO = fabrica.getRenegociacaoDAO();
-        return renegociacaoDAO.buscaTodas();
+        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
+        return parcelaDAO.buscaPorParcela(id, idConta);
+    }
+    
+    public List<Parcela> buscaParcelaPorConta(int idConta) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
+        return parcelaDAO.buscaParcelasDaConta(idConta);
     }
 
-    public List<Renegociacao> buscaRenegociacaoPorCodigo(int id) {
+    public Renegociacao buscaRenegociacaoPorCodigo(int id, int idParcela, int idConta) {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
         RenegociacaoDAO renegociacaoDAO = fabrica.getRenegociacaoDAO();
-        return renegociacaoDAO.buscaPorCodigo(id);
+        return renegociacaoDAO.buscaPorCodigo(id, idParcela, idConta);
+    }
+    public List<Renegociacao> buscaRenegociacaoPorParcela(int idParcela, int idConta) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        RenegociacaoDAO renegociacaoDAO = fabrica.getRenegociacaoDAO();
+        return renegociacaoDAO.buscaPorParcela(idParcela, idConta);
+    }
+    public List<Renegociacao> buscaRenegociacaoPorConta(int idConta) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        RenegociacaoDAO renegociacaoDAO = fabrica.getRenegociacaoDAO();
+        return renegociacaoDAO.buscaPorConta(idConta);
     }
 
     public void insereRenegociacao(Renegociacao renegociacao) {

@@ -2,9 +2,9 @@ package model;
 
 public class Renegociacao extends Parcela{
 
-	private int id;
+	private int idRenegociacao;
 	private int novaData;
-	private float novoValor;
+	private double novoValor;
 	private String descricao;
 	private boolean valida;
 	
@@ -16,22 +16,28 @@ public class Renegociacao extends Parcela{
 		this.setValida(true);//quando cria a renegociação é sempre valida, depois que pode invalidar
 	}
 
-	public int getId() {
-		return id;
+	public Renegociacao() {
+		super();
 	}
-	public void setId(int id) {
-		this.id = id;
+	
+	public int getIdRenegociacao() {
+		return idRenegociacao;
 	}
+
+	public void setIdRenegociacao(int idRenegociacao) {
+		this.idRenegociacao = idRenegociacao;
+	}
+
 	public int getNovaData() {
 		return novaData;
 	}
 	public void setNovaData(int novaData) {
 		this.novaData = novaData;
 	}
-	public float getNovoValor() {
+	public double getNovoValor() {
 		return novoValor;
 	}
-	public void setNovoValor(float novoValor) {
+	public void setNovoValor(double novoValor) {
 		this.novoValor = novoValor;
 	}
 	public String getDescricao() {
