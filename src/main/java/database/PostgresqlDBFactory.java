@@ -3,6 +3,7 @@ package database;
 import dao.CategoriaDAO;
 import dao.ContaDAO;
 import dao.DAOFactory;
+import dao.FornecedorDAO;
 import dao.ParcelaDAO;
 import dao.PessoaDAO;
 import dao.ProdutoDAO;
@@ -94,5 +95,11 @@ public class PostgresqlDBFactory extends DAOFactory {
     public PessoaDAO getPessoaDAO() {
         return new PostgresqlPessoaDB(conn);
     }
+
+    @Override
+    public FornecedorDAO getForncedorDAO() {
+        return new PostgresqlFornecedorDB(conn);
+    }
+
 
 }
