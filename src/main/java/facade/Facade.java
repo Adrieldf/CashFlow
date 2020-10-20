@@ -131,7 +131,7 @@ public class Facade {
         PessoaDAO pessoaDAO = fabrica.getPessoaDAO();
         return pessoaDAO.buscaPorNome(nome);
     }
-    
+
     public Pessoa buscaPessoaPorId(int id) {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
         PessoaDAO pessoaDAO = fabrica.getPessoaDAO();
@@ -150,9 +150,39 @@ public class Facade {
         pessoaDAO.remove(pessoa);
     }
 
-    public void alteraessoa(Pessoa pessoa) {
+    public void alteraPessoa(Pessoa pessoa) {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
         PessoaDAO pessoaDAO = fabrica.getPessoaDAO();
         pessoaDAO.altera(pessoa);
+    }
+
+    public List<Fornecedor> buscaTodosFornecedor() {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        FornecedorDAO fornecedorDAO = fabrica.getForncedorDAO();
+        return fornecedorDAO.buscaTodos();
+    }
+
+    public Fornecedor buscaFornecedor(String nomeFornecedor) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        FornecedorDAO fornecedorDAO = fabrica.getForncedorDAO();
+        return fornecedorDAO.buscaFornecedor(nomeFornecedor);
+    }
+
+    public void insereFornecedor(Fornecedor fornecedor) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        FornecedorDAO fornecedorDAO = fabrica.getForncedorDAO();
+        fornecedorDAO.insere(fornecedor);
+    }
+
+    public void removeFornecedor(Fornecedor fornecedor) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        FornecedorDAO fornecedorDAO = fabrica.getForncedorDAO();
+        fornecedorDAO.remove(fornecedor);
+    }
+
+    public void alteraFornecedor(Fornecedor fornecedor) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        FornecedorDAO fornecedorDAO = fabrica.getForncedorDAO();
+        fornecedorDAO.altera(fornecedor);
     }
 }
