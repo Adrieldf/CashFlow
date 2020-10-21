@@ -1,7 +1,5 @@
 package view;
 
-import controller.*;
-
 public class Principal extends javax.swing.JFrame {
 
     ListaDeContas listaDeContas = new ListaDeContas();
@@ -10,6 +8,7 @@ public class Principal extends javax.swing.JFrame {
     CadastroPessoa cadastroPessoa = new CadastroPessoa();
     CadastroContaAReceber contaAReceber = new CadastroContaAReceber();
     CadastroContaAPagar contaAPagar = new CadastroContaAPagar();
+    CadastroFornecedor cadastroFornecedor = new CadastroFornecedor();
     
     public Principal() {
         initComponents();
@@ -25,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
         btnCategoria = new javax.swing.JMenuItem();
         btnProduto = new javax.swing.JMenuItem();
         btnPessoa = new javax.swing.JMenuItem();
+        btnFornecedor = new javax.swing.JMenuItem();
         btnContasAReceber = new javax.swing.JMenuItem();
         btnContasAPagar = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -62,6 +62,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         btnCadastar.add(btnPessoa);
+
+        btnFornecedor.setText("Fornecedor");
+        btnFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFornecedorActionPerformed(evt);
+            }
+        });
+        btnCadastar.add(btnFornecedor);
 
         btnContasAReceber.setText("Contas a recerber");
         btnContasAReceber.addActionListener(new java.awt.event.ActionListener() {
@@ -156,6 +164,11 @@ public class Principal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnContasActionPerformed
 
+    private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
+        cadastroFornecedor.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnFornecedorActionPerformed
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -189,6 +202,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnContas;
     private javax.swing.JMenuItem btnContasAPagar;
     private javax.swing.JMenuItem btnContasAReceber;
+    private javax.swing.JMenuItem btnFornecedor;
     private javax.swing.JMenuItem btnPessoa;
     private javax.swing.JMenuItem btnProduto;
     private javax.swing.JMenu jMenu1;
