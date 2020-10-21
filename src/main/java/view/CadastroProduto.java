@@ -183,7 +183,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
-        Produto produto = new Produto(input_produto.getText(), (String) combobox_categoria.getSelectedItem());
+        Produto produto = new Produto(input_produto.getText(), (int) combobox_categoria.getSelectedItem());
 
         facade.insereProdutos(produto);
     }//GEN-LAST:event_btnNovo3ActionPerformed
