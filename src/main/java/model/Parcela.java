@@ -8,6 +8,7 @@ package model;
 import dao.DAOFactory;
 import dao.ParcelaDAO;
 import database.PostgresqlDBFactory;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -15,7 +16,7 @@ public class Parcela
 {
 	private int id;
 	private int idConta;
-	private int data;
+	private String data;
 	private double valor;
 	private double valorPago;
 	private double desconto;
@@ -32,10 +33,10 @@ public class Parcela
 	public void setIdConta(int idConta) {
 		this.idConta = idConta;
 	}
-	public int getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(int data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	public double getValor() {
@@ -56,12 +57,5 @@ public class Parcela
 	public void setDesconto(double desconto) {
 		this.desconto = desconto;
 	}
-	
-  /*  public int numeroConta;
-    public int numParcela;
-    public String data;
-    public float valorTotal;
-    public float valorPago;
-    public String finalizada;*/
    
 }

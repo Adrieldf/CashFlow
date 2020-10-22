@@ -4,9 +4,18 @@ package view;
 import controller.TelaPrincipalController;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import static java.time.DayOfWeek.WEDNESDAY;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import static java.time.temporal.TemporalAdjusters.next;
+import java.util.ArrayList;
+import static java.time.DayOfWeek.MONDAY;
+import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import model.Parcela;
 
 public class CadastroContaAPagar extends javax.swing.JFrame {
 
@@ -38,7 +47,7 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         input_parcelas = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        input_juros = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         grid = new javax.swing.JTable();
         btn_previsualizacao = new javax.swing.JButton();
@@ -48,6 +57,7 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
         combobox_fornecedor = new javax.swing.JComboBox<>();
         rdb_areceber = new javax.swing.JRadioButton();
         rdb_apagar = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -161,10 +171,13 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
         jLabel7.setText("Forncedor:");
 
         buttonGroup2.add(rdb_areceber);
+        rdb_areceber.setSelected(true);
         rdb_areceber.setText("Conta a receber");
 
         buttonGroup2.add(rdb_apagar);
         rdb_apagar.setText("Conta a pagar");
+
+        jLabel8.setText("%");
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,8 +235,11 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(input_parcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(226, 226, 226)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(input_juros, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel8)))
+                                        .addGap(188, 188, 188)))
                                 .addComponent(btn_previsualizacao))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -276,7 +292,8 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(input_juros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addGap(44, 44, 44)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo2)
@@ -318,13 +335,17 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
     private void input_parcelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_parcelasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_input_parcelasActionPerformed
-
-    private void btn_previsualizacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_previsualizacaoActionPerformed
-
+    
+    public List<Parcela> montaParcelas()
+    {
         int parcelas;
-        float valor;
+        double valor;
+        double juros;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+
+        LocalDate localDate = LocalDate.parse(input_data.getText(), formatter);
         
-        
+        List<Parcela> listaParcelas = new ArrayList<Parcela>();
 
         if (input_parcelas.getText() == null || input_parcelas.getText().length() == 0) {
             parcelas = 1;
@@ -335,24 +356,65 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
         if (input_valor.getText() == null || input_valor.getText().length() == 0) {
             valor = 0;
         } else {
-            valor = Float.parseFloat(input_valor.getText());
+            valor = Double.parseDouble(input_valor.getText());
         }
+        
+        if (input_juros.getText() == null || input_juros.getText().length() == 0) {
+            juros = 0;
+        } else {
+            valor = Double.parseDouble(input_valor.getText());
+            juros = valor * ( Float.parseFloat(input_juros.getText())/100 );
+        }
+        
+        double valorParcela = (valor + juros) / parcelas;
+        
+        for (int i = 1; i < parcelas+1; i++) {
 
+            Parcela parcela = new Parcela();
+            parcela.setValor(valorParcela);
+            parcela.setData(formatter.format(localDate));
+            listaParcelas.add(parcela);
+            
+            localDate = proxData(localDate);
+        }
+        
+        return listaParcelas;
+
+    }
+    
+    private LocalDate proxData(LocalDate dataAtual)
+    {
+        LocalDate returnvalue = dataAtual.plusMonths(1);
+        LocalDate proxSegunda  = returnvalue.with(next(MONDAY));
+        
+        if( returnvalue.getDayOfWeek().equals("SATURDAY") || returnvalue.getDayOfWeek().equals("SUNDAY"))
+        {
+            return proxSegunda;
+        }
+        else
+        {   
+            System.out.println(returnvalue.getDayOfWeek());
+            return returnvalue;
+        }
+        
+    }
+    
+    private void btn_previsualizacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_previsualizacaoActionPerformed
+        
+        List<Parcela> listaParcelas = montaParcelas();
+        
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
         linha.getDataVector().removeAllElements();
         linha.setRowCount(0);
 
-        for (int i = 1; i < parcelas+1; i++) {
-            
+        for (Parcela parcela : listaParcelas) {
             Object[] dados = {
-                input_data.getText(),
-                valor
+                parcela.getData(),
+                parcela.getValor()
             };
-             linha.addRow(dados);
-            
+            linha.addRow(dados);
         }
-
-
+        
     }//GEN-LAST:event_btn_previsualizacaoActionPerformed
 
     private void combobox_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_categoriaActionPerformed
@@ -375,6 +437,7 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combobox_produto;
     private javax.swing.JTable grid;
     private javax.swing.JFormattedTextField input_data;
+    private javax.swing.JTextField input_juros;
     private javax.swing.JTextField input_parcelas;
     private javax.swing.JTextField input_valor;
     private javax.swing.JLabel jLabel1;
@@ -384,11 +447,11 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JRadioButton rdb_apagar;
     private javax.swing.JRadioButton rdb_areceber;
     // End of variables declaration//GEN-END:variables

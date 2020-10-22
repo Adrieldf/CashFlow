@@ -42,7 +42,7 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 				Parcela p = new Parcela();
 				p.setId(rs.getInt("id"));
 				p.setIdConta(rs.getInt("idConta"));
-				p.setData(rs.getInt("data"));
+				//p.setData(rs.getInt("data"));
 				p.setValor(rs.getDouble("valor"));
 				p.setValorPago(rs.getDouble("valorPago"));
 				p.setDesconto(rs.getDouble("desconto"));
@@ -80,7 +80,7 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 				Parcela p = new Parcela();
 				p.setId(rs.getInt("id"));
 				p.setIdConta(rs.getInt("idConta"));
-				p.setData(rs.getInt("data"));
+				//p.setData(rs.getInt("data"));
 				p.setValor(rs.getDouble("valor"));
 				p.setValorPago(rs.getDouble("valorPago"));
 				p.setDesconto(rs.getDouble("desconto"));
@@ -114,7 +114,7 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 					"insert into parcela (\"idConta\", data, valor, valorPago, desconto) values (?, ?, ?, ?, ?)");
 
 			pstmt.setInt(1, parcela.getIdConta());
-			pstmt.setInt(2, parcela.getData());
+			//pstmt.setInt(2, parcela.getData());
 			pstmt.setDouble(3, parcela.getValor());
 			pstmt.setDouble(4, parcela.getValorPago());
 			pstmt.setDouble(5, parcela.getDesconto());
@@ -168,7 +168,7 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 			pstmt = conn.prepareStatement("update parcela set data = ?, valor = ?, valorPago = ?, desconto = ? where id = ? and \"idConta\" = ?");
 
 			
-			pstmt.setInt(1, parcela.getData());
+			//pstmt.setInt(1, parcela.getData());
 			pstmt.setDouble(2, parcela.getValor());
 			pstmt.setDouble(3, parcela.getValorPago());
 			pstmt.setDouble(4, parcela.getDesconto());

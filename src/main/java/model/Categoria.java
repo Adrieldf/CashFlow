@@ -12,12 +12,21 @@ import database.PostgresqlDBFactory;
 import java.util.List;
 
 public class Categoria {
-
+    
+    private int idCategoria;
     private String nomeCategoria;
 
-    public Categoria(String nome) {
-        super();
-        nomeCategoria = nome;
+    public Categoria(int idCategoria, String nomeCategoria) {
+        this.idCategoria = idCategoria;
+        this.nomeCategoria = nomeCategoria;
+    }
+    
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public String getNomeCategoria() {
@@ -27,5 +36,7 @@ public class Categoria {
     public void setNomeCategoria(String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
     }
+
+
 
 }

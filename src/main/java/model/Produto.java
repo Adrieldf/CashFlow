@@ -14,9 +14,9 @@ import java.util.List;
 
 public class Produto implements Serializable {
 
-	private static final long serialVersionUID = 38230695077030297L;
-	private int id;
-	private String nomeProduto;
+    private static final long serialVersionUID = 38230695077030297L;
+    private int id;
+    private String nomeProduto;
     private int idCategoria;
 
     public Produto() {
@@ -29,14 +29,14 @@ public class Produto implements Serializable {
     }
 
     public int getId() {
-		return id;
-	}
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getNomeProduto() {
+    public String getNomeProduto() {
         return nomeProduto;
     }
 

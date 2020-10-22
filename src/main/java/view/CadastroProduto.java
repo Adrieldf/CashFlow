@@ -16,10 +16,14 @@ import model.Produto;
 public class CadastroProduto extends javax.swing.JFrame {
 
     public Facade facade = new Facade();
+    private List<Categoria> listaCategorias;
+    private List<Produto> listaProdutos;
 
     public CadastroProduto() {
         initComponents();
-
+        
+        listaCategorias = facade.buscaTodasCategorias();
+        listaProdutos = facade.buscaTodosProdutos();
     }
 
     @SuppressWarnings("unchecked")
@@ -155,13 +159,11 @@ public class CadastroProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void preencheGrid() {
-        List<Categoria> listaCategorias = facade.buscaTodasCategorias();
-
+        
+        
         for (Categoria categoria : listaCategorias) {
             combobox_categoria.addItem(categoria.getNomeCategoria());
         }
-
-        List<Produto> listaProdutos = facade.buscaTodosProdutos();
 
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
         linha.getDataVector().removeAllElements();
@@ -183,9 +185,18 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
-        Produto produto = new Produto(input_produto.getText(), (int) combobox_categoria.getSelectedItem());
+        
+        for(Categoria categoria : listaCategorias)
+        {
+            if(categoria.getNomeCategoria().equals(combobox_categoria.getSelectedItem()))
+            {   
+                 Produto produto = new Produto(input_produto.getText(), categoria.getIdCategoria());
 
-        facade.insereProdutos(produto);
+                facade.insereProdutos(produto);
+                break;
+            }
+        }
+
     }//GEN-LAST:event_btnNovo3ActionPerformed
 
     private void input_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_produtoActionPerformed
