@@ -37,7 +37,7 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
                     .executeQuery("select nome from categoria");
 
             while (rs.next()) {
-                Categoria p = new Categoria(rs.getString("nome"));
+                Categoria p = new Categoria(0,rs.getString("nome"));
 
                 categoria.add(p);
             }
