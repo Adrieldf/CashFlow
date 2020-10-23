@@ -7,13 +7,18 @@ package dao;
 
 import java.util.List;
 import model.Categoria;
+import model.Conta;
 
 public interface CategoriaDAO {
 
     List<Categoria> buscaTodos();
+    
+    Categoria buscaPorId(int id);
 
     void insere(Categoria categoria);
 
     void remove(Categoria categoria);
+    
+    void altera(Categoria categoria);
 
 }

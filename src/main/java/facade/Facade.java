@@ -17,6 +17,11 @@ public class Facade {
         CategoriaDAO categoriaDAO = fabrica.getCategoriaDAO();
         return categoriaDAO.buscaTodos();
     }
+    public Categoria buscaCategoriaPorId(int id) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        CategoriaDAO categoriaDAO = fabrica.getCategoriaDAO();
+        return categoriaDAO.buscaPorId(id);
+    }
 
     public void insereCategoria(Categoria categoria) {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
@@ -29,6 +34,12 @@ public class Facade {
         CategoriaDAO categoriaDAO = fabrica.getCategoriaDAO();
         categoriaDAO.remove(categoria);
     }
+    
+    public void alteraCategoria(Categoria categoria) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        CategoriaDAO categoriaDAO = fabrica.getCategoriaDAO();
+        categoriaDAO.altera(categoria);;
+    }
 
     public List<Produto> buscaTodosProdutos() {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
@@ -40,6 +51,12 @@ public class Facade {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
         ProdutoDAO produtoDAO = fabrica.getProdutoDAO();
         return produtoDAO.buscaPorCategoria(categoria);
+    }
+    
+    public Produto buscaProdutosPorId(int id) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ProdutoDAO produtoDAO = fabrica.getProdutoDAO();
+        return produtoDAO.buscaPorId(id);
     }
 
     public void insereProdutos(Produto produto) {
@@ -116,6 +133,12 @@ public class Facade {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
         UsuarioDAO usuarioDAO = fabrica.getUsuarioDAO();
         return usuarioDAO.buscaPorLogin(login);
+    }
+    
+    public Usuario buscaUsuarioPorId(int id) {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        UsuarioDAO usuarioDAO = fabrica.getUsuarioDAO();
+        return usuarioDAO.buscaPorId(id);
     }
 
     public void insereUsuario(Usuario usuario) {

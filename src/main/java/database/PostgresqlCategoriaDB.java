@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Categoria;
+import model.Pessoa;
 
 public class PostgresqlCategoriaDB implements CategoriaDAO {
 
@@ -55,6 +56,39 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
 		return categoria;
 	}
 
+	@Override
+	public Categoria buscaPorId(int id) {
+		 List<Categoria> categorias = new ArrayList<Categoria>();
+
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+
+	        try {
+
+	        	pstmt = conn.prepareStatement("select * from categoria where id = ?");
+				pstmt.setInt(1, id);
+				rs = pstmt.executeQuery();
+				
+	            while (rs.next()) {
+	            	Categoria c = new Categoria(rs.getInt("id"),rs.getString("nome"));
+	               
+	            	categorias.add(c);
+	            }
+
+	        } catch (SQLException se) {
+	            System.out.println("Ocorreu um erro : " + se.getMessage());
+	        } finally {
+	            try {
+	                rs.close();
+	                pstmt.close();
+	            } catch (SQLException e) {
+	                System.out.println(e.getMessage());
+	            }
+	        }
+
+	        return categorias.get(0);
+	}
+	
 	@Override
 	public void insere(Categoria categoria) {
 		if (categoria == null) {
@@ -102,6 +136,33 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
 				System.out.println(e.getMessage());
 			}
 		}
+	}
+
+	@Override
+	public void altera(Categoria categoria) {
+		 if (categoria == null) {
+	            return;
+	        }
+
+	        PreparedStatement pstmt = null;
+
+	        try {
+	            pstmt = conn.prepareStatement("update categoria set nome = ? where id = ? ");
+
+	            pstmt.setString(1, categoria.getNomeCategoria());
+	            pstmt.setInt(2, categoria.getIdCategoria());
+
+	            pstmt.executeUpdate();
+
+	        } catch (SQLException se) {
+	            System.out.println("Ocorreu um erro : " + se.getMessage());
+	        } finally {
+	            try {
+	                pstmt.close();
+	            } catch (SQLException e) {
+	                System.out.println(e.getMessage());
+	            }
+	        }
 	}
 
 }

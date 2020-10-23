@@ -12,7 +12,7 @@ public interface ContaDAO {
 
     Conta buscaConta(int id, int idUsuario);
 
-    List<Conta> buscaTodos();
+    List<Conta> buscaTodos(int idUsuario);
 
     List<Conta> buscaContaPorTipo(int tipo, int idUsuario);
 

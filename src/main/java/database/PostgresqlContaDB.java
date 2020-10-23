@@ -62,17 +62,18 @@ public class PostgresqlContaDB implements ContaDAO {
 	}
 
 	@Override
-	public List<Conta> buscaTodos() {
+	public List<Conta> buscaTodos(int idUsuario) {
 		List<Conta> contas = new ArrayList<Conta>();
 
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select * from conta");
-
+			pstmt = conn.prepareStatement("select * from conta where \"idUsuario\" = ?");
+			pstmt.setInt(1, idUsuario);
+			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				Conta c = new Conta();
 				c.setId(rs.getInt("id"));
@@ -88,7 +89,7 @@ public class PostgresqlContaDB implements ContaDAO {
 		} finally {
 			try {
 				rs.close();
-				stmt.close();
+				pstmt.close();
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}

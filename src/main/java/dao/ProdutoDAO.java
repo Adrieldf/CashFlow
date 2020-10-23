@@ -14,6 +14,8 @@ public interface ProdutoDAO {
     List<Produto> buscaTodos();
 
     List<Produto> buscaPorCategoria(Categoria categoria);
+    
+    Produto buscaPorId(int id);
 
     void insere(Produto produto);
 

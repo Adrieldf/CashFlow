@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.UsuarioDAO;
+import model.Produto;
 import model.Usuario;
 
 public class PostgresqlUsuarioDB implements UsuarioDAO {
@@ -96,6 +97,47 @@ public class PostgresqlUsuarioDB implements UsuarioDAO {
         return usuarios.get(0);
     }
 
+    @Override
+   	public Usuario buscaPorId(int id) {
+   		 List<Usuario> usuarios = new ArrayList<Usuario>();
+
+   	        PreparedStatement pstmt = null;
+   	        ResultSet rs = null;
+
+   	        try {
+
+   	        	pstmt = conn.prepareStatement("select * from usuario where id = ?");
+   				pstmt.setInt(1, id);
+   				rs = pstmt.executeQuery();
+   				
+   	            while (rs.next()) {
+   	            	Usuario u = new Usuario();
+   	                u.setId(rs.getInt("id"));
+   	                u.setLogin(rs.getString("login"));
+   	                u.setSenha(rs.getString("senha"));
+   	                u.setNome(rs.getString("nome"));
+   	                u.setTelefone(rs.getString("telefone"));
+   	                u.setEmail(rs.getString("email"));
+   	                u.setEndereco(rs.getString("endereco"));
+   	                usuarios.add(u);
+   	            }
+
+   	        } catch (SQLException se) {
+   	            System.out.println("Ocorreu um erro : " + se.getMessage());
+   	        } finally {
+   	            try {
+   	                rs.close();
+   	                pstmt.close();
+   	            } catch (SQLException e) {
+   	                System.out.println(e.getMessage());
+   	            }
+   	        }
+
+   	        return usuarios.get(0);
+   	}
+
+    
+    
     @Override
     public void insere(Usuario usuario) {
         if (usuario == null) {

@@ -94,6 +94,42 @@ public class PostgresqlProdutoDB implements ProdutoDAO {
     }
 
     @Override
+	public Produto buscaPorId(int id) {
+		 List<Produto> produtos = new ArrayList<Produto>();
+
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+
+	        try {
+
+	        	pstmt = conn.prepareStatement("select * from produto where id = ?");
+				pstmt.setInt(1, id);
+				rs = pstmt.executeQuery();
+				
+	            while (rs.next()) {
+	            	 Produto p = new Produto();
+	                 p.setId(rs.getInt("id"));
+	                 p.setNomeProduto(rs.getString("nome"));
+	                 p.setCategoria(rs.getInt("idCategoria"));
+	                 produtos.add(p);
+	            }
+
+	        } catch (SQLException se) {
+	            System.out.println("Ocorreu um erro : " + se.getMessage());
+	        } finally {
+	            try {
+	                rs.close();
+	                pstmt.close();
+	            } catch (SQLException e) {
+	                System.out.println(e.getMessage());
+	            }
+	        }
+
+	        return produtos.get(0);
+	}
+    
+    
+    @Override
     public void insere(Produto produto) {
         if (produto == null) {
             return;
