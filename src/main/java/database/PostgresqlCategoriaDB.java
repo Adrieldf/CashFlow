@@ -16,93 +16,92 @@ import java.util.List;
 import model.Categoria;
 
 public class PostgresqlCategoriaDB implements CategoriaDAO {
-    
-    private Connection conn;
 
-    public PostgresqlCategoriaDB(Connection conn) {
-        this.conn = conn;
-    }
-    
-    @Override
-    public List<Categoria> buscaTodos() {
-       List<Categoria> categoria = new ArrayList<Categoria>();
+	private Connection conn;
 
-        Statement stmt = null;
-        ResultSet rs = null;
+	public PostgresqlCategoriaDB(Connection conn) {
+		this.conn = conn;
+	}
 
-        try {
+	@Override
+	public List<Categoria> buscaTodos() {
+		List<Categoria> categoria = new ArrayList<Categoria>();
 
-            stmt = conn.createStatement();
-            rs = stmt
-                    .executeQuery("select nome from categoria");
+		Statement stmt = null;
+		ResultSet rs = null;
 
-            while (rs.next()) {
-                Categoria p = new Categoria(0,rs.getString("nome"));
+		try {
 
-                categoria.add(p);
-            }
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select * from categoria");
 
-        } catch (SQLException se) {
-            System.out.println("Ocorreu um erro : " + se.getMessage());
-        } finally {
-            try {
-                rs.close();
-                stmt.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+			while (rs.next()) {
+				Categoria p = new Categoria(rs.getInt("id"), rs.getString("nome"));
 
-        return categoria;
-    }
+				categoria.add(p);
+			}
 
-    @Override
-    public void insere(Categoria categoria) {
-         if (categoria == null) {
-            return;
-        }
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 
-        PreparedStatement pstmt = null;
+		return categoria;
+	}
 
-        try {
-            pstmt = conn.prepareStatement("insert into categoria (nome) values (?)");
+	@Override
+	public void insere(Categoria categoria) {
+		if (categoria == null) {
+			return;
+		}
 
-            pstmt.setString(1, categoria.getNomeCategoria());
+		PreparedStatement pstmt = null;
 
-            pstmt.executeUpdate();
+		try {
+			pstmt = conn.prepareStatement("insert into categoria (nome) values (?)");
 
-        } catch (SQLException se) {
-            System.out.println("Ocorreu um erro : " + se.getMessage());
-        } finally {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }}
+			pstmt.setString(1, categoria.getNomeCategoria());
 
-    @Override
-    public void remove(Categoria categoria) {
-        if (categoria == null) {
-            return;
-        }
+			pstmt.executeUpdate();
 
-        PreparedStatement pstmt = null;
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 
-        try {
-            pstmt = conn.prepareStatement("delete from categoria where categoria = ?");
-            pstmt.setString(1, categoria.getNomeCategoria());
-            pstmt.executeUpdate();
-        } catch (SQLException se) {
-            System.out.println("Ocorreu um erro : " + se.getMessage());
-        } finally {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }}
+	@Override
+	public void remove(Categoria categoria) {
+		if (categoria == null) {
+			return;
+		}
 
-    
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = conn.prepareStatement("delete from categoria where categoria = ?");
+			pstmt.setString(1, categoria.getNomeCategoria());
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 
 }
