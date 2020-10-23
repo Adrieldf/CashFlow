@@ -15,12 +15,19 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import model.Categoria;
 import model.Parcela;
+import model.Produto;
 
-public class CadastroContaAPagar extends javax.swing.JFrame {
-
-    public CadastroContaAPagar() {
+public class CadastroConta extends javax.swing.JFrame {
+    
+    private List<Categoria> listaCategorias;
+    private List<Produto> listaProdutos;
+    
+    public CadastroConta() {
         initComponents();
+        
+        preencheComboboxCategoria();
     }
 
     @SuppressWarnings("unchecked")
@@ -305,10 +312,34 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void exibir() {
-        setVisible(true);
+    private void preencheComboboxCategoria()
+    {
+        for (Categoria categoria : listaCategorias) {
+            combobox_categoria.addItem(categoria.getNomeCategoria());
+        }
     }
-
+    
+    private void preencheComboboxProduto()
+    {
+       combobox_produto.removeAllItems();
+       
+       String nomeCategoria = (String) combobox_categoria.getSelectedItem();
+       
+       for(Categoria categoria : listaCategorias)
+       {
+           if(categoria.getNomeCategoria().equals(nomeCategoria)){
+               
+               for(Produto produto : listaProdutos){
+                   if(produto.getIdCategoria() == categoria.getIdCategoria()){
+                       combobox_produto.addItem(produto.getNomeProduto());
+                   } 
+               }
+               break;
+           }
+       }
+       
+    }
+    
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
         Principal principal = new Principal();
@@ -418,7 +449,7 @@ public class CadastroContaAPagar extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_previsualizacaoActionPerformed
 
     private void combobox_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_categoriaActionPerformed
-        // TODO add your handling code here:
+       preencheComboboxProduto();
     }//GEN-LAST:event_combobox_categoriaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

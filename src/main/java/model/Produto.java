@@ -25,7 +25,7 @@ public class Produto implements Serializable {
     public Produto(String nome, int idCategoria) {
         super();
         this.setNomeProduto(nome);
-        this.setCategoria(idCategoria);
+        this.setIdCategoria(idCategoria);
     }
 
     public int getId() {
@@ -44,11 +44,11 @@ public class Produto implements Serializable {
         this.nomeProduto = nomeProduto;
     }
 
-    public int getCategoria() {
+    public int getIdCategoria() {
         return this.idCategoria;
     }
 
-    public void setCategoria(int categoria) {
+    public void setIdCategoria(int categoria) {
         this.idCategoria = categoria;
     }
 

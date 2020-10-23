@@ -5,7 +5,7 @@
  */
 package controller;
 
-import view.CadastroContaAPagar;
+import view.CadastroConta;
 
 
 public class CadastroContaAPagarController {

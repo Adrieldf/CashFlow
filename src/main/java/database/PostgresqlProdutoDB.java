@@ -40,7 +40,7 @@ public class PostgresqlProdutoDB implements ProdutoDAO {
                 Produto p = new Produto();
                 p.setId(rs.getInt("id"));
                 p.setNomeProduto(rs.getString("nome"));
-                p.setCategoria(rs.getInt("idCategoria"));
+                p.setIdCategoria(rs.getInt("idCategoria"));
                 produtos.add(p);
             }
 
@@ -75,7 +75,7 @@ public class PostgresqlProdutoDB implements ProdutoDAO {
                 Produto p = new Produto();
                 p.setId(rs.getInt("id"));
                 p.setNomeProduto(rs.getString("nome"));
-                p.setCategoria(rs.getInt("idCategoria"));
+                p.setIdCategoria(rs.getInt("idCategoria"));
                 produtos.add(p);
             }
 
@@ -110,7 +110,7 @@ public class PostgresqlProdutoDB implements ProdutoDAO {
 	            	 Produto p = new Produto();
 	                 p.setId(rs.getInt("id"));
 	                 p.setNomeProduto(rs.getString("nome"));
-	                 p.setCategoria(rs.getInt("idCategoria"));
+	                 p.setIdCategoria(rs.getInt("idCategoria"));
 	                 produtos.add(p);
 	            }
 
@@ -141,7 +141,7 @@ public class PostgresqlProdutoDB implements ProdutoDAO {
             pstmt = conn.prepareStatement("insert into produto (nome, \"idCategoria\") values (?,?)");
 
             pstmt.setString(1, produto.getNomeProduto());
-            pstmt.setInt(2, produto.getCategoria());
+            pstmt.setInt(2, produto.getIdCategoria());
 
             pstmt.executeUpdate();
 
@@ -167,7 +167,7 @@ public class PostgresqlProdutoDB implements ProdutoDAO {
         try {
             pstmt = conn.prepareStatement("delete from produto where id = ? and \"idCategoria\" = ?");
             pstmt.setString(1, produto.getNomeProduto());
-            pstmt.setInt(2, produto.getCategoria());
+            pstmt.setInt(2, produto.getIdCategoria());
             pstmt.executeUpdate();
         } catch (SQLException se) {
             System.out.println("Ocorreu um erro : " + se.getMessage());
@@ -192,9 +192,9 @@ public class PostgresqlProdutoDB implements ProdutoDAO {
             pstmt = conn.prepareStatement("update produto set nome = ?, \"idCategoria\" = ? where id = ? and \"idCategoria\" = ?");
 
             pstmt.setString(1, produto.getNomeProduto());
-            pstmt.setInt(2, produto.getCategoria());
+            pstmt.setInt(2, produto.getIdCategoria());
             pstmt.setString(3, produto.getNomeProduto());
-            pstmt.setInt(4, produto.getCategoria());
+            pstmt.setInt(4, produto.getIdCategoria());
 
             pstmt.executeUpdate();
 

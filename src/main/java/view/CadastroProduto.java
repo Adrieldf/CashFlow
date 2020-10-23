@@ -15,13 +15,13 @@ import model.Produto;
 
 public class CadastroProduto extends javax.swing.JFrame {
 
-    public Facade facade = new Facade();
+    private Facade facade = new Facade();
     private List<Categoria> listaCategorias;
     private List<Produto> listaProdutos;
 
     public CadastroProduto() {
         initComponents();
-        
+
         listaCategorias = facade.buscaTodasCategorias();
         listaProdutos = facade.buscaTodosProdutos();
     }
@@ -159,8 +159,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void preencheGrid() {
-        
-        
+
         for (Categoria categoria : listaCategorias) {
             combobox_categoria.addItem(categoria.getNomeCategoria());
         }
@@ -185,14 +184,22 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
-        
-        for(Categoria categoria : listaCategorias)
-        {
-            if(categoria.getNomeCategoria().equals(combobox_categoria.getSelectedItem()))
-            {   
-                 Produto produto = new Produto(input_produto.getText(), categoria.getIdCategoria());
+
+        for (Categoria categoria : listaCategorias) {
+            if (categoria.getNomeCategoria().equals(combobox_categoria.getSelectedItem())) {
+                System.out.println(categoria.getIdCategoria());
+                Produto produto = new Produto(input_produto.getText(), categoria.getIdCategoria());
 
                 facade.insereProdutos(produto);
+                
+                DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+                Object[] dados = {
+                    produto.getNomeProduto()
+                };
+                linha.addRow(dados);
+
+                input_produto.setText("");
+
                 break;
             }
         }

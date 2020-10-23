@@ -7,7 +7,7 @@ public class Principal extends javax.swing.JFrame {
     CadastroProduto cadastroProduto = new CadastroProduto();
     CadastroPessoa cadastroPessoa = new CadastroPessoa();
     CadastroContaAReceber contaAReceber = new CadastroContaAReceber();
-    CadastroContaAPagar contaAPagar = new CadastroContaAPagar();
+    CadastroConta contaAPagar = new CadastroConta();
     CadastroFornecedor cadastroFornecedor = new CadastroFornecedor();
     
     public Principal() {
@@ -25,7 +25,6 @@ public class Principal extends javax.swing.JFrame {
         btnProduto = new javax.swing.JMenuItem();
         btnPessoa = new javax.swing.JMenuItem();
         btnFornecedor = new javax.swing.JMenuItem();
-        btnContasAReceber = new javax.swing.JMenuItem();
         btnContasAPagar = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         btnContas = new javax.swing.JMenuItem();
@@ -71,15 +70,7 @@ public class Principal extends javax.swing.JFrame {
         });
         btnCadastar.add(btnFornecedor);
 
-        btnContasAReceber.setText("Contas a recerber");
-        btnContasAReceber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContasAReceberActionPerformed(evt);
-            }
-        });
-        btnCadastar.add(btnContasAReceber);
-
-        btnContasAPagar.setText("Conta a pagar");
+        btnContasAPagar.setText("Conta");
         btnContasAPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContasAPagarActionPerformed(evt);
@@ -145,11 +136,6 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastarActionPerformed
 
-    private void btnContasAReceberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasAReceberActionPerformed
-        contaAReceber.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnContasAReceberActionPerformed
-
     private void btnContasAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasAPagarActionPerformed
         contaAPagar.setVisible(true);
         dispose();
@@ -201,7 +187,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnCategoria;
     private javax.swing.JMenuItem btnContas;
     private javax.swing.JMenuItem btnContasAPagar;
-    private javax.swing.JMenuItem btnContasAReceber;
     private javax.swing.JMenuItem btnFornecedor;
     private javax.swing.JMenuItem btnPessoa;
     private javax.swing.JMenuItem btnProduto;
