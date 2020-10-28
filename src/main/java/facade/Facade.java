@@ -224,4 +224,41 @@ public class Facade {
         FornecedorDAO fornecedorDAO = fabrica.getForncedorDAO();
         fornecedorDAO.altera(fornecedor);
     }
+    
+    public Conta buscaConta(int id, int idUsuario){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ContaDAO contaDAO = fabrica.getContaDAO();
+        return contaDAO.buscaConta(id, idUsuario);
+    }
+
+    public List<Conta> buscaTodos(int idUsuario)
+    {
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ContaDAO contaDAO = fabrica.getContaDAO();
+        return contaDAO.buscaTodos(idUsuario);
+    }
+
+    public List<Conta> buscaContaPorTipo(int tipo, int idUsuario){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ContaDAO contaDAO = fabrica.getContaDAO();
+        return contaDAO.buscaContaPorTipo(tipo, idUsuario);
+    }
+
+    public void insereConta(Conta conta){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ContaDAO contaDAO = fabrica.getContaDAO();
+        contaDAO.insere(conta);
+    }
+
+    public void removeConta(Conta conta){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ContaDAO contaDAO = fabrica.getContaDAO();
+        contaDAO.remove(conta);
+    }
+
+    public void alteraConta(Conta conta){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ContaDAO contaDAO = fabrica.getContaDAO();
+        contaDAO.altera(conta);
+    }
 }
