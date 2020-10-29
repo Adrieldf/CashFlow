@@ -209,7 +209,11 @@ public class Login extends javax.swing.JFrame {
     
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        Principal principal = new Principal();
+        
+        int idUsuario = 0;
+        //Lógica pára validar usuário e pegar o id dele
+        
+        Principal principal = new Principal(idUsuario);
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed

@@ -261,4 +261,35 @@ public class Facade {
         ContaDAO contaDAO = fabrica.getContaDAO();
         contaDAO.altera(conta);
     }
+    
+    public Parcela buscaPorParcela(int id, int idConta){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
+        return parcelaDAO.buscaPorParcela(id, idConta);
+    }
+
+    public List<Parcela> buscaParcelasDaConta(int idConta){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
+        return parcelaDAO.buscaParcelasDaConta(idConta);
+    }
+    
+    public void insereParcelas(Parcela parcela){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
+        parcelaDAO.insere(parcela);
+    }
+
+    public void removeParcelas(Parcela parcela){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
+        parcelaDAO.remove(parcela);
+    }
+
+    public void alteraParcelas(Parcela parcela){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
+        parcelaDAO.altera(parcela);
+        
+    }
 }

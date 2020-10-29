@@ -1,6 +1,8 @@
 package view;
 
 public class Principal extends javax.swing.JFrame {
+    
+    public int idUsuario;
 
     ListaDeContas listaDeContas = new ListaDeContas();
     CadastroCategoria cadastroCategoria = new CadastroCategoria();
@@ -10,9 +12,9 @@ public class Principal extends javax.swing.JFrame {
     CadastroConta contaAPagar = new CadastroConta();
     CadastroFornecedor cadastroFornecedor = new CadastroFornecedor();
     
-    public Principal() {
+    public Principal(int idUsuario) {
         initComponents();
-        //setExtendedState(MAXIMIZED_BOTH);
+        this.idUsuario = idUsuario;
     }
 
     @SuppressWarnings("unchecked")

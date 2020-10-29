@@ -323,7 +323,6 @@ public class CadastroConta extends javax.swing.JFrame {
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
         Conta conta = new Conta();
-        Parcela parcela = new Parcela();
 
         if (rdb_areceber.isSelected()) {
             conta.setTipo(2);
@@ -341,6 +340,13 @@ public class CadastroConta extends javax.swing.JFrame {
                 conta.setIdFornecedor(categoria.getIdCategoria());
             }
         }
+        
+        List<Parcela> listaParcelas = montaParcelas();
+        
+        for (Parcela parcela : listaParcelas) {
+            facade.insereParcelas(parcela);
+        }
+
 
         facade.insereConta(conta);
     }//GEN-LAST:event_btnNovo3ActionPerformed
