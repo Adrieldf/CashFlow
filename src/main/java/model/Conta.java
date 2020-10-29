@@ -14,8 +14,10 @@ public class Conta {
     private int idFornecedor;
     private int idUsuario;
     private String descricao;
+    private int idProduto;
 
-    //esses atributos aqui da pra usar, mas a� tem que pegar as informa��es das tabelas parcela e renegociacao
+
+	//esses atributos aqui da pra usar, mas a� tem que pegar as informa��es das tabelas parcela e renegociacao
     public ArrayList<Parcela> parcela = new ArrayList<Parcela>();
     public Produto produto;
     public float valor;
@@ -61,5 +63,13 @@ public class Conta {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    
+    public int getIdProduto() {
+		return idProduto;
+	}
+
+	public void setIdProduto(int idProduto) {
+		this.idProduto = idProduto;
+	}
 
 }

@@ -44,6 +44,7 @@ public class PostgresqlContaDB implements ContaDAO {
 				c.setIdUsuario(rs.getInt("idUsuario"));
 				c.setTipo(rs.getInt("tipo"));
 				c.setDescricao(rs.getString("descricao"));
+				c.setIdProduto(rs.getInt("idProduto"));
 				contas.add(c);
 			}
 
@@ -81,6 +82,7 @@ public class PostgresqlContaDB implements ContaDAO {
 				c.setIdUsuario(rs.getInt("idUsuario"));
 				c.setTipo(rs.getInt("tipo"));
 				c.setDescricao(rs.getString("descricao"));
+				c.setIdProduto(rs.getInt("idProduto"));
 				contas.add(c);
 			}
 
@@ -119,6 +121,7 @@ public class PostgresqlContaDB implements ContaDAO {
 				c.setIdUsuario(rs.getInt("idUsuario"));
 				c.setTipo(rs.getInt("tipo"));
 				c.setDescricao(rs.getString("descricao"));
+				c.setIdProduto(rs.getInt("idProduto"));
 				contas.add(c);
 			}
 
@@ -146,12 +149,13 @@ public class PostgresqlContaDB implements ContaDAO {
 
 		try {
 			pstmt = conn.prepareStatement(
-					"insert into conta (\"idFornecedor\", \"idUsuario\", tipo, descricao) values (?, ?, ?, ?)");
+					"insert into conta (\"idFornecedor\", \"idUsuario\", tipo, descricao, \"idProduto\") values (?, ?, ?, ?)");
 
 			pstmt.setInt(1, conta.getIdFornecedor());
 			pstmt.setInt(2, conta.getIdUsuario());
 			pstmt.setInt(3, conta.getTipo());
 			pstmt.setString(4, conta.getDescricao());
+			pstmt.setInt(5, conta.getIdProduto());
 
 			pstmt.executeUpdate();
 
@@ -199,13 +203,14 @@ public class PostgresqlContaDB implements ContaDAO {
 
 		try {
 			pstmt = conn.prepareStatement(
-					"update conta set \"idFornecedor\" = ?, tipo = ?, descricao = ?,  where id = ? and \"idUsuario\" = ?");
+					"update conta set \"idFornecedor\" = ?, tipo = ?, descricao = ?, \"idProduto\" = ? where id = ? and \"idUsuario\" = ?");
 
 			pstmt.setInt(1, conta.getIdFornecedor());
 			pstmt.setInt(2, conta.getTipo());
 			pstmt.setString(3, conta.getDescricao());
-			pstmt.setInt(4, conta.getId());
-			pstmt.setInt(5, conta.getIdUsuario());
+			pstmt.setInt(4, conta.getIdProduto());
+			pstmt.setInt(5, conta.getId());
+			pstmt.setInt(6, conta.getIdUsuario());
 
 			pstmt.executeUpdate();
 
