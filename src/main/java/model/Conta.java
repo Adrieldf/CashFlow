@@ -16,14 +16,6 @@ public class Conta {
     private String descricao;
     private int idProduto;
 
-
-	//esses atributos aqui da pra usar, mas a� tem que pegar as informa��es das tabelas parcela e renegociacao
-    public ArrayList<Parcela> parcela = new ArrayList<Parcela>();
-    public Produto produto;
-    public float valor;
-    public boolean finalizada;
-    public boolean renegociada;
-
     public int getId() {
         return id;
     }

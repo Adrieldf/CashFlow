@@ -20,6 +20,8 @@ public class Parcela
 	private double valor;
 	private double valorPago;
 	private double desconto;
+        public boolean renegociada;
+        private int idUsuario;
 	
 	public int getId() {
 		return id;

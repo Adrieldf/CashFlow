@@ -14,6 +14,7 @@ import controller.TelaPrincipalController;
 
 public class ListaDeContas extends javax.swing.JFrame {
     
+    private int idUsuario;
     public ListaDeContasController contasController = new ListaDeContasController();
     
     public ListaDeContas() {
@@ -226,7 +227,7 @@ public class ListaDeContas extends javax.swing.JFrame {
     
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
-        Principal principal = new Principal();
+        Principal principal = new Principal(idUsuario);
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed

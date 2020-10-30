@@ -7,6 +7,7 @@ public class Pessoa {
     private String telefone;
     private String email;
     private String endereco;
+    private int idUsuario;
 
     public Pessoa() {
 

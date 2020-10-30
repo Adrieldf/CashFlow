@@ -2,7 +2,7 @@ package view;
 
 public class Principal extends javax.swing.JFrame {
     
-    public int idUsuario;
+    private int idUsuario;
 
     ListaDeContas listaDeContas = new ListaDeContas();
     CadastroCategoria cadastroCategoria = new CadastroCategoria();

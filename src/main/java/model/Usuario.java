@@ -4,6 +4,7 @@ public class Usuario extends Pessoa {
 
 	private String login;
 	private String senha;
+        private int idUsuario;
 	
 	
 	public Usuario(String nome, String login, String senha) {

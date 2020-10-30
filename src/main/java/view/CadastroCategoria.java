@@ -13,7 +13,8 @@ import facade.Facade;
 import model.Categoria;
 
 public class CadastroCategoria extends javax.swing.JFrame {
-
+    
+    private int idUsuario;
     public Facade facade = new Facade();
 
     public CadastroCategoria() {
@@ -157,7 +158,7 @@ public class CadastroCategoria extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
-        Principal principal = new Principal();
+        Principal principal = new Principal(idUsuario);
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed

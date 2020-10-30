@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 
 
 public class CadastroContaAReceber extends javax.swing.JFrame {
-
+    
+    private int idUsuario;
+    
     public CadastroContaAReceber() {
         initComponents();
     }
@@ -215,7 +217,7 @@ public class CadastroContaAReceber extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
        //Voltar
-        Principal principal = new Principal();
+        Principal principal = new Principal(idUsuario);
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed

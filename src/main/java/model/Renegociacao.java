@@ -7,13 +7,14 @@ public class Renegociacao extends Parcela{
 	private double novoValor;
 	private String descricao;
 	private boolean valida;
+        private int idUsuario;
 	
 	public Renegociacao(int novaData, float novoValor, String descricao) {
 		super();
 		this.setNovaData(novaData);
 		this.setNovoValor(novoValor);
 		this.setDescricao(descricao);
-		this.setValida(true);//quando cria a renegociação é sempre valida, depois que pode invalidar
+		this.setValida(true);//quando cria a renegociaï¿½ï¿½o ï¿½ sempre valida, depois que pode invalidar
 	}
 
 	public Renegociacao() {

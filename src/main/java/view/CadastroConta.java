@@ -22,7 +22,8 @@ import model.Parcela;
 import model.Produto;
 
 public class CadastroConta extends javax.swing.JFrame {
-
+    
+    private int idUsuario;
     private List<Categoria> listaCategorias;
     private List<Produto> listaProdutos;
     private Facade facade = new Facade();
@@ -316,7 +317,7 @@ public class CadastroConta extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
-        Principal principal = new Principal();
+        Principal principal = new Principal(idUsuario);
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed

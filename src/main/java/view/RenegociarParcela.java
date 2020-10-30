@@ -8,7 +8,9 @@ import java.util.logging.Logger;
 
 
 public class RenegociarParcela extends javax.swing.JFrame {
-
+    
+    private int idUsuario;
+    
     public RenegociarParcela() {
         initComponents();
     }

@@ -18,6 +18,7 @@ public class Produto implements Serializable {
     private int id;
     private String nomeProduto;
     private int idCategoria;
+    private int idUsuario;
 
     public Produto() {
     }

@@ -13,6 +13,7 @@ public class Fornecedor {
     private String telefone;
     private String email;
     private String endereco;
+    private int idUsuario;
 
     public Fornecedor(int id, String fornecedor, String telefone, String email, String endereco) {
         this.id = id;
