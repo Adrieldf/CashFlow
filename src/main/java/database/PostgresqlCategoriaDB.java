@@ -25,19 +25,20 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
 	}
 
 	@Override
-	public List<Categoria> buscaTodos() {
+	public List<Categoria> buscaTodos(int idUsuario) {
 		List<Categoria> categoria = new ArrayList<Categoria>();
 
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("select * from categoria");
-
+			pstmt = conn.prepareStatement("select * from categoria where \"idUsuario\" = ?");
+			pstmt.setInt(1, idUsuario);
+			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
-				Categoria p = new Categoria(rs.getInt("id"), rs.getString("nome"));
+				Categoria p = new Categoria(rs.getInt("id"), rs.getString("nome"), rs.getInt("idUsuario"));
 
 				categoria.add(p);
 			}
@@ -47,7 +48,7 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
 		} finally {
 			try {
 				rs.close();
-				stmt.close();
+				pstmt.close();
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
@@ -57,7 +58,7 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
 	}
 
 	@Override
-	public Categoria buscaPorId(int id) {
+	public Categoria buscaPorId(int id, int idUsuario) {
 		 List<Categoria> categorias = new ArrayList<Categoria>();
 
 	        PreparedStatement pstmt = null;
@@ -65,12 +66,13 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
 
 	        try {
 
-	        	pstmt = conn.prepareStatement("select * from categoria where id = ?");
+	        	pstmt = conn.prepareStatement("select * from categoria where id = ? and \"idUsuario\" = ?");
 				pstmt.setInt(1, id);
+				pstmt.setInt(2, idUsuario);
 				rs = pstmt.executeQuery();
 				
 	            while (rs.next()) {
-	            	Categoria c = new Categoria(rs.getInt("id"),rs.getString("nome"));
+	            	Categoria c = new Categoria(rs.getInt("id"),rs.getString("nome"), rs.getInt(idUsuario));
 	               
 	            	categorias.add(c);
 	            }
@@ -98,9 +100,10 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("insert into categoria (nome) values (?)");
+			pstmt = conn.prepareStatement("insert into categoria (nome, \"idUsuario\") values (?,?)");
 
 			pstmt.setString(1, categoria.getNomeCategoria());
+			pstmt.setInt(2, categoria.getIdUsuario());
 
 			pstmt.executeUpdate();
 
@@ -124,8 +127,9 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("delete from categoria where categoria = ?");
-			pstmt.setString(1, categoria.getNomeCategoria());
+			pstmt = conn.prepareStatement("delete from categoria where id = ? and \"idUsuario\" = ?");
+			pstmt.setInt(1, categoria.getIdCategoria());
+			pstmt.setInt(2, categoria.getIdUsuario());
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println("Ocorreu um erro : " + se.getMessage());
@@ -147,10 +151,11 @@ public class PostgresqlCategoriaDB implements CategoriaDAO {
 	        PreparedStatement pstmt = null;
 
 	        try {
-	            pstmt = conn.prepareStatement("update categoria set nome = ? where id = ? ");
+	            pstmt = conn.prepareStatement("update categoria set nome = ? where id = ? and \"idUsuario\" = ?");
 
 	            pstmt.setString(1, categoria.getNomeCategoria());
 	            pstmt.setInt(2, categoria.getIdCategoria());
+	            pstmt.setInt(3, categoria.getIdUsuario());
 
 	            pstmt.executeUpdate();
 

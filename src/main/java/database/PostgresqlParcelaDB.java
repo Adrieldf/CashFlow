@@ -25,7 +25,7 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
     }
 
     @Override
-    public Parcela buscaPorParcela(int id, int idConta) {
+    public Parcela buscaPorParcela(int id, int idConta, int idUsuario) {
     	List<Parcela> parcelas = new ArrayList<Parcela>();
 
 		PreparedStatement pstmt = null;
@@ -33,19 +33,21 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 
 		try {
 
-			pstmt = conn.prepareStatement("select * from parcela where id = ? and \"idConta\" = ?");
+			pstmt = conn.prepareStatement("select * from parcela where id = ? and \"idConta\" = ? and \"idUsuario\" = ?");
 			pstmt.setInt(1, id);
 			pstmt.setInt(2, idConta);
+			pstmt.setInt(3, idUsuario);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				Parcela p = new Parcela();
 				p.setId(rs.getInt("id"));
 				p.setIdConta(rs.getInt("idConta"));
-				//p.setData(rs.getInt("data"));
+				p.setData(rs.getString("data"));
 				p.setValor(rs.getDouble("valor"));
 				p.setValorPago(rs.getDouble("valorPago"));
 				p.setDesconto(rs.getDouble("desconto"));
+				p.setIdUsuario(rs.getInt("idUsuario"));
 				parcelas.add(p);
 			}
 
@@ -64,7 +66,7 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
     }
 
     @Override
-    public List<Parcela> buscaParcelasDaConta(int idConta) {
+    public List<Parcela> buscaParcelasDaConta(int idConta, int idUsuario) {
     	List<Parcela> parcelas = new ArrayList<Parcela>();
 
 		PreparedStatement pstmt = null;
@@ -72,18 +74,20 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 
 		try {
 
-			pstmt = conn.prepareStatement("select * from parcela where \"idConta\" = ?");
+			pstmt = conn.prepareStatement("select * from parcela where \"idConta\" = ? and \"idUsuario\" = ?");
 			pstmt.setInt(1, idConta);
+			pstmt.setInt(2, idUsuario);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				Parcela p = new Parcela();
 				p.setId(rs.getInt("id"));
 				p.setIdConta(rs.getInt("idConta"));
-				//p.setData(rs.getInt("data"));
+				p.setData(rs.getString("data"));
 				p.setValor(rs.getDouble("valor"));
 				p.setValorPago(rs.getDouble("valorPago"));
 				p.setDesconto(rs.getDouble("desconto"));
+				p.setIdUsuario(rs.getInt("idUsuario"));
 				parcelas.add(p);
 			}
 
@@ -111,13 +115,14 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 
 		try {
 			pstmt = conn.prepareStatement(
-					"insert into parcela (\"idConta\", data, valor, valorPago, desconto) values (?, ?, ?, ?, ?)");
+					"insert into parcela (\"idConta\", data, valor, valorPago, desconto, \"idUsuario\") values (?, ?, ?, ?, ?, ?)");
 
 			pstmt.setInt(1, parcela.getIdConta());
-			//pstmt.setInt(2, parcela.getData());
+			pstmt.setString(2, parcela.getData());
 			pstmt.setDouble(3, parcela.getValor());
 			pstmt.setDouble(4, parcela.getValorPago());
 			pstmt.setDouble(5, parcela.getDesconto());
+			pstmt.setInt(6,  parcela.getIdUsuario());
 
 			pstmt.executeUpdate();
 
@@ -141,9 +146,10 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("delete from parcela where id = ? and \"idConta\" = ?");
+			pstmt = conn.prepareStatement("delete from parcela where id = ? and \"idConta\" = ? and \"idUsuario\" = ?");
 			pstmt.setInt(1, parcela.getId());
 			pstmt.setInt(2, parcela.getIdConta());
+			pstmt.setInt(3, parcela.getIdUsuario());
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println("Ocorreu um erro : " + se.getMessage());
@@ -165,15 +171,16 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("update parcela set data = ?, valor = ?, valorPago = ?, desconto = ? where id = ? and \"idConta\" = ?");
+			pstmt = conn.prepareStatement("update parcela set data = ?, valor = ?, valorPago = ?, desconto = ? where id = ? and \"idConta\" = ? and \"idUsuario\" = ?");
 
 			
-			//pstmt.setInt(1, parcela.getData());
+			pstmt.setString(1, parcela.getData());
 			pstmt.setDouble(2, parcela.getValor());
 			pstmt.setDouble(3, parcela.getValorPago());
 			pstmt.setDouble(4, parcela.getDesconto());
 			pstmt.setInt(5, parcela.getId());
 			pstmt.setInt(6, parcela.getIdConta());
+			pstmt.setInt(7, parcela.getIdUsuario());
 
 			pstmt.executeUpdate();
 

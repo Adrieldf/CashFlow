@@ -10,9 +10,11 @@ import model.Fornecedor;
 
 public interface FornecedorDAO {
 
-    List<Fornecedor> buscaTodos();
+    List<Fornecedor> buscaTodos(int idUsuario);
     
-    Fornecedor buscaFornecedor(String nomeFornecedor);
+    Fornecedor buscaFornecedor(String nomeFornecedor, int idUsuario);
+    
+    Fornecedor buscaFornecedorPorId(int id, int idUsuario);
     
     void insere(Fornecedor fornecedor);
 

@@ -3,13 +3,13 @@ package model;
 public class Renegociacao extends Parcela{
 
 	private int idRenegociacao;
-	private int novaData;
+	private String novaData;
 	private double novoValor;
 	private String descricao;
 	private boolean valida;
         private int idUsuario;
 	
-	public Renegociacao(int novaData, float novoValor, String descricao) {
+	public Renegociacao(String novaData, float novoValor, String descricao) {
 		super();
 		this.setNovaData(novaData);
 		this.setNovoValor(novoValor);
@@ -29,10 +29,10 @@ public class Renegociacao extends Parcela{
 		this.idRenegociacao = idRenegociacao;
 	}
 
-	public int getNovaData() {
+	public String getNovaData() {
 		return novaData;
 	}
-	public void setNovaData(int novaData) {
+	public void setNovaData(String novaData) {
 		this.novaData = novaData;
 	}
 	public double getNovoValor() {

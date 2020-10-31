@@ -11,9 +11,9 @@ import model.Conta;
 
 public interface CategoriaDAO {
 
-    List<Categoria> buscaTodos();
+    List<Categoria> buscaTodos(int idUsuario);
     
-    Categoria buscaPorId(int id);
+    Categoria buscaPorId(int id, int idUsuario);
 
     void insere(Categoria categoria);
 
