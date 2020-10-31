@@ -25,7 +25,7 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 	}
 
 	@Override
-	public Renegociacao buscaPorCodigo(int id, int idParcela, int idConta) {
+	public Renegociacao buscaPorCodigo(int id, int idParcela, int idConta, int idUsuario) {
 		List<Renegociacao> renegociacoes = new ArrayList<Renegociacao>();
 
 		PreparedStatement pstmt = null;
@@ -34,10 +34,11 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 		try {
 
 			pstmt = conn.prepareStatement(
-					"select * from renegociacao where id = ? and \"idParcela\" = ? and \"idConta\" = ?");
+					"select * from renegociacao where id = ? and \"idParcela\" = ? and \"idConta\" = ? and \"idUsuario\" = ?");
 			pstmt.setInt(1, id);
 			pstmt.setInt(2, idParcela);
 			pstmt.setInt(3, idConta);
+			pstmt.setInt(4, idUsuario);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -45,10 +46,11 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 				r.setIdRenegociacao(rs.getInt("id"));
 				r.setId(rs.getInt("idParcela"));
 				r.setIdConta(rs.getInt("idConta"));
-				r.setNovaData(rs.getInt("data"));
+				r.setNovaData(rs.getString("data"));
 				r.setNovoValor(rs.getDouble("valor"));
 				r.setDescricao(rs.getString("descricao"));
 				r.setValida(rs.getInt("descricao") == 1 ? true : false);
+				r.setIdUsuario(rs.getInt("idUsuario"));
 				renegociacoes.add(r);
 			}
 
@@ -67,7 +69,7 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 	}
 
 	@Override
-	public List<Renegociacao> buscaPorParcela(int idParcela, int idConta) {
+	public List<Renegociacao> buscaPorParcela(int idParcela, int idConta, int idUsuario) {
 		List<Renegociacao> renegociacoes = new ArrayList<Renegociacao>();
 
 		PreparedStatement pstmt = null;
@@ -75,10 +77,11 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 
 		try {
 
-			pstmt = conn.prepareStatement("select * from renegociacao where \"idParcela\" = ? and \"idConta\" = ?");
+			pstmt = conn.prepareStatement("select * from renegociacao where \"idParcela\" = ? and \"idConta\" = ? and \"idUsuario\" = ?");
 
 			pstmt.setInt(1, idParcela);
 			pstmt.setInt(2, idConta);
+			pstmt.setInt(3, idUsuario);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -86,10 +89,11 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 				r.setIdRenegociacao(rs.getInt("id"));
 				r.setId(rs.getInt("idParcela"));
 				r.setIdConta(rs.getInt("idConta"));
-				r.setNovaData(rs.getInt("data"));
+				r.setNovaData(rs.getString("data"));
 				r.setNovoValor(rs.getDouble("valor"));
 				r.setDescricao(rs.getString("descricao"));
 				r.setValida(rs.getInt("descricao") == 1 ? true : false);
+				r.setIdUsuario(rs.getInt("idUsuario"));
 				renegociacoes.add(r);
 			}
 
@@ -108,7 +112,7 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 	}
 
 	@Override
-	public List<Renegociacao> buscaPorConta(int idConta) {
+	public List<Renegociacao> buscaPorConta(int idConta, int idUsuario) {
 		List<Renegociacao> renegociacoes = new ArrayList<Renegociacao>();
 
 		PreparedStatement pstmt = null;
@@ -116,9 +120,10 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 
 		try {
 
-			pstmt = conn.prepareStatement("select * from renegociacao where \"idConta\" = ?");
+			pstmt = conn.prepareStatement("select * from renegociacao where \"idConta\" = ? and \"idUsuario\" = ?");
 
 			pstmt.setInt(1, idConta);
+			pstmt.setInt(2, idUsuario);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -126,7 +131,7 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 				r.setIdRenegociacao(rs.getInt("id"));
 				r.setId(rs.getInt("idParcela"));
 				r.setIdConta(rs.getInt("idConta"));
-				r.setNovaData(rs.getInt("data"));
+				r.setNovaData(rs.getString("data"));
 				r.setNovoValor(rs.getDouble("valor"));
 				r.setDescricao(rs.getString("descricao"));
 				r.setValida(rs.getInt("descricao") == 1 ? true : false);
@@ -157,14 +162,15 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 
 		try {
 			pstmt = conn.prepareStatement(
-					"insert into renegociacao (\"idParcela\", \"idConta\", data, valor, descricao, valida) values (?, ?, ?, ?, ?, ?)");
+					"insert into renegociacao (\"idParcela\", \"idConta\", data, valor, descricao, valida, \"idUsuario\") values (?, ?, ?, ?, ?, ?,?)");
 
 			pstmt.setInt(1, renegociacao.getId());
 			pstmt.setInt(2, renegociacao.getIdConta());
-			pstmt.setInt(3, renegociacao.getNovaData());
+			pstmt.setString(3, renegociacao.getNovaData());
 			pstmt.setDouble(4, renegociacao.getNovoValor());
 			pstmt.setString(5, renegociacao.getDescricao());
-			pstmt.setInt(5, renegociacao.isValida() ? 1 : 0);
+			pstmt.setInt(6, renegociacao.isValida() ? 1 : 0);
+			pstmt.setInt(7, renegociacao.getIdUsuario());
 
 			pstmt.executeUpdate();
 
@@ -188,10 +194,11 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("delete from renegociacao where id = ? and \"idParcela\" = ? and \"idConta\" = ?");
+			pstmt = conn.prepareStatement("delete from renegociacao where id = ? and \"idParcela\" = ? and \"idConta\" = ? and \"idUsuario\" = ?");
 			pstmt.setInt(1, renegociacao.getIdRenegociacao());
 			pstmt.setInt(2, renegociacao.getId());
 			pstmt.setInt(3, renegociacao.getIdConta());
+			pstmt.setInt(4, renegociacao.getIdUsuario());
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			System.out.println("Ocorreu um erro : " + se.getMessage());
@@ -213,11 +220,11 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("update renegociacao set data = ?, valor = ?, descricao = ?, valida = ? where id = ? and \"idParcela\" = ? and \"idConta\" = ?");
+			pstmt = conn.prepareStatement("update renegociacao set data = ?, valor = ?, descricao = ?, valida = ? where id = ? and \"idParcela\" = ? and \"idConta\" = ? and \"idUsuario\" = ?");
 
 			
 			
-			pstmt.setInt(1, renegociacao.getNovaData());
+			pstmt.setString(1, renegociacao.getNovaData());
 			pstmt.setDouble(2, renegociacao.getNovoValor());
 			pstmt.setString(3, renegociacao.getDescricao());
 			pstmt.setInt(4, renegociacao.isValida() ? 1 : 0);
@@ -225,6 +232,7 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 			pstmt.setInt(5, renegociacao.getIdRenegociacao());
 			pstmt.setInt(6, renegociacao.getId());
 			pstmt.setInt(7, renegociacao.getIdConta());
+			pstmt.setInt(8, renegociacao.getIdUsuario());
 
 			pstmt.executeUpdate();
 

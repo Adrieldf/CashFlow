@@ -11,11 +11,11 @@ import model.Produto;
 
 public interface ProdutoDAO {
 
-    List<Produto> buscaTodos();
+    List<Produto> buscaTodos(int idUsuario);
 
-    List<Produto> buscaPorCategoria(Categoria categoria);
+    List<Produto> buscaPorCategoria(Categoria categoria, int idUsuario);
     
-    Produto buscaPorId(int id);
+    Produto buscaPorId(int id, int idUsuario);
 
     void insere(Produto produto);
 

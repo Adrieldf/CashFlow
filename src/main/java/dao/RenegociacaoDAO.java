@@ -6,11 +6,11 @@ import model.Renegociacao;
 
 public interface RenegociacaoDAO {
 
-    Renegociacao buscaPorCodigo(int id, int idParcela, int idConta);
+    Renegociacao buscaPorCodigo(int id, int idParcela, int idConta, int idUsuario);
     
-    List<Renegociacao> buscaPorParcela(int idParcela, int idConta);
+    List<Renegociacao> buscaPorParcela(int idParcela, int idConta, int idUsuario);
     
-    List<Renegociacao> buscaPorConta(int idConta);
+    List<Renegociacao> buscaPorConta(int idConta, int idUsuario);
 
     void insere(Renegociacao renegociacao);
 

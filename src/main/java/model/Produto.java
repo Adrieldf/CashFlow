@@ -53,4 +53,12 @@ public class Produto implements Serializable {
         this.idCategoria = categoria;
     }
 
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
 }

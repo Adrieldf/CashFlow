@@ -7,7 +7,7 @@ public class Renegociacao extends Parcela{
 	private double novoValor;
 	private String descricao;
 	private boolean valida;
-        private int idUsuario;
+    private int idUsuario;
 	
 	public Renegociacao(String novaData, float novoValor, String descricao) {
 		super();
@@ -52,6 +52,14 @@ public class Renegociacao extends Parcela{
 	}
 	public void setValida(boolean valida) {
 		this.valida = valida;
+	}
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 }
