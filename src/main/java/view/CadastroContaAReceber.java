@@ -12,15 +12,11 @@ public class CadastroContaAReceber extends javax.swing.JFrame {
     
     private int idUsuario;
     
-    public CadastroContaAReceber() {
+    public CadastroContaAReceber(int idUsuario) {
         initComponents();
+        this.idUsuario = idUsuario;
     }
     
-    public void exibir()
-    {
-        setVisible(true);
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

@@ -20,23 +20,26 @@ import model.Categoria;
 import model.Conta;
 import model.Parcela;
 import model.Produto;
+import model.Fornecedor;
 
 public class CadastroConta extends javax.swing.JFrame {
     
     private int idUsuario;
     private List<Categoria> listaCategorias;
     private List<Produto> listaProdutos;
+    private List<Fornecedor> listaFornecedor;
     private Facade facade = new Facade();
-
-    public CadastroConta() {
+    
+    public CadastroConta(int idUsuario) {
         initComponents();
-
+        this.idUsuario = idUsuario;
+        
         listaCategorias = facade.buscaTodasCategorias();
         listaProdutos = facade.buscaTodosProdutos();
-
+        
         preencheComboboxCategoria();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,6 +73,8 @@ public class CadastroConta extends javax.swing.JFrame {
         rdb_areceber = new javax.swing.JRadioButton();
         rdb_apagar = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        input_descricao = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -178,6 +183,8 @@ public class CadastroConta extends javax.swing.JFrame {
         rdb_apagar.setText("Conta a pagar");
 
         jLabel8.setText("%");
+
+        jLabel9.setText("Descrição:");
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,6 +194,11 @@ public class CadastroConta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(input_descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -279,7 +291,11 @@ public class CadastroConta extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(input_juros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(111, 111, 111)))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(input_descricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNovo2)
                     .addComponent(btnNovo3))
@@ -295,15 +311,15 @@ public class CadastroConta extends javax.swing.JFrame {
             combobox_categoria.addItem(categoria.getNomeCategoria());
         }
     }
-
+    
     private void preencheComboboxProduto() {
         combobox_produto.removeAllItems();
-
+        
         String nomeCategoria = (String) combobox_categoria.getSelectedItem();
-
+        
         for (Categoria categoria : listaCategorias) {
             if (categoria.getNomeCategoria().equals(nomeCategoria)) {
-
+                
                 for (Produto produto : listaProdutos) {
                     if (produto.getIdCategoria() == categoria.getIdCategoria()) {
                         combobox_produto.addItem(produto.getNomeProduto());
@@ -312,7 +328,7 @@ public class CadastroConta extends javax.swing.JFrame {
                 break;
             }
         }
-
+        
     }
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
@@ -324,32 +340,41 @@ public class CadastroConta extends javax.swing.JFrame {
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
         Conta conta = new Conta();
-
+        
         if (rdb_areceber.isSelected()) {
             conta.setTipo(2);
         } else {
             conta.setTipo(1);
         }
-
+        
+        conta.setIdUsuario(this.idUsuario);
+        conta.setDescricao(input_descricao.getText());
+        
         for (Categoria categoria : listaCategorias) {
             if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
                 for (Produto produto : listaProdutos) {
                     if (combobox_categoria.getSelectedItem().equals(produto.getNomeProduto())) {
-
+                        conta.setIdProduto(produto.getId());
+                        break;
                     }
                 }
-                conta.setIdFornecedor(categoria.getIdCategoria());
+                break;
             }
         }
         
-        List<Parcela> listaParcelas = montaParcelas();
+        for (Fornecedor fornecedor : listaFornecedor) {
+            if (combobox_fornecedor.getSelectedItem().equals(fornecedor)) {
+                conta.setIdFornecedor(fornecedor.getId());
+            }
+        }
         
+        facade.insereConta(conta);
+        
+        List<Parcela> listaParcelas = montaParcelas();
+        //AJUSTAR PARA SETAR O ID DA NOVA CONTA
         for (Parcela parcela : listaParcelas) {
             facade.insereParcelas(parcela);
         }
-
-
-        facade.insereConta(conta);
     }//GEN-LAST:event_btnNovo3ActionPerformed
 
     private void combobox_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_produtoActionPerformed
@@ -363,73 +388,73 @@ public class CadastroConta extends javax.swing.JFrame {
     private void input_parcelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_parcelasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_input_parcelasActionPerformed
-
+    
     public List<Parcela> montaParcelas() {
         int parcelas;
         double valor;
         double juros;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-
+        
         LocalDate localDate = LocalDate.parse(input_data.getText(), formatter);
-
+        
         List<Parcela> listaParcelas = new ArrayList<Parcela>();
-
+        
         if (input_parcelas.getText() == null || input_parcelas.getText().length() == 0) {
             parcelas = 1;
         } else {
             parcelas = Integer.parseInt(input_parcelas.getText());
         }
-
+        
         if (input_valor.getText() == null || input_valor.getText().length() == 0) {
             valor = 0;
         } else {
             valor = Double.parseDouble(input_valor.getText());
         }
-
+        
         if (input_juros.getText() == null || input_juros.getText().length() == 0) {
             juros = 0;
         } else {
             valor = Double.parseDouble(input_valor.getText());
             juros = valor * (Float.parseFloat(input_juros.getText()) / 100);
         }
-
+        
         double valorParcela = (valor + juros) / parcelas;
-
+        
         for (int i = 1; i < parcelas + 1; i++) {
-
+            
             Parcela parcela = new Parcela();
             parcela.setValor(valorParcela);
             parcela.setData(formatter.format(localDate));
             listaParcelas.add(parcela);
-
+            
             localDate = proxData(localDate);
         }
-
+        
         return listaParcelas;
-
+        
     }
-
+    
     private LocalDate proxData(LocalDate dataAtual) {
         LocalDate returnvalue = dataAtual.plusMonths(1);
         LocalDate proxSegunda = returnvalue.with(next(MONDAY));
-
+        
         if (returnvalue.getDayOfWeek().equals("SATURDAY") || returnvalue.getDayOfWeek().equals("SUNDAY")) {
             return proxSegunda;
         } else {
             System.out.println(returnvalue.getDayOfWeek());
             return returnvalue;
         }
-
+        
     }
 
     private void btn_previsualizacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_previsualizacaoActionPerformed
-
+        
         List<Parcela> listaParcelas = montaParcelas();
-
+        
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
         linha.getDataVector().removeAllElements();
         linha.setRowCount(0);
-
+        
         for (Parcela parcela : listaParcelas) {
             Object[] dados = {
                 parcela.getData(),
@@ -460,6 +485,7 @@ public class CadastroConta extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combobox_produto;
     private javax.swing.JTable grid;
     private javax.swing.JFormattedTextField input_data;
+    private javax.swing.JTextField input_descricao;
     private javax.swing.JTextField input_juros;
     private javax.swing.JTextField input_parcelas;
     private javax.swing.JTextField input_valor;
@@ -471,6 +497,7 @@ public class CadastroConta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rdb_apagar;
