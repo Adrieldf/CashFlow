@@ -20,9 +20,10 @@ public class CadastroProduto extends javax.swing.JFrame {
     private List<Categoria> listaCategorias;
     private List<Produto> listaProdutos;
 
-    public CadastroProduto() {
+    public CadastroProduto(int idUsuario) {
         initComponents();
-
+        this.idUsuario = idUsuario;
+        
         listaCategorias = facade.buscaTodasCategorias();
         listaProdutos = facade.buscaTodosProdutos();
     }

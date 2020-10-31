@@ -17,9 +17,10 @@ public class CadastroCategoria extends javax.swing.JFrame {
     private int idUsuario;
     public Facade facade = new Facade();
 
-    public CadastroCategoria() {
+    public CadastroCategoria(int idUsuario) {
         initComponents();
-
+        this.idUsuario = idUsuario;
+        
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
         linha.getDataVector().removeAllElements();
         linha.setRowCount(0);

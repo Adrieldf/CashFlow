@@ -14,8 +14,9 @@ public class CadastroFornecedor extends javax.swing.JFrame {
     private int idUsuario;
     public Facade facade = new Facade();
 
-    public CadastroFornecedor() {
+    public CadastroFornecedor(int idUsuario) {
         initComponents();
+        this.idUsuario = idUsuario;
     }
 
     @SuppressWarnings("unchecked")
@@ -127,9 +128,6 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void exibir() {
-        setVisible(true);
-    }
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
