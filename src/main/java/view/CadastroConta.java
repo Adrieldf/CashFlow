@@ -36,8 +36,10 @@ public class CadastroConta extends javax.swing.JFrame {
         
         listaCategorias = facade.buscaTodasCategorias();
         listaProdutos = facade.buscaTodosProdutos();
+        listaFornecedor = facade.buscaTodosFornecedor();
         
         preencheComboboxCategoria();
+        preencheComboboxFornecedor();
     }
     
     @SuppressWarnings("unchecked")
@@ -309,6 +311,13 @@ public class CadastroConta extends javax.swing.JFrame {
     private void preencheComboboxCategoria() {
         for (Categoria categoria : listaCategorias) {
             combobox_categoria.addItem(categoria.getNomeCategoria());
+        }
+    }
+    
+    private void preencheComboboxFornecedor()
+    {
+        for(Fornecedor fornecedor:listaFornecedor){
+            combobox_fornecedor.addItem(fornecedor.getFornecedor());
         }
     }
     
