@@ -62,7 +62,6 @@ public class ListaDeContas extends javax.swing.JFrame {
         grid = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         input_conta = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         combobox_tipo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -74,6 +73,7 @@ public class ListaDeContas extends javax.swing.JFrame {
         checkbox_renegociada = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         combobox_fornecedor = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         jCheckBox2.setSelected(true);
@@ -138,13 +138,6 @@ public class ListaDeContas extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Filtrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Exibir todas contas");
 
         combobox_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pagar", "Receber" }));
@@ -186,6 +179,13 @@ public class ListaDeContas extends javax.swing.JFrame {
                 combobox_fornecedorActionPerformed(evt);
             }
         });
+
+        jButton1.setText("Filtrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,9 +222,9 @@ public class ListaDeContas extends javax.swing.JFrame {
                             .addComponent(checkbox_finalizada)
                             .addComponent(combobox_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(32, 32, 32)))
                 .addGap(38, 38, 38))
         );
@@ -233,7 +233,7 @@ public class ListaDeContas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(25, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
@@ -245,24 +245,22 @@ public class ListaDeContas extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(combobox_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(combobox_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
-                                .addGap(23, 23, 23))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(input_conta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)))
+                                    .addComponent(jLabel1)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(input_conta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel7)
                                 .addComponent(combobox_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(combobox_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(36, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(27, 27, 27)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(42, 42, 42)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,7 +281,7 @@ public class ListaDeContas extends javax.swing.JFrame {
 
     private void preencheComboboxFornecedor() {
         for (Fornecedor fornecedor : listaFornecedor) {
-            combobox_fornecedor.addItem(fornecedor.getFornecedor());
+            combobox_fornecedor.addItem(fornecedor.getNome());
         }
     }
 
@@ -323,55 +321,6 @@ public class ListaDeContas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_input_contaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          List<Integer> listaIdProdutoFiltro = new ArrayList<Integer>();
-        listaContasFiltro.clear();
-        
-        for (Categoria categoria : listaCategorias) {
-            if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
-                for (Produto produto : listaProdutos) {
-                    if (combobox_categoria.getSelectedItem().equals(produto.getNomeProduto()) || combobox_categoria.getSelectedItem().equals("Todos")) {
-                        listaIdProdutoFiltro.add(produto.getId());
-                    }
-                }
-            }
-        }
-
-        for (Conta conta : listaContas) {
-
-            //Verificação da busca de uma conta
-            if (!input_conta.getText().isEmpty()) {
-                if (conta.getId() != Integer.parseInt(input_conta.getText())) {
-                    continue;
-                }
-            }
-
-            //Verificação do tipo
-            if (combobox_tipo.getSelectedItem().equals("Pagar")) {
-                if (conta.getTipo() != 1) {
-                    continue;
-                }
-            } else if (combobox_tipo.getSelectedItem().equals("Receber")) {
-                if (conta.getTipo() != 2) {
-                    continue;
-                }
-            }
-
-            //Verificação da categoria
-            if (!combobox_categoria.getSelectedItem().equals("Todos")) {
-                if (!combobox_produto.getSelectedItem().equals("Todos")) {
-                    for(List<Integer> id = listaIdProdutoFiltro){
-                        
-                    }
-                }
-            }
-
-        }  
-    }
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void combobox_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_categoriaActionPerformed
         preencheComboboxProduto();
     }//GEN-LAST:event_combobox_categoriaActionPerformed
@@ -387,6 +336,20 @@ public class ListaDeContas extends javax.swing.JFrame {
     private void combobox_fornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_fornecedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox_fornecedorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        List<Integer> listaIdProdutoFiltro = new ArrayList<Integer>();
+        listaContasFiltro.clear();
+        
+        for (Categoria categoria : listaCategorias) {
+            if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
+                for (Produto produto : listaProdutos) {
+                    if (combobox_categoria.getSelectedItem().equals(produto.getNomeProduto()) || combobox_categoria.getSelectedItem().equals("Todos")) {
+                        listaIdProdutoFiltro.add(produto.getId());
+                    }
+                }
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovo2;
