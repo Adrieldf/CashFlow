@@ -34,9 +34,9 @@ public class CadastroConta extends javax.swing.JFrame {
         initComponents();
         this.idUsuario = idUsuario;
         
-        listaCategorias = facade.buscaTodasCategorias();
-        listaProdutos = facade.buscaTodosProdutos();
-        listaFornecedor = facade.buscaTodosFornecedor();
+        listaCategorias = facade.buscaTodasCategorias(idUsuario);
+        listaProdutos = facade.buscaTodosProdutos(idUsuario);
+        listaFornecedor = facade.buscaTodosFornecedor(idUsuario);
         
         preencheComboboxCategoria();
         preencheComboboxFornecedor();
@@ -317,7 +317,7 @@ public class CadastroConta extends javax.swing.JFrame {
     private void preencheComboboxFornecedor()
     {
         for(Fornecedor fornecedor:listaFornecedor){
-            combobox_fornecedor.addItem(fornecedor.getFornecedor());
+            combobox_fornecedor.addItem(fornecedor.getNome());
         }
     }
     

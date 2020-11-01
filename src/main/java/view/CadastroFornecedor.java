@@ -137,7 +137,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
-        Fornecedor fornecedor = new Fornecedor(0, input_fornecedor.getText(), input_telefone.getText(), input_email.getText(), input_endereco.getText());
+        Fornecedor fornecedor = new Fornecedor(0, input_fornecedor.getText(), input_telefone.getText(), input_email.getText(), input_endereco.getText(),idUsuario);
         facade.insereFornecedor(fornecedor);
     }//GEN-LAST:event_btnNovo3ActionPerformed
 

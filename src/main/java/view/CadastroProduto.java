@@ -24,8 +24,8 @@ public class CadastroProduto extends javax.swing.JFrame {
         initComponents();
         this.idUsuario = idUsuario;
         
-        listaCategorias = facade.buscaTodasCategorias();
-        listaProdutos = facade.buscaTodosProdutos();
+        listaCategorias = facade.buscaTodasCategorias(idUsuario);
+        listaProdutos = facade.buscaTodosProdutos(idUsuario);
     }
 
     @SuppressWarnings("unchecked")
