@@ -23,10 +23,11 @@ public class Produto implements Serializable {
     public Produto() {
     }
 
-    public Produto(String nome, int idCategoria) {
+    public Produto(String nome, int idCategoria, int idUsuario) {
         super();
         this.setNomeProduto(nome);
         this.setIdCategoria(idCategoria);
+        this.setIdUsuario(idUsuario);
     }
 
     public int getId() {

@@ -31,13 +31,15 @@ public class ListaDeContas extends javax.swing.JFrame {
 
     public ListaDeContasController contasController = new ListaDeContasController();
 
-    public ListaDeContas() {
+    public ListaDeContas(int idUsuario) {
         initComponents();
+        this.idUsuario = idUsuario;
 
         listaCategorias = facade.buscaTodasCategorias(idUsuario);
         listaProdutos = facade.buscaTodosProdutos(idUsuario);
         listaFornecedor = facade.buscaTodosFornecedor(idUsuario);
         listaContas = facade.buscaTodos(idUsuario);
+
         for (Conta conta : listaContas) {
             for (Parcela parcela : facade.buscaParcelaPorConta(conta.getId(), idUsuario)) {
                 listaParcelas.add(parcela);
@@ -114,10 +116,10 @@ public class ListaDeContas extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, true, true
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -139,6 +141,11 @@ public class ListaDeContas extends javax.swing.JFrame {
         });
 
         jButton2.setText("Exibir todas contas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         combobox_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pagar", "Receber" }));
 
@@ -374,38 +381,38 @@ public class ListaDeContas extends javax.swing.JFrame {
             if (!combobox_categoria.getSelectedItem().equals("Todos")) {
                 if (!combobox_produto.getSelectedItem().equals("Todos")) {
                     for (Integer id : listaIdProdutoFiltro) {
-                        if(id == conta.getIdProduto()){
+                        if (id == conta.getIdProduto()) {
                             encontrou = true;
                             break;
                         }
                     }
-                    if(!encontrou){
+                    if (!encontrou) {
                         continue;
                     }
                 }
             }
-            
-            int idFornecedor=0;
-            if(!combobox_fornecedor.getSelectedItem().equals("Todos")){
-                for(Fornecedor fornecedor: listaFornecedor){
-                    if(combobox_fornecedor.getSelectedItem().equals(fornecedor.getNome())){
+
+            int idFornecedor = 0;
+            if (!combobox_fornecedor.getSelectedItem().equals("Todos")) {
+                for (Fornecedor fornecedor : listaFornecedor) {
+                    if (combobox_fornecedor.getSelectedItem().equals(fornecedor.getNome())) {
                         idFornecedor = fornecedor.getId();
                         break;
                     }
                 }
-                if(conta.getIdFornecedor() != idFornecedor){
+                if (conta.getIdFornecedor() != idFornecedor) {
                     continue;
                 }
             }
-            
-            if(combobox_situacao.getSelectedItem().equals("Finalizada")){
-                for(Parcela parcela:listaParcelas){
-                    if(parcela.getValor()!=parcela.getValorPago()){
+
+            if (combobox_situacao.getSelectedItem().equals("Finalizada")) {
+                for (Parcela parcela : listaParcelas) {
+                    if (parcela.getValor() != parcela.getValorPago()) {
                         encontrou = true;
                         break;
                     }
                 }
-                if(encontrou){
+                if (encontrou) {
                     continue;
                 }
             }
@@ -415,6 +422,65 @@ public class ListaDeContas extends javax.swing.JFrame {
     private void combobox_situacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_situacaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox_situacaoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+        linha.getDataVector().removeAllElements();
+        linha.setRowCount(0);
+        double valor, valorPago;
+        String nomeCategoria = "";
+        String nomeProduto = "";
+        boolean efetuado = false;
+        boolean renegociado = false;
+
+        for (Conta conta : listaContas) {
+            String tipo = "A receber";
+            if (conta.getTipo() == 1) {
+                tipo = "A pagar";
+            }
+
+            valor = 0;
+            valorPago = 0;
+            renegociado = false;
+            for (Parcela parcela : listaParcelas) {
+                if (parcela.getIdConta() == conta.getId()) {
+                    valor = valor + parcela.getValor();
+                    valorPago = valorPago + parcela.getValorPago();
+                    if(parcela.isRenegociada()){
+                        renegociado = true;
+                    }
+                }
+            }
+            
+            efetuado = false;
+            if(valor == valorPago){
+                efetuado = true;
+            }
+
+            for (Produto produto:listaProdutos) {
+                if(produto.getId()==conta.getIdProduto()){
+                    nomeProduto = produto.getNomeProduto();
+                    for(Categoria categoria:listaCategorias){
+                        if(categoria.getIdCategoria() == produto.getIdCategoria()){
+                            nomeCategoria = categoria.getNomeCategoria();
+                            break;
+                        }
+                    }
+                }
+            }
+
+            Object[] dados = {
+                tipo,
+                conta.getId(),
+                valor,
+                nomeProduto,
+                nomeCategoria,
+                efetuado,
+                renegociado
+            };
+            linha.addRow(dados);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovo2;

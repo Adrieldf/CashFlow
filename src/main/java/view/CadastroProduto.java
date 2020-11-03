@@ -189,7 +189,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         for (Categoria categoria : listaCategorias) {
             if (categoria.getNomeCategoria().equals(combobox_categoria.getSelectedItem())) {
-                Produto produto = new Produto(input_produto.getText(), categoria.getIdCategoria());
+                Produto produto = new Produto(input_produto.getText(), categoria.getIdCategoria(), idUsuario);
 
                 facade.insereProdutos(produto);
                 

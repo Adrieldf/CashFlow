@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import controller.TelaPrincipalController;
+import facade.Facade;
+import model.Usuario;
 
 public class Login extends javax.swing.JFrame {
 
@@ -103,7 +105,7 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jLabel2.setText("E-mail:");
+        jLabel2.setText("Usuário:");
 
         input_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,10 +212,13 @@ public class Login extends javax.swing.JFrame {
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         
-        int idUsuario = 0;
-        //Lógica pára validar usuário e pegar o id dele
+        Usuario usuario = new Usuario();
         
-        Principal principal = new Principal(idUsuario);
+        int idUsuario = 0;
+        Facade facade = new Facade();
+        usuario = facade.buscaUsuarioPorLogin(input_user.getText());
+        
+        Principal principal = new Principal(usuario.getId());
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed

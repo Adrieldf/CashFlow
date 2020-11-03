@@ -166,7 +166,7 @@ public class CadastroCategoria extends javax.swing.JFrame {
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
         //Salvar
-        Categoria categoria = new Categoria(0, input_categoria.getText(),idUsuario);
+        Categoria categoria = new Categoria(idUsuario, input_categoria.getText(),idUsuario);
 
         facade.insereCategoria(categoria);
 

@@ -151,8 +151,6 @@ public class CadastroPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
-        //Pessoa pessoa = new Pessoa(0, input_nome.getText(), input_telefone.getText(), input_email.getText(), input_endereco.getText());
-        //facade.inserePessoa(pessoa);
         
         Usuario usuario = new Usuario(input_nome.getText(), input_senha.getText());
         facade.insereUsuario(usuario);

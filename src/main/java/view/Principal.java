@@ -4,17 +4,26 @@ public class Principal extends javax.swing.JFrame {
     
     private int idUsuario;
 
-    ListaDeContas listaDeContas = new ListaDeContas();
-    CadastroCategoria cadastroCategoria = new CadastroCategoria(idUsuario);
-    CadastroProduto cadastroProduto = new CadastroProduto(idUsuario);
-    CadastroPessoa cadastroPessoa = new CadastroPessoa(idUsuario);
-    CadastroContaAReceber contaAReceber = new CadastroContaAReceber(idUsuario);
-    CadastroConta contaAPagar = new CadastroConta(idUsuario);
-    CadastroFornecedor cadastroFornecedor = new CadastroFornecedor(idUsuario);
+    ListaDeContas listaDeContas;
+    CadastroCategoria cadastroCategoria;
+    CadastroProduto cadastroProduto;
+    CadastroPessoa cadastroPessoa;
+    CadastroContaAReceber contaAReceber;
+    CadastroConta contaAPagar;
+    CadastroFornecedor cadastroFornecedor;
     
     public Principal(int idUsuario) {
-        initComponents();
         this.idUsuario = idUsuario;
+        initComponents();
+        
+        listaDeContas = new ListaDeContas(idUsuario);
+        cadastroCategoria = new CadastroCategoria(idUsuario);
+        cadastroProduto = new CadastroProduto(idUsuario);
+        cadastroPessoa = new CadastroPessoa(idUsuario);
+        contaAReceber = new CadastroContaAReceber(idUsuario);
+        contaAPagar = new CadastroConta(idUsuario);
+        cadastroFornecedor = new CadastroFornecedor(idUsuario);
+        
     }
 
     @SuppressWarnings("unchecked")

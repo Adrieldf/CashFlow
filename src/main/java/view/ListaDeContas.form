@@ -168,13 +168,13 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="7" rowCount="17">
-                <Column editable="true" title="Tipo" type="java.lang.String"/>
-                <Column editable="false" title="Conta" type="java.lang.String"/>
-                <Column editable="false" title="Valor total" type="java.lang.String"/>
+                <Column editable="false" title="Tipo" type="java.lang.String"/>
+                <Column editable="false" title="Conta" type="java.lang.Integer"/>
+                <Column editable="false" title="Valor total" type="java.lang.Double"/>
                 <Column editable="false" title="Categoria" type="java.lang.String"/>
                 <Column editable="false" title="Produto" type="java.lang.String"/>
-                <Column editable="true" title="Efetuado" type="java.lang.Boolean"/>
-                <Column editable="true" title="Renegociado" type="java.lang.Boolean"/>
+                <Column editable="false" title="Efetuado" type="java.lang.Boolean"/>
+                <Column editable="false" title="Renegociado" type="java.lang.Boolean"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -237,6 +237,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Exibir todas contas"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="combobox_tipo">
       <Properties>
