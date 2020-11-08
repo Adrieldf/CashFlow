@@ -378,10 +378,12 @@ public class CadastroConta extends javax.swing.JFrame {
         }
         
         facade.insereConta(conta);
+        int idConta = facade.buscaUltimoIdDaConta(idUsuario);
         
         List<Parcela> listaParcelas = montaParcelas();
-        //AJUSTAR PARA SETAR O ID DA NOVA CONTA
+
         for (Parcela parcela : listaParcelas) {
+            parcela.setIdConta(idConta);
             facade.insereParcelas(parcela);
         }
     }//GEN-LAST:event_btnNovo3ActionPerformed
@@ -450,7 +452,7 @@ public class CadastroConta extends javax.swing.JFrame {
         if (returnvalue.getDayOfWeek().equals("SATURDAY") || returnvalue.getDayOfWeek().equals("SUNDAY")) {
             return proxSegunda;
         } else {
-            System.out.println(returnvalue.getDayOfWeek());
+            //System.out.println(returnvalue.getDayOfWeek());
             return returnvalue;
         }
         

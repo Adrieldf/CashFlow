@@ -15,6 +15,8 @@ public interface ContaDAO {
     List<Conta> buscaTodos(int idUsuario);
 
     List<Conta> buscaContaPorTipo(int tipo, int idUsuario);
+    
+    int buscaUltimoIdDaConta(int idUsuario);
 
     void insere(Conta conta);
 

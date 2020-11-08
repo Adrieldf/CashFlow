@@ -201,6 +201,12 @@ public class Facade {
         ContaDAO contaDAO = fabrica.getContaDAO();
         return contaDAO.buscaTodos(idUsuario);
     }
+    
+    public int buscaUltimoIdDaConta(int idUsuario){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ContaDAO contaDAO = fabrica.getContaDAO();
+        return contaDAO.buscaUltimoIdDaConta(idUsuario);
+    }
 
     public List<Conta> buscaContaPorTipo(int tipo, int idUsuario){
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
