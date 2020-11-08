@@ -139,6 +139,38 @@ public class PostgresqlContaDB implements ContaDAO {
 		return contas;
 	}
 
+	public int buscaUltimoIdDaConta(int idUsuario) {
+		int maxId = 0;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			pstmt = conn.prepareStatement("select MAX (id) from conta where \"idUsuario\" = ?");
+		
+			pstmt.setInt(1, idUsuario);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				maxId = rs.getInt("id");
+				
+			}
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return maxId;
+		
+	}
 	@Override
 	public void insere(Conta conta) {
 		if (conta == null) {
