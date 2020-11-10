@@ -35,6 +35,7 @@ public class Principal extends javax.swing.JFrame {
         btnCategoria = new javax.swing.JMenuItem();
         btnProduto = new javax.swing.JMenuItem();
         btnPessoa = new javax.swing.JMenuItem();
+        btnPessoa.setEnabled(false);
         btnFornecedor = new javax.swing.JMenuItem();
         btnContasAPagar = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
@@ -91,7 +92,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(btnCadastar);
 
-        jMenu1.setText("Informações");
+        jMenu1.setText("Informa\u00E7\u00F5es");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);

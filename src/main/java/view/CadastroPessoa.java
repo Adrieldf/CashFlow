@@ -67,7 +67,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jLabel3.setText("Email:");
 
-        jLabel4.setText("EndereÃ§o:");
+        jLabel4.setText("Endereço:");
 
         input_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,14 +145,19 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
+    	if(this.idUsuario == 0) {
+    		Login login = new Login();
+            login.setVisible(true);
+    	}else {
         Principal principal = new Principal(idUsuario);
         principal.setVisible(true);
+        }
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
         
-        Usuario usuario = new Usuario(input_nome.getText(), input_senha.getText());
+        Usuario usuario = new Usuario(input_nome.getText(), input_senha.getText(), input_nome.getText(), input_telefone.getText(), input_email.getText(), input_endereco.getText());
         facade.insereUsuario(usuario);
     }//GEN-LAST:event_btnNovo3ActionPerformed
 

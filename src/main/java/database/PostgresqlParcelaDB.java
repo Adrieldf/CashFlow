@@ -115,7 +115,7 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 
 		try {
 			pstmt = conn.prepareStatement(
-					"insert into parcela (\"idConta\", data, valor, valorPago, desconto, \"idUsuario\") values (?, ?, ?, ?, ?, ?)");
+					"insert into parcela (\"idConta\", data, valor, \"valorPago\", desconto, \"idUsuario\") values (?, ?, ?, ?, ?, ?)");
 
 			pstmt.setInt(1, parcela.getIdConta());
 			pstmt.setString(2, parcela.getData());
@@ -171,7 +171,7 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement("update parcela set data = ?, valor = ?, valorPago = ?, desconto = ? where id = ? and \"idConta\" = ? and \"idUsuario\" = ?");
+			pstmt = conn.prepareStatement("update parcela set data = ?, valor = ?, \"valorPago\" = ?, desconto = ? where id = ? and \"idConta\" = ? and \"idUsuario\" = ?");
 
 			
 			pstmt.setString(1, parcela.getData());

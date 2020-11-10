@@ -115,7 +115,7 @@ public class CadastroConta extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Número de parcelas:");
+        jLabel4.setText("N\u00FAmero de parcelas:");
 
         input_parcelas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +160,7 @@ public class CadastroConta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(grid);
 
-        btn_previsualizacao.setText("Pré-visualização");
+        btn_previsualizacao.setText("Pr\u00E9-visualiza\u00E7\u00E3o");
         btn_previsualizacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_previsualizacaoActionPerformed(evt);
@@ -186,7 +186,7 @@ public class CadastroConta extends javax.swing.JFrame {
 
         jLabel8.setText("%");
 
-        jLabel9.setText("Descrição:");
+        jLabel9.setText("Descri\u00E7\u00E3o:");
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -332,6 +332,7 @@ public class CadastroConta extends javax.swing.JFrame {
                 for (Produto produto : listaProdutos) {
                     if (produto.getIdCategoria() == categoria.getIdCategoria()) {
                         combobox_produto.addItem(produto.getNomeProduto());
+                        
                     }
                 }
                 break;

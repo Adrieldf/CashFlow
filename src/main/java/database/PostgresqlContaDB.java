@@ -181,7 +181,7 @@ public class PostgresqlContaDB implements ContaDAO {
 
 		try {
 			pstmt = conn.prepareStatement(
-					"insert into conta (\"idFornecedor\", \"idUsuario\", tipo, descricao, \"idProduto\") values (?, ?, ?, ?)");
+					"insert into conta (\"idFornecedor\", \"idUsuario\", tipo, descricao, \"idProduto\") values (?, ?, ?, ?, ?)");
 
 			pstmt.setInt(1, conta.getIdFornecedor());
 			pstmt.setInt(2, conta.getIdUsuario());

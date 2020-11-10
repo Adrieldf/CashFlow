@@ -14,215 +14,215 @@ import model.Usuario;
 
 public class PostgresqlUsuarioDB implements UsuarioDAO {
 
-    private Connection conn;
+	private Connection conn;
 
-    public PostgresqlUsuarioDB(Connection conn) {
-        this.conn = conn;
-    }
+	public PostgresqlUsuarioDB(Connection conn) {
+		this.conn = conn;
+	}
 
-    @Override
-    public List<Usuario> buscaTodos() {
-        List<Usuario> usuarios = new ArrayList<Usuario>();
+	@Override
+	public List<Usuario> buscaTodos() {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
 
-        Statement stmt = null;
-        ResultSet rs = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 
-        try {
+		try {
 
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("select * from usuario as u ");
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select * from usuario as u ");
 
-            while (rs.next()) {
-                Usuario u = new Usuario();
-                u.setId(rs.getInt("id"));
-                u.setLogin(rs.getString("login"));
-                u.setSenha(rs.getString("senha"));
-                u.setNome(rs.getString("nome"));
-                u.setTelefone(rs.getString("telefone"));
-                u.setEmail(rs.getString("email"));
-                u.setEndereco(rs.getString("endereco"));
-                usuarios.add(u);
-            }
+			while (rs.next()) {
+				Usuario u = new Usuario();
+				u.setId(rs.getInt("id"));
+				u.setLogin(rs.getString("login"));
+				u.setSenha(rs.getString("senha"));
+				u.setNome(rs.getString("nome"));
+				u.setTelefone(rs.getString("telefone"));
+				u.setEmail(rs.getString("email"));
+				u.setEndereco(rs.getString("endereco"));
+				usuarios.add(u);
+			}
 
-        } catch (SQLException se) {
-            System.out.println("Ocorreu um erro : " + se.getMessage());
-        } finally {
-            try {
-                rs.close();
-                stmt.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 
-        return usuarios;
-    }
+		return usuarios;
+	}
 
-    @Override
-    public Usuario buscaPorLogin(String login) {
-        List<Usuario> usuarios = new ArrayList<Usuario>();
+	@Override
+	public Usuario buscaPorLogin(String login) {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
 
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-        try {
+		try {
 
-        	pstmt = conn.prepareStatement("select * from usuario as u where u.login = ?");
-            pstmt.setString(1, login);
-            rs = pstmt.executeQuery();
-            
-            while (rs.next()) {
-                Usuario u = new Usuario();
-                u.setId(rs.getInt("id"));
-                u.setLogin(rs.getString("login"));
-                u.setSenha(rs.getString("senha"));
-                u.setNome(rs.getString("nome"));
-                u.setTelefone(rs.getString("telefone"));
-                u.setEmail(rs.getString("email"));
-                u.setEndereco(rs.getString("endereco"));
-                usuarios.add(u);
-            }
+			pstmt = conn.prepareStatement("select * from usuario as u where u.login = ?");
+			pstmt.setString(1, login);
+			rs = pstmt.executeQuery();
 
-        } catch (SQLException se) {
-            System.out.println("Ocorreu um erro : " + se.getMessage());
-        } finally {
-            try {
-                rs.close();
-                pstmt.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+			while (rs.next()) {
+				Usuario u = new Usuario();
+				u.setId(rs.getInt("id"));
+				u.setLogin(rs.getString("login"));
+				u.setSenha(rs.getString("senha"));
+				u.setNome(rs.getString("nome"));
+				u.setTelefone(rs.getString("telefone"));
+				u.setEmail(rs.getString("email"));
+				u.setEndereco(rs.getString("endereco"));
+				usuarios.add(u);
+			}
 
-        return usuarios.get(0);
-    }
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 
-    @Override
-   	public Usuario buscaPorId(int id) {
-   		 List<Usuario> usuarios = new ArrayList<Usuario>();
+		return usuarios.size() > 0 ? usuarios.get(0) : null;
+	}
 
-   	        PreparedStatement pstmt = null;
-   	        ResultSet rs = null;
+	@Override
+	public Usuario buscaPorId(int id) {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
 
-   	        try {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
-   	        	pstmt = conn.prepareStatement("select * from usuario where id = ?");
-   				pstmt.setInt(1, id);
-   				rs = pstmt.executeQuery();
-   				
-   	            while (rs.next()) {
-   	            	Usuario u = new Usuario();
-   	                u.setId(rs.getInt("id"));
-   	                u.setLogin(rs.getString("login"));
-   	                u.setSenha(rs.getString("senha"));
-   	                u.setNome(rs.getString("nome"));
-   	                u.setTelefone(rs.getString("telefone"));
-   	                u.setEmail(rs.getString("email"));
-   	                u.setEndereco(rs.getString("endereco"));
-   	                usuarios.add(u);
-   	            }
+		try {
 
-   	        } catch (SQLException se) {
-   	            System.out.println("Ocorreu um erro : " + se.getMessage());
-   	        } finally {
-   	            try {
-   	                rs.close();
-   	                pstmt.close();
-   	            } catch (SQLException e) {
-   	                System.out.println(e.getMessage());
-   	            }
-   	        }
+			pstmt = conn.prepareStatement("select * from usuario where id = ?");
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
 
-   	        return usuarios.get(0);
-   	}
+			while (rs.next()) {
+				Usuario u = new Usuario();
+				u.setId(rs.getInt("id"));
+				u.setLogin(rs.getString("login"));
+				u.setSenha(rs.getString("senha"));
+				u.setNome(rs.getString("nome"));
+				u.setTelefone(rs.getString("telefone"));
+				u.setEmail(rs.getString("email"));
+				u.setEndereco(rs.getString("endereco"));
+				usuarios.add(u);
+			}
 
-    
-    
-    @Override
-    public void insere(Usuario usuario) {
-        if (usuario == null) {
-            return;
-        }
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 
-        PreparedStatement pstmt = null;
+		return usuarios.get(0);
+	}
 
-        try {
-            pstmt = conn.prepareStatement("insert into usuario (login, senha, nome, telefone, email, endereco) values (?, ?, ?, ?, ?, ?)");
+	@Override
+	public void insere(Usuario usuario) {
+		if (usuario == null) {
+			return;
+		}
 
-            pstmt.setString(1, usuario.getLogin());
-            pstmt.setString(2, usuario.getSenha());
-            pstmt.setString(3, usuario.getNome());
-            pstmt.setString(4, usuario.getTelefone());
-            pstmt.setString(5, usuario.getEmail());
-            pstmt.setString(6, usuario.getEndereco());
+		PreparedStatement pstmt = null;
 
-            pstmt.executeUpdate();
+		try {
+			pstmt = conn.prepareStatement(
+					"insert into usuario (login, senha, nome, telefone, email, endereco) values (?, ?, ?, ?, ?, ?)");
 
-        } catch (SQLException se) {
-            System.out.println("Ocorreu um erro : " + se.getMessage());
-        } finally {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
+			pstmt.setString(1, usuario.getLogin());
+			pstmt.setString(2, usuario.getSenha());
+			pstmt.setString(3, usuario.getNome());
+			pstmt.setString(4, usuario.getTelefone());
+			pstmt.setString(5, usuario.getEmail());
+			pstmt.setString(6, usuario.getEndereco());
 
-    @Override
-    public void remove(Usuario usuario) {
-        if (usuario == null) {
-            return;
-        }
+			pstmt.executeUpdate();
 
-        PreparedStatement pstmt = null;
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 
-        try {
-            pstmt = conn.prepareStatement("delete from usuario where id = ?");
-            pstmt.setInt(1, usuario.getId());
-            pstmt.executeUpdate();
-        } catch (SQLException se) {
-            System.out.println("Ocorreu um erro : " + se.getMessage());
-        } finally {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+	@Override
+	public void remove(Usuario usuario) {
+		if (usuario == null) {
+			return;
+		}
 
-    }
+		PreparedStatement pstmt = null;
 
-    @Override
-    public void altera(Usuario usuario) {
-    	if (usuario == null) {
-            return;
-        }
+		try {
+			pstmt = conn.prepareStatement("delete from usuario where id = ?");
+			pstmt.setInt(1, usuario.getId());
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 
-        PreparedStatement pstmt = null;
+	}
 
-        try {
-            pstmt = conn.prepareStatement("update usuario set login = ?, senha = ?, nome = ?, telefone = ?, email = ?, endereco = ? where id = ? ");
+	@Override
+	public void altera(Usuario usuario) {
+		if (usuario == null) {
+			return;
+		}
 
-            pstmt.setString(1, usuario.getLogin());
-            pstmt.setString(2, usuario.getSenha());
-            pstmt.setString(3, usuario.getNome());
-            pstmt.setString(4, usuario.getTelefone());
-            pstmt.setString(5, usuario.getEmail());
-            pstmt.setString(6, usuario.getEndereco());
-            pstmt.setInt(7, usuario.getId());
+		PreparedStatement pstmt = null;
 
-            pstmt.executeUpdate();
+		try {
+			pstmt = conn.prepareStatement(
+					"update usuario set login = ?, senha = ?, nome = ?, telefone = ?, email = ?, endereco = ? where id = ? ");
 
-        } catch (SQLException se) {
-            System.out.println("Ocorreu um erro : " + se.getMessage());
-        } finally {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
+			pstmt.setString(1, usuario.getLogin());
+			pstmt.setString(2, usuario.getSenha());
+			pstmt.setString(3, usuario.getNome());
+			pstmt.setString(4, usuario.getTelefone());
+			pstmt.setString(5, usuario.getEmail());
+			pstmt.setString(6, usuario.getEndereco());
+			pstmt.setInt(7, usuario.getId());
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 
 }
