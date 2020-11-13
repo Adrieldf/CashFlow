@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Categoria;
 import model.Conta;
@@ -324,7 +327,7 @@ public class CadastroConta extends javax.swing.JFrame {
     private void preencheComboboxProduto() {
         combobox_produto.removeAllItems();
         
-        String nomeCategoria = (String) combobox_categoria.getSelectedItem();
+        String nomeCategoria = combobox_categoria.getSelectedItem().toString();
         
         for (Categoria categoria : listaCategorias) {
             if (categoria.getNomeCategoria().equals(nomeCategoria)) {
@@ -363,7 +366,7 @@ public class CadastroConta extends javax.swing.JFrame {
         for (Categoria categoria : listaCategorias) {
             if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
                 for (Produto produto : listaProdutos) {
-                    if (combobox_categoria.getSelectedItem().equals(produto.getNomeProduto())) {
+                    if (combobox_produto.getSelectedItem().equals(produto.getNomeProduto())) {
                         conta.setIdProduto(produto.getId());
                         break;
                     }
@@ -373,20 +376,23 @@ public class CadastroConta extends javax.swing.JFrame {
         }
         
         for (Fornecedor fornecedor : listaFornecedor) {
-            if (combobox_fornecedor.getSelectedItem().equals(fornecedor)) {
+            if (combobox_fornecedor.getSelectedItem().equals(fornecedor.getNome())) {
                 conta.setIdFornecedor(fornecedor.getId());
             }
         }
         
         facade.insereConta(conta);
-        int idConta = facade.buscaUltimoIdDaConta(idUsuario);
+        int idConta = facade.buscaUltimoIdDaConta(this.idUsuario);
         
         List<Parcela> listaParcelas = montaParcelas();
 
         for (Parcela parcela : listaParcelas) {
             parcela.setIdConta(idConta);
+            parcela.setIdUsuario(this.idUsuario);
             facade.insereParcelas(parcela);
         }
+        JOptionPane.showMessageDialog(null, "Sucesso", "Conta cadastrada com sucesso!", JOptionPane.INFORMATION_MESSAGE);
+   	 
     }//GEN-LAST:event_btnNovo3ActionPerformed
 
     private void combobox_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_produtoActionPerformed
@@ -492,7 +498,7 @@ public class CadastroConta extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup5;
     private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.ButtonGroup buttonGroup7;
-    private javax.swing.JComboBox<String> combobox_categoria;
+    private JComboBox<String> combobox_categoria;
     private javax.swing.JComboBox<String> combobox_fornecedor;
     private javax.swing.JComboBox<String> combobox_produto;
     private javax.swing.JTable grid;

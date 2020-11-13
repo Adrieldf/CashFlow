@@ -39,7 +39,8 @@ public class ListaDeContas extends javax.swing.JFrame {
         listaProdutos = facade.buscaTodosProdutos(idUsuario);
         listaFornecedor = facade.buscaTodosFornecedor(idUsuario);
         listaContas = facade.buscaTodos(idUsuario);
-
+        listaParcelas = new ArrayList<Parcela>();
+        
         for (Conta conta : listaContas) {
             for (Parcela parcela : facade.buscaParcelaPorConta(conta.getId(), idUsuario)) {
                 listaParcelas.add(parcela);

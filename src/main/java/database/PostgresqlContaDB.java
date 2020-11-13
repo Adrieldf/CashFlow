@@ -153,7 +153,7 @@ public class PostgresqlContaDB implements ContaDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				maxId = rs.getInt("id");
+				maxId = rs.getInt("max");
 				
 			}
 

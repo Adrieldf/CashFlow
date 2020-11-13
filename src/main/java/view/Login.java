@@ -239,10 +239,11 @@ public class Login extends javax.swing.JFrame {
         int idUsuario = 0;
         Facade facade = new Facade();
         usuario = facade.buscaUsuarioPorLogin(input_user.getText());
-        if(usuario == null) {
-        	 JOptionPane.showMessageDialog(null, "Usuário ou senha não encontrados! Tente novamente", "Erro ao fazer login", JOptionPane.INFORMATION_MESSAGE);
+        if(usuario == null || input_senha.getText() != usuario.getSenha()) {
+        	 JOptionPane.showMessageDialog(null, "Usuário e/ou senha não conferem! Tente novamente", "Erro ao fazer login", JOptionPane.INFORMATION_MESSAGE);
         	 return;
         }
+        
         Principal principal = new Principal(usuario.getId());
         principal.setVisible(true);
         dispose();
