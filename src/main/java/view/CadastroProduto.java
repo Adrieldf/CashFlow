@@ -14,7 +14,7 @@ import model.Categoria;
 import model.Produto;
 
 public class CadastroProduto extends javax.swing.JFrame {
-    
+
     private int idUsuario;
     private Facade facade = new Facade();
     private List<Categoria> listaCategorias;
@@ -23,7 +23,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     public CadastroProduto(int idUsuario) {
         initComponents();
         this.idUsuario = idUsuario;
-        
+
         listaCategorias = facade.buscaTodasCategorias(idUsuario);
         listaProdutos = facade.buscaTodosProdutos(idUsuario);
     }
@@ -106,6 +106,11 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jLabel2.setText("Categoria:");
 
+        combobox_categoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combobox_categoriaActionPerformed(evt);
+            }
+        });
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,12 +174,21 @@ public class CadastroProduto extends javax.swing.JFrame {
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
         linha.getDataVector().removeAllElements();
         linha.setRowCount(0);
-
+        
+        int idCategoria = 0;
+        for (Categoria categoria : listaCategorias) {
+            if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
+                idCategoria = categoria.getIdCategoria();
+            }
+        }
+        
         for (Produto produto : listaProdutos) {
-            Object[] dados = {
+            if(produto.getIdCategoria() == idCategoria){
+                Object[] dados = {
                 produto.getNomeProduto()
             };
             linha.addRow(dados);
+            }
         }
     }
 
@@ -192,7 +206,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 Produto produto = new Produto(input_produto.getText(), categoria.getIdCategoria(), idUsuario);
 
                 facade.insereProdutos(produto);
-                
+
                 DefaultTableModel linha = (DefaultTableModel) grid.getModel();
                 Object[] dados = {
                     produto.getNomeProduto()
@@ -210,6 +224,28 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void input_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_produtoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_input_produtoActionPerformed
+
+    private void combobox_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_categoriaActionPerformed
+        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+        linha.getDataVector().removeAllElements();
+        linha.setRowCount(0);
+
+        int idCategoria = 0;
+        for (Categoria categoria : listaCategorias) {
+            if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
+                idCategoria = categoria.getIdCategoria();
+            }
+        }
+
+        for (Produto produto : listaProdutos) {
+            if (produto.getIdCategoria() == idCategoria) {
+                Object[] dados = {
+                    produto.getNomeProduto()
+                };
+                linha.addRow(dados);
+            }
+        }
+    }//GEN-LAST:event_combobox_categoriaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovo2;

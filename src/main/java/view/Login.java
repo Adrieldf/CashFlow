@@ -13,6 +13,9 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Login extends javax.swing.JFrame {
 
@@ -233,17 +236,24 @@ public class Login extends javax.swing.JFrame {
     
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        
-        Usuario usuario = new Usuario();
-        
         int idUsuario = 0;
         Facade facade = new Facade();
+        Usuario usuario = new Usuario();
+        /*
+        List<Usuario> lista = facade.buscaTodosUsuario();
+        for ( Usuario usuarioL : lista ) {
+            System.out.println(usuarioL.getLogin());
+            System.out.println(usuarioL.getSenha());
+        }*/
+        
+        
         usuario = facade.buscaUsuarioPorLogin(input_user.getText());
-        if(usuario == null || input_senha.getText() != usuario.getSenha()) {
-        	 JOptionPane.showMessageDialog(null, "Usuário e/ou senha não conferem! Tente novamente", "Erro ao fazer login", JOptionPane.INFORMATION_MESSAGE);
+        
+        if(usuario == null || !(input_senha.getText().equals(usuario.getSenha())) ) {
+        	 JOptionPane.showMessageDialog(null, "Usuï¿½rio e/ou senha nï¿½o conferem! Tente novamente", "Erro ao fazer login", JOptionPane.INFORMATION_MESSAGE);
         	 return;
         }
-        
+
         Principal principal = new Principal(usuario.getId());
         principal.setVisible(true);
         dispose();
@@ -258,7 +268,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_input_senhaActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnLogin;
     private javax.swing.JTextField input_senha;

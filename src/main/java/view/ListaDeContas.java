@@ -40,7 +40,7 @@ public class ListaDeContas extends javax.swing.JFrame {
         listaFornecedor = facade.buscaTodosFornecedor(idUsuario);
         listaContas = facade.buscaTodos(idUsuario);
         listaParcelas = new ArrayList<Parcela>();
-        
+
         for (Conta conta : listaContas) {
             for (Parcela parcela : facade.buscaParcelaPorConta(conta.getId(), idUsuario)) {
                 listaParcelas.add(parcela);
@@ -129,6 +129,11 @@ public class ListaDeContas extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        grid.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gridMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(grid);
@@ -343,91 +348,117 @@ public class ListaDeContas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox_fornecedorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private boolean realizaFiltro(Conta conta, List<Integer> listaIdProdutoFiltro) {
+
+        //Verificação da busca de uma conta
+        if (!input_conta.getText().isEmpty()) {
+            if (conta.getId() != Integer.parseInt(input_conta.getText())) {
+                return true;
+            }
+        }
+        //Verificação do tipo
+        if (combobox_tipo.getSelectedItem().equals("Pagar")) {
+            if (conta.getTipo() != 1) {
+                return true;
+            }
+        } else if (combobox_tipo.getSelectedItem().equals("Receber")) {
+            if (conta.getTipo() != 2) {
+                return true;
+            }
+        }
+
+        //Verificação da categoria
+        boolean encontrou = false;
+        if (!combobox_categoria.getSelectedItem().equals("Todos")) {
+
+            for (Integer id : listaIdProdutoFiltro) {
+                if (id == conta.getIdProduto()) {
+                    encontrou = true;
+                    break;
+                }
+            }
+            if (!encontrou) {
+                return true;
+            }
+
+        }
+
+        int idFornecedor = 0;
+        if (!combobox_fornecedor.getSelectedItem().equals("Todos")) {
+            for (Fornecedor fornecedor : listaFornecedor) {
+                if (combobox_fornecedor.getSelectedItem().equals(fornecedor.getNome())) {
+                    idFornecedor = fornecedor.getId();
+                    break;
+                }
+            }
+            if (conta.getIdFornecedor() != idFornecedor) {
+                return true;
+            }
+        }
+
+        if (combobox_situacao.getSelectedItem().equals("Finalizada")) {
+            for (Parcela parcela : listaParcelas) {
+                if (parcela.getValor() != parcela.getValorPago()) {
+                    encontrou = true;
+                    break;
+                }
+            }
+            if (encontrou) {
+                return true;
+            }
+        }
+
+        //Se chegou até aqui a conta respeita os filtros
+        return false;
+    }
+
+    private boolean executaFiltro(Conta conta) {
         List<Integer> listaIdProdutoFiltro = new ArrayList<Integer>();
-        listaContasFiltro.clear();
+        List<Integer> listaIdCategoriaFiltro = new ArrayList<Integer>();
+        List<Produto> listaProdutosFiltro = new ArrayList<Produto>();
 
         for (Categoria categoria : listaCategorias) {
-            if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
+            if (combobox_categoria.getSelectedItem().equals("Todos")) {
                 for (Produto produto : listaProdutos) {
-                    if (combobox_categoria.getSelectedItem().equals(produto.getNomeProduto()) || combobox_categoria.getSelectedItem().equals("Todos")) {
+                    if (combobox_categoria.getSelectedItem().equals("Todos")) {
                         listaIdProdutoFiltro.add(produto.getId());
                     }
                 }
-            }
-        }
-
-        for (Conta conta : listaContas) {
-
-            //Verificação da busca de uma conta
-            if (!input_conta.getText().isEmpty()) {
-                if (conta.getId() != Integer.parseInt(input_conta.getText())) {
-                    continue;
-                }
-            }
-
-            //Verificação do tipo
-            if (combobox_tipo.getSelectedItem().equals("Pagar")) {
-                if (conta.getTipo() != 1) {
-                    continue;
-                }
-            } else if (combobox_tipo.getSelectedItem().equals("Receber")) {
-                if (conta.getTipo() != 2) {
-                    continue;
-                }
-            }
-
-            //Verificação da categoria
-            boolean encontrou = false;
-            if (!combobox_categoria.getSelectedItem().equals("Todos")) {
-                if (!combobox_produto.getSelectedItem().equals("Todos")) {
-                    for (Integer id : listaIdProdutoFiltro) {
-                        if (id == conta.getIdProduto()) {
-                            encontrou = true;
-                            break;
+            } else if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
+                for (Produto produto : listaProdutos) {
+                     if (produto.getIdCategoria() == categoria.getIdCategoria()) {
+                        if(combobox_produto.getSelectedItem().equals("Todos")){
+                            listaIdProdutoFiltro.add(produto.getId());
                         }
+                        else{
+                            if(combobox_produto.getSelectedItem().equals(produto.getNomeProduto())){
+                                listaIdProdutoFiltro.add(produto.getId());
+                            }
+                        }
+                        
                     }
-                    if (!encontrou) {
-                        continue;
-                    }
-                }
-            }
-
-            int idFornecedor = 0;
-            if (!combobox_fornecedor.getSelectedItem().equals("Todos")) {
-                for (Fornecedor fornecedor : listaFornecedor) {
-                    if (combobox_fornecedor.getSelectedItem().equals(fornecedor.getNome())) {
-                        idFornecedor = fornecedor.getId();
-                        break;
-                    }
-                }
-                if (conta.getIdFornecedor() != idFornecedor) {
-                    continue;
-                }
-            }
-
-            if (combobox_situacao.getSelectedItem().equals("Finalizada")) {
-                for (Parcela parcela : listaParcelas) {
-                    if (parcela.getValor() != parcela.getValorPago()) {
-                        encontrou = true;
-                        break;
-                    }
-                }
-                if (encontrou) {
-                    continue;
                 }
             }
         }
+
+        return realizaFiltro(conta, listaIdProdutoFiltro);
+
+    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        exibeTodasContas(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void combobox_situacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_situacaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox_situacaoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void exibeTodasContas(boolean filtro) {
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
         linha.getDataVector().removeAllElements();
         linha.setRowCount(0);
+        linha.fireTableDataChanged();
         double valor, valorPago;
         String nomeCategoria = "";
         String nomeProduto = "";
@@ -447,26 +478,31 @@ public class ListaDeContas extends javax.swing.JFrame {
                 if (parcela.getIdConta() == conta.getId()) {
                     valor = valor + parcela.getValor();
                     valorPago = valorPago + parcela.getValorPago();
-                    if(parcela.isRenegociada()){
+                    if (parcela.isRenegociada()) {
                         renegociado = true;
                     }
                 }
             }
-            
+
             efetuado = false;
-            if(valor == valorPago){
+            if (valor == valorPago) {
                 efetuado = true;
             }
 
-            for (Produto produto:listaProdutos) {
-                if(produto.getId()==conta.getIdProduto()){
+            for (Produto produto : listaProdutos) {
+                if (produto.getId() == conta.getIdProduto()) {
                     nomeProduto = produto.getNomeProduto();
-                    for(Categoria categoria:listaCategorias){
-                        if(categoria.getIdCategoria() == produto.getIdCategoria()){
+                    for (Categoria categoria : listaCategorias) {
+                        if (categoria.getIdCategoria() == produto.getIdCategoria()) {
                             nomeCategoria = categoria.getNomeCategoria();
                             break;
                         }
                     }
+                }
+            }
+            if (filtro) {
+                if (executaFiltro(conta)) {
+                    continue;
                 }
             }
 
@@ -474,14 +510,26 @@ public class ListaDeContas extends javax.swing.JFrame {
                 tipo,
                 conta.getId(),
                 valor,
-                nomeProduto,
                 nomeCategoria,
+                nomeProduto,
                 efetuado,
                 renegociado
             };
             linha.addRow(dados);
         }
+    }
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        exibeTodasContas(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void gridMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridMouseClicked
+        
+        String idConta = grid.getValueAt(grid.getSelectedRow(), 1).toString();
+        
+        DetalheConta detalhe = new DetalheConta(idUsuario, Integer.parseInt(idConta));
+        detalhe.setVisible(true);
+    }//GEN-LAST:event_gridMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNovo2;

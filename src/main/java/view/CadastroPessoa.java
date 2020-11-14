@@ -67,7 +67,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jLabel3.setText("Email:");
 
-        jLabel4.setText("Endereço:");
+        jLabel4.setText("Endereï¿½o:");
 
         input_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
