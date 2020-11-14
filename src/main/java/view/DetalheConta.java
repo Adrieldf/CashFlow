@@ -26,6 +26,8 @@ public class DetalheConta extends javax.swing.JFrame {
         linha.getDataVector().removeAllElements();
         linha.setRowCount(0);
         
+        txt_idconta.setText(Integer.toString(idConta));
+        
         boolean pago = false;
         for (Parcela parcela : listaParcelas) {
             pago = false;
@@ -58,7 +60,7 @@ public class DetalheConta extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         grid = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        txt_idconta = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,10 +98,10 @@ public class DetalheConta extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, true, true
+                false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -114,7 +116,7 @@ public class DetalheConta extends javax.swing.JFrame {
 
         jLabel1.setText("Conta:");
 
-        jLabel2.setText("000001");
+        txt_idconta.setText("000001");
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -134,7 +136,7 @@ public class DetalheConta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(61, 61, 61)
-                        .addComponent(jLabel2)
+                        .addComponent(txt_idconta)
                         .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
@@ -142,7 +144,7 @@ public class DetalheConta extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_idconta, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,8 +169,8 @@ public class DetalheConta extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JTable grid;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel txt_idconta;
     // End of variables declaration//GEN-END:variables
 }
