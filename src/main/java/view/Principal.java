@@ -11,6 +11,7 @@ public class Principal extends javax.swing.JFrame {
     CadastroContaAReceber contaAReceber;
     CadastroConta contaAPagar;
     CadastroFornecedor cadastroFornecedor;
+    Projecoes projecoes;
     
     public Principal(int idUsuario) {
         this.idUsuario = idUsuario;
@@ -23,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
         contaAReceber = new CadastroContaAReceber(idUsuario);
         contaAPagar = new CadastroConta(idUsuario);
         cadastroFornecedor = new CadastroFornecedor(idUsuario);
+        projecoes = new Projecoes(idUsuario);
         
     }
 
@@ -35,11 +37,11 @@ public class Principal extends javax.swing.JFrame {
         btnCategoria = new javax.swing.JMenuItem();
         btnProduto = new javax.swing.JMenuItem();
         btnPessoa = new javax.swing.JMenuItem();
-        btnPessoa.setEnabled(false);
         btnFornecedor = new javax.swing.JMenuItem();
         btnContasAPagar = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         btnContas = new javax.swing.JMenuItem();
+        btnProjecoes = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,7 +94,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(btnCadastar);
 
-        jMenu1.setText("Informa\u00E7\u00F5es");
+        jMenu1.setText("Informações");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
@@ -106,6 +108,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(btnContas);
+
+        btnProjecoes.setText("Projeções");
+        btnProjecoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProjecoesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnProjecoes);
 
         jMenuBar1.add(jMenu1);
 
@@ -153,8 +163,13 @@ public class Principal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnContasAPagarActionPerformed
 
+    private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
+        cadastroFornecedor.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnFornecedorActionPerformed
+
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void btnContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasActionPerformed
@@ -162,10 +177,10 @@ public class Principal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnContasActionPerformed
 
-    private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
-        cadastroFornecedor.setVisible(true);
+    private void btnProjecoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjecoesActionPerformed
+        projecoes.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnFornecedorActionPerformed
+    }//GEN-LAST:event_btnProjecoesActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -202,6 +217,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnFornecedor;
     private javax.swing.JMenuItem btnPessoa;
     private javax.swing.JMenuItem btnProduto;
+    private javax.swing.JMenuItem btnProjecoes;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
