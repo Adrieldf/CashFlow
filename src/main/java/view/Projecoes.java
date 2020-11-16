@@ -2,28 +2,41 @@ package view;
 
 //import controller.Controller;
 import facade.Facade;
+
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.Month;
+import org.jfree.data.time.RegularTimePeriod;
+import org.jfree.data.time.Week;
+import org.jfree.data.xy.YIntervalSeries;
+import org.jfree.data.xy.YIntervalSeriesCollection;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.DeviationRenderer;
+import org.jfree.chart.ui.RectangleInsets;
 
 public class Projecoes extends javax.swing.JFrame {
     
-    DefaultPieDataset data;
+    //DefaultPieDataset dataSet;
+	YIntervalSeriesCollection dataset;
+	
     private int idUsuario;
     private Facade facade = new Facade();
 
     public Projecoes(int idUsuario) {
         initComponents();
-        DefaultPieDataset dataSet = new DefaultPieDataset();
-        dataSet.setValue("Chrome", 29);
-        dataSet.setValue("InternetExplorer", 36);
-        dataSet.setValue("Firefox", 35);
-       
+        /*
+        dataSet = new DefaultPieDataset();
+        
         // based on the dataset we create the chart
         JFreeChart pieChart = ChartFactory.createPieChart3D("Teste", dataSet, true, true, false);
         PiePlot plot = (PiePlot) pieChart.getPlot();
@@ -38,6 +51,67 @@ public class Projecoes extends javax.swing.JFrame {
        
         // add to contentPane
         //setContentPane(chartPanel);
+        
+        jPanel2.setLayout(new BorderLayout());
+        jPanel2.add(chartPanel, BorderLayout.CENTER);
+        jPanel2.validate();*/
+        
+        dataset = new YIntervalSeriesCollection();
+        
+        YIntervalSeries series1 = new YIntervalSeries("A pagar");
+        YIntervalSeries series2 = new YIntervalSeries("A receber");
+        //RegularTimePeriod t = new Week();
+        RegularTimePeriod t = new Day();
+        double y1 = 100.0;
+        double y2 = 100.0;
+        for (int i = 0; i <= 3; i++) {
+            double dev1 = (0.05 * i);
+            series1.add(t.getFirstMillisecond(), y1, y1 - dev1, y1 + dev1);
+            y1 = y1 + Math.random() - 0.45;
+
+            double dev2 = (0.07 * i);
+            series2.add(t.getFirstMillisecond(), y2, y2 - dev2, y2 + dev2);
+            y2 = y2 + Math.random() - 0.55;
+            t = t.next();
+        }
+
+        dataset.addSeries(series1);
+        dataset.addSeries(series2);
+        
+        JFreeChart chart = ChartFactory.createTimeSeriesChart(
+                "Projeção de valores", 
+                "Período",                
+                "Valores R$",         
+                dataset,                 
+                true,                     
+                true,                    
+                false                    
+            );
+        
+        XYPlot plot = (XYPlot) chart.getPlot();
+        plot.setDomainPannable(true);
+        plot.setRangePannable(false);
+        plot.setInsets(new RectangleInsets(5, 5, 5, 20));
+
+        /*DeviationRenderer renderer = new DeviationRenderer(true, false);
+        renderer.setSeriesStroke(0, new BasicStroke(3.0f, BasicStroke.CAP_ROUND,
+                BasicStroke.JOIN_ROUND));
+        renderer.setSeriesStroke(0, new BasicStroke(3.0f,
+                BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        renderer.setSeriesStroke(1, new BasicStroke(3.0f,
+                BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        renderer.setSeriesFillPaint(0, new Color(255, 200, 200));
+        renderer.setSeriesFillPaint(1, new Color(200, 200, 255));
+        plot.setRenderer(renderer);*/
+
+        // change the auto tick unit selection to integer units only...
+        NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
+        yAxis.setAutoRangeIncludesZero(false);
+        yAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        
+        //Dimensão do gráfico
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(690, 400));
         
         jPanel2.setLayout(new BorderLayout());
         jPanel2.add(chartPanel, BorderLayout.CENTER);
@@ -121,7 +195,7 @@ public class Projecoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
