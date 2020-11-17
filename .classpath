@@ -5,6 +5,6 @@
 	<classpathentry kind="lib" path="lib/postgresql-9.1-902.jdbc4.jar"/>
 	<classpathentry kind="lib" path="lib/jgoodies-forms-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/gbarc/.m2/repository/org/jfree/jfreechart/1.5.0/jfreechart-1.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.5.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
