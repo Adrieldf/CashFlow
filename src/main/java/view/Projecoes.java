@@ -79,8 +79,8 @@ public class Projecoes extends javax.swing.JFrame {
         dataset.addSeries(series2);
         
         JFreeChart chart = ChartFactory.createTimeSeriesChart(
-                "Projeção de valores", 
-                "Período",                
+                "Projeï¿½ï¿½o de valores", 
+                "Perï¿½odo",                
                 "Valores R$",         
                 dataset,                 
                 true,                     
@@ -109,7 +109,7 @@ public class Projecoes extends javax.swing.JFrame {
         yAxis.setAutoRangeIncludesZero(false);
         yAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         
-        //Dimensão do gráfico
+        //Dimensï¿½o do grï¿½fico
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(690, 400));
         
@@ -156,7 +156,7 @@ public class Projecoes extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -179,7 +179,7 @@ public class Projecoes extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
