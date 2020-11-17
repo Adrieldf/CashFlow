@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import model.Categoria;
 import model.Produto;
@@ -19,10 +20,12 @@ public class CadastroProduto extends javax.swing.JFrame {
     private Facade facade = new Facade();
     private List<Categoria> listaCategorias;
     private List<Produto> listaProdutos;
+    private JFrame tela;
 
-    public CadastroProduto(int idUsuario) {
+    public CadastroProduto(int idUsuario, JFrame tela) {
         initComponents();
         this.idUsuario = idUsuario;
+        this.tela = tela;
 
         listaCategorias = facade.buscaTodasCategorias(idUsuario);
         listaProdutos = facade.buscaTodosProdutos(idUsuario);
@@ -194,8 +197,10 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
-        Principal principal = new Principal(idUsuario);
-        principal.setVisible(true);
+        //Principal principal = new Principal(idUsuario);
+        //principal.setVisible(true);
+        //dispose();
+        tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 

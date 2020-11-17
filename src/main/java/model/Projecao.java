@@ -5,10 +5,19 @@
  */
 package model;
 
-/**
- *
- * @author gbarc
- */
+import java.time.LocalDate;
+
+
 public class Projecao {
+    
+    LocalDate data;
+    private double valor;
+    private double valorPago;
+
+    public Projecao(LocalDate data, double valor, double valorPago) {
+        this.data = data;
+        this.valor = valor;
+        this.valorPago = valorPago;
+    }
     
 }

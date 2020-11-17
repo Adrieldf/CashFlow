@@ -1,5 +1,7 @@
 package view;
 
+import javax.swing.JFrame;
+
 public class Principal extends javax.swing.JFrame {
     
     private int idUsuario;
@@ -19,7 +21,7 @@ public class Principal extends javax.swing.JFrame {
         
         listaDeContas = new ListaDeContas(idUsuario);
         cadastroCategoria = new CadastroCategoria(idUsuario);
-        cadastroProduto = new CadastroProduto(idUsuario);
+        cadastroProduto = new CadastroProduto(idUsuario,this);
         cadastroPessoa = new CadastroPessoa(idUsuario);
         contaAReceber = new CadastroContaAReceber(idUsuario);
         contaAPagar = new CadastroConta(idUsuario);
@@ -145,7 +147,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
         cadastroProduto.preencheGrid();
         cadastroProduto.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
