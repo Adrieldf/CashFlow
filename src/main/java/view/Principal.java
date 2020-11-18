@@ -1,6 +1,17 @@
 package view;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 public class Principal extends javax.swing.JFrame {
     
@@ -16,17 +27,31 @@ public class Principal extends javax.swing.JFrame {
     Projecoes projecoes;
     
     public Principal(int idUsuario) {
+    	getContentPane().setPreferredSize(new Dimension(300, 200));
+    	setSize(new Dimension(265, 176));
+    	getContentPane().setSize(new Dimension(200, 200));
+    	getContentPane().setMinimumSize(new Dimension(200, 200));
         this.idUsuario = idUsuario;
         initComponents();
         
-        listaDeContas = new ListaDeContas(idUsuario);
-        cadastroCategoria = new CadastroCategoria(idUsuario);
+        listaDeContas = new ListaDeContas(idUsuario, this);
+        cadastroCategoria = new CadastroCategoria(idUsuario, this);
         cadastroProduto = new CadastroProduto(idUsuario,this);
-        cadastroPessoa = new CadastroPessoa(idUsuario);
-        contaAReceber = new CadastroContaAReceber(idUsuario);
-        contaAPagar = new CadastroConta(idUsuario);
-        cadastroFornecedor = new CadastroFornecedor(idUsuario);
-        projecoes = new Projecoes(idUsuario);
+        cadastroPessoa = new CadastroPessoa(idUsuario, this);
+        contaAReceber = new CadastroContaAReceber(idUsuario, this);
+        contaAPagar = new CadastroConta(idUsuario, this);
+        cadastroFornecedor = new CadastroFornecedor(idUsuario, this);
+        projecoes = new Projecoes(idUsuario, this);
+        
+        JButton btnSair = new JButton("Sair");
+        btnSair.setBounds(239, 166, 51, 23);
+        btnSair.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		dispose();
+        	}
+        });
+        getContentPane().setLayout(null);
+        getContentPane().add(btnSair);
         
     }
 
@@ -96,7 +121,7 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(btnCadastar);
 
-        jMenu1.setText("InformaÃ§Ãµes");
+        jMenu1.setText("Informações");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
@@ -111,7 +136,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(btnContas);
 
-        btnProjecoes.setText("ProjeÃ§Ãµes");
+        btnProjecoes.setText("Projeções");
         btnProjecoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProjecoesActionPerformed(evt);
@@ -123,17 +148,6 @@ public class Principal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -141,7 +155,7 @@ public class Principal extends javax.swing.JFrame {
     
     private void btnPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPessoaActionPerformed
         cadastroPessoa.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnPessoaActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
@@ -153,7 +167,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaActionPerformed
 
         cadastroCategoria.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnCategoriaActionPerformed
 
     private void btnCadastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastarActionPerformed
@@ -162,12 +176,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnContasAPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasAPagarActionPerformed
         contaAPagar.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnContasAPagarActionPerformed
 
     private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
         cadastroFornecedor.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnFornecedorActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -176,12 +190,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContasActionPerformed
         listaDeContas.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnContasActionPerformed
 
     private void btnProjecoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjecoesActionPerformed
         projecoes.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btnProjecoesActionPerformed
 
 //    /**
@@ -222,5 +236,4 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnProjecoes;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    // End of variables declaration//GEN-END:variables
 }

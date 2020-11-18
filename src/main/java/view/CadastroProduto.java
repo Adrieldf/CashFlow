@@ -200,7 +200,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         //Principal principal = new Principal(idUsuario);
         //principal.setVisible(true);
         //dispose();
-        tela.setVisible(true);
+        this.tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 

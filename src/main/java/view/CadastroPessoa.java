@@ -7,17 +7,22 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JFrame;
+
 import model.Pessoa;
 import model.Usuario;
 
-public class CadastroPessoa extends javax.swing.JFrame {
+public class CadastroPessoa extends JFrame {
     
     private int idUsuario;
     public Facade facade = new Facade();
-
-    public CadastroPessoa(int idUsuario) {
+    private JFrame tela;
+    
+    public CadastroPessoa(int idUsuario, JFrame tela) {
         initComponents();
         this.idUsuario = idUsuario;
+        this.tela = tela;
     }
 
     @SuppressWarnings("unchecked")
@@ -145,13 +150,14 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
-    	if(this.idUsuario == 0) {
+    	/*if(this.idUsuario == 0) {
     		Login login = new Login();
             login.setVisible(true);
     	}else {
         Principal principal = new Principal(idUsuario);
         principal.setVisible(true);
-        }
+        }*/
+    	this.tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 

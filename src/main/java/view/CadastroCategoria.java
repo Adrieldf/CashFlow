@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 import controller.CadastroCategoriaController;
 import controller.TelaPrincipalController;
 import java.util.List;
+
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import facade.Facade;
 import model.Categoria;
@@ -16,10 +18,12 @@ public class CadastroCategoria extends javax.swing.JFrame {
     
     private int idUsuario;
     public Facade facade = new Facade();
-
-    public CadastroCategoria(int idUsuario) {
+    private JFrame tela;
+    
+    public CadastroCategoria(int idUsuario, JFrame tela) {
         initComponents();
         this.idUsuario = idUsuario;
+        this.tela = tela;
         
         DefaultTableModel linha = (DefaultTableModel) grid.getModel();
         linha.getDataVector().removeAllElements();
@@ -159,9 +163,11 @@ public class CadastroCategoria extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
-        Principal principal = new Principal(idUsuario);
+       /* Principal principal = new Principal(idUsuario);
         principal.setVisible(true);
-        dispose();
+        dispose();*/
+    	this.tela.setVisible(true);
+    	dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed

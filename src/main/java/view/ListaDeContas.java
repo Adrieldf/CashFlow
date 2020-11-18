@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import controller.ContaController;
 import controller.ListaDeContasController;
@@ -18,7 +20,7 @@ import model.Produto;
 import model.Conta;
 import model.Parcela;
 
-public class ListaDeContas extends javax.swing.JFrame {
+public class ListaDeContas extends JFrame {
 
     private int idUsuario;
     private List<Categoria> listaCategorias;
@@ -28,13 +30,14 @@ public class ListaDeContas extends javax.swing.JFrame {
     private List<Conta> listaContas;
     private List<Parcela> listaParcelas;
     private Facade facade = new Facade();
-
+    private JFrame tela;
     public ListaDeContasController contasController = new ListaDeContasController();
 
-    public ListaDeContas(int idUsuario) {
+    public ListaDeContas(int idUsuario, JFrame tela) {
         initComponents();
         this.idUsuario = idUsuario;
-
+        this.tela = tela;
+        
         listaCategorias = facade.buscaTodasCategorias(idUsuario);
         listaProdutos = facade.buscaTodosProdutos(idUsuario);
         listaFornecedor = facade.buscaTodosFornecedor(idUsuario);
@@ -327,8 +330,9 @@ public class ListaDeContas extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
         //Voltar
-        Principal principal = new Principal(idUsuario);
-        principal.setVisible(true);
+       /* Principal principal = new Principal(idUsuario);
+        principal.setVisible(true);*/
+    	this.tela.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
@@ -527,7 +531,7 @@ public class ListaDeContas extends javax.swing.JFrame {
         
         String idConta = grid.getValueAt(grid.getSelectedRow(), 1).toString();
         
-        DetalheConta detalhe = new DetalheConta(idUsuario, Integer.parseInt(idConta));
+        DetalheConta detalhe = new DetalheConta(idUsuario, Integer.parseInt(idConta), this);
         detalhe.setVisible(true);
     }//GEN-LAST:event_gridMouseClicked
 

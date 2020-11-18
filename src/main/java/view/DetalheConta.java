@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import model.Parcela;
 import model.Renegociacao;
@@ -15,10 +17,11 @@ public class DetalheConta extends javax.swing.JFrame {
 
     private int idUsuario;
     private Facade facade = new Facade();
+    private JFrame tela;
 
-    public DetalheConta(int idUsuario, int idConta) {
+    public DetalheConta(int idUsuario, int idConta, JFrame tela) {
         initComponents();
-
+        this.tela = tela;
         List<Parcela> listaParcelas = facade.buscaParcelasDaConta(idConta, idUsuario);
          List<Renegociacao> listaRenegociacao = facade.buscaRenegociacaoPorConta(idConta, idUsuario);
         
@@ -158,7 +161,8 @@ public class DetalheConta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
-        // TODO add your handling code here:
+        this.tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

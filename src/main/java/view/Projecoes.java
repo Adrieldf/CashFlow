@@ -11,6 +11,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFrame;
+
 import model.Conta;
 import model.Parcela;
 import model.Projecao;
@@ -30,7 +33,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.DeviationRenderer;
 import org.jfree.chart.ui.RectangleInsets;
 
-public class Projecoes extends javax.swing.JFrame {
+public class Projecoes extends JFrame {
     
     //DefaultPieDataset dataSet;
 	YIntervalSeriesCollection dataset;
@@ -41,10 +44,11 @@ public class Projecoes extends javax.swing.JFrame {
     private List<Parcela> listaParcelas;
     private List<Projecao> listaPagar;
     private List<Projecao> listaReceber;
-
-    public Projecoes(int idUsuario) {
+    private JFrame tela;
+    
+    public Projecoes(int idUsuario, JFrame tela) {
         initComponents();
-        
+        this.tela = tela;
         listaContas = facade.buscaTodos(idUsuario);
         listaParcelas = new ArrayList<Parcela>();
         

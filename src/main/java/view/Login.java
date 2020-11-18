@@ -7,6 +7,7 @@ import controller.TelaPrincipalController;
 import facade.Facade;
 import model.Usuario;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
@@ -17,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Login extends javax.swing.JFrame {
+public class Login extends JFrame {
 
     public Login() {
         initComponents();
@@ -156,9 +157,8 @@ public class Login extends javax.swing.JFrame {
         btnCadastrar = new JButton();
         btnCadastrar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		CadastroPessoa cadastroPessoa = new CadastroPessoa(0);
-        		cadastroPessoa.setVisible(true);
-        		dispose();
+        		btnCadastrarUsuario(arg0);
+        		
         	}
         });
         btnCadastrar.setToolTipText("");
@@ -233,7 +233,12 @@ public class Login extends javax.swing.JFrame {
        
         dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
-    
+    private void btnCadastrarUsuario(ActionEvent evt) {
+    	CadastroPessoa cadastroPessoa = new CadastroPessoa(0, this);
+		cadastroPessoa.setVisible(true);
+		dispose();
+       
+    }
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         int idUsuario = 0;

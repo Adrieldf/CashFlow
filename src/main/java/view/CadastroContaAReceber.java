@@ -7,14 +7,17 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JFrame;
+
 
 public class CadastroContaAReceber extends javax.swing.JFrame {
     
     private int idUsuario;
-    
-    public CadastroContaAReceber(int idUsuario) {
+    private JFrame tela;
+    public CadastroContaAReceber(int idUsuario, JFrame tela) {
         initComponents();
         this.idUsuario = idUsuario;
+        this.tela = tela;
     }
     
     @SuppressWarnings("unchecked")
@@ -213,9 +216,11 @@ public class CadastroContaAReceber extends javax.swing.JFrame {
 
     private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
        //Voltar
-        Principal principal = new Principal(idUsuario);
+       /* Principal principal = new Principal(idUsuario);
         principal.setVisible(true);
-        dispose();
+        dispose();*/
+    	this.tela.setVisible(true);
+    	dispose();
     }//GEN-LAST:event_btnNovo2ActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
