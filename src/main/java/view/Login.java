@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
@@ -60,7 +61,6 @@ public class Login extends JFrame {
         btnClose = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        input_senha = new javax.swing.JTextField();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -147,12 +147,6 @@ public class Login extends JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        input_senha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                input_senhaActionPerformed(evt);
-            }
-        });
         
         btnCadastrar = new JButton();
         btnCadastrar.addActionListener(new ActionListener() {
@@ -163,6 +157,8 @@ public class Login extends JFrame {
         });
         btnCadastrar.setToolTipText("");
         btnCadastrar.setText("Cadastrar novo usu\u00E1rio");
+        
+        input_senha = new JPasswordField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1Layout.setHorizontalGroup(
@@ -175,15 +171,15 @@ public class Login extends JFrame {
         			.addGap(85)
         			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
         				.addComponent(btnCadastrar, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
         					.addComponent(btnLogin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         					.addComponent(jLabel1)
         					.addComponent(jLabel2)
         					.addComponent(input_user)
         					.addComponent(btnClose, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
         					.addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        					.addComponent(input_senha)))
-        			.addContainerGap(86, Short.MAX_VALUE))
+        					.addComponent(input_senha, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)))
+        			.addGap(86))
         );
         jPanel1Layout.setVerticalGroup(
         	jPanel1Layout.createParallelGroup(Alignment.LEADING)
@@ -268,15 +264,10 @@ public class Login extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_input_userActionPerformed
 
-    private void input_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_senhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_input_senhaActionPerformed
-
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JTextField input_senha;
     private javax.swing.JTextField input_user;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -308,4 +299,5 @@ public class Login extends JFrame {
     private javax.swing.JMenuBar jMenuBar9;
     private javax.swing.JPanel jPanel1;
     private JButton btnCadastrar;
+    private JPasswordField input_senha;
 }
