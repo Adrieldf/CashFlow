@@ -16,251 +16,227 @@ import model.Produto;
 
 public class CadastroProduto extends javax.swing.JFrame {
 
-    private int idUsuario;
-    private Facade facade = new Facade();
-    private List<Categoria> listaCategorias;
-    private List<Produto> listaProdutos;
-    private JFrame tela;
+	private int idUsuario;
+	private Facade facade = new Facade();
+	private List<Categoria> listaCategorias;
+	private List<Produto> listaProdutos;
+	private JFrame tela;
 
-    public CadastroProduto(int idUsuario, JFrame tela) {
-        initComponents();
-        this.idUsuario = idUsuario;
-        this.tela = tela;
+	public CadastroProduto(int idUsuario, JFrame tela) {
+		initComponents();
+		this.idUsuario = idUsuario;
+		this.tela = tela;
 
-        listaCategorias = facade.buscaTodasCategorias(idUsuario);
-        listaProdutos = facade.buscaTodosProdutos(idUsuario);
-    }
+		this.atualizaDados();
+	}
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	public void atualizaDados() {
+		listaCategorias = facade.buscaTodasCategorias(idUsuario);
+		listaProdutos = facade.buscaTodosProdutos(idUsuario);
+		combobox_categoria.removeAllItems();
+		for (Categoria categoria : listaCategorias) {
+			combobox_categoria.addItem(categoria.getNomeCategoria());
+		}
+	}
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        grid = new javax.swing.JTable();
-        btnNovo2 = new javax.swing.JButton();
-        btnNovo3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        input_produto = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        combobox_categoria = new javax.swing.JComboBox<>();
-        jMenuBar1 = new javax.swing.JMenuBar();
+	@SuppressWarnings("unchecked")
+	// <editor-fold defaultstate="collapsed" desc="Generated
+	// Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menu");
+		jScrollPane1 = new javax.swing.JScrollPane();
+		grid = new javax.swing.JTable();
+		btnNovo2 = new javax.swing.JButton();
+		btnNovo3 = new javax.swing.JButton();
+		jLabel1 = new javax.swing.JLabel();
+		input_produto = new javax.swing.JTextField();
+		jLabel2 = new javax.swing.JLabel();
+		combobox_categoria = new javax.swing.JComboBox<>();
+		jMenuBar1 = new javax.swing.JMenuBar();
 
-        grid.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Produtos"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setTitle("Menu");
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+		grid.setModel(new javax.swing.table.DefaultTableModel(new Object[][] { { null }, { null }, { null }, { null },
+				{ null }, { null }, { null }, { null }, { null }, { null }, { null }, { null }, { null } },
+				new String[] { "Produtos" }) {
+			Class[] types = new Class[] { java.lang.String.class };
+			boolean[] canEdit = new boolean[] { false };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(grid);
+			public Class getColumnClass(int columnIndex) {
+				return types[columnIndex];
+			}
 
-        btnNovo2.setText("Voltar");
-        btnNovo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovo2ActionPerformed(evt);
-            }
-        });
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+		jScrollPane1.setViewportView(grid);
 
-        btnNovo3.setText("Salvar");
-        btnNovo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovo3ActionPerformed(evt);
-            }
-        });
+		btnNovo2.setText("Voltar");
+		btnNovo2.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnNovo2ActionPerformed(evt);
+			}
+		});
 
-        jLabel1.setText("Produto:");
+		btnNovo3.setText("Salvar");
+		btnNovo3.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnNovo3ActionPerformed(evt);
+			}
+		});
 
-        input_produto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                input_produtoActionPerformed(evt);
-            }
-        });
+		jLabel1.setText("Produto:");
 
-        jLabel2.setText("Categoria:");
+		input_produto.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				input_produtoActionPerformed(evt);
+			}
+		});
 
-        combobox_categoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobox_categoriaActionPerformed(evt);
-            }
-        });
-        setJMenuBar(jMenuBar1);
+		jLabel2.setText("Categoria:");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(btnNovo3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
-                .addComponent(btnNovo2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(223, 223, 223)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(combobox_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(27, 27, 27)
-                                .addComponent(input_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(combobox_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(input_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo2)
-                    .addComponent(btnNovo3))
-                .addGap(29, 29, 29))
-        );
+		combobox_categoria.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				combobox_categoriaActionPerformed(evt);
+			}
+		});
+		setJMenuBar(jMenuBar1);
 
-        pack();
-        setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				javax.swing.GroupLayout.Alignment.TRAILING,
+				layout.createSequentialGroup().addGap(134, 134, 134)
+						.addComponent(btnNovo3, javax.swing.GroupLayout.PREFERRED_SIZE, 100,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
+						.addComponent(btnNovo2, javax.swing.GroupLayout.PREFERRED_SIZE, 100,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(112, 112, 112))
+				.addGroup(layout.createSequentialGroup().addGroup(layout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(layout.createSequentialGroup().addGap(223, 223, 223).addComponent(jScrollPane1,
+								javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGroup(layout.createSequentialGroup().addGap(183, 183, 183).addGroup(layout
+								.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createSequentialGroup().addComponent(jLabel2).addGap(18, 18, 18)
+										.addComponent(combobox_categoria, javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addGroup(layout.createSequentialGroup().addComponent(jLabel1).addGap(27, 27, 27)
+										.addComponent(input_produto, javax.swing.GroupLayout.PREFERRED_SIZE, 171,
+												javax.swing.GroupLayout.PREFERRED_SIZE)))))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addGap(28, 28, 28)
+						.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246,
+								javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(14, 14, 14)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(jLabel2).addComponent(combobox_categoria,
+										javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+										javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(input_produto, javax.swing.GroupLayout.PREFERRED_SIZE,
+										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(jLabel1))
+						.addGap(41, 41, 41)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(btnNovo2).addComponent(btnNovo3))
+						.addGap(29, 29, 29)));
 
-    public void preencheGrid() {
+		pack();
+		setLocationRelativeTo(null);
+	}// </editor-fold>//GEN-END:initComponents
 
-        for (Categoria categoria : listaCategorias) {
-            combobox_categoria.addItem(categoria.getNomeCategoria());
-        }
+	public void preencheGrid() {
 
-        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
-        linha.getDataVector().removeAllElements();
-        linha.setRowCount(0);
-        
-        int idCategoria = 0;
-        for (Categoria categoria : listaCategorias) {
-            if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
-                idCategoria = categoria.getIdCategoria();
-            }
-        }
-        
-        for (Produto produto : listaProdutos) {
-            if(produto.getIdCategoria() == idCategoria){
-                Object[] dados = {
-                produto.getNomeProduto()
-            };
-            linha.addRow(dados);
-            }
-        }
-    }
+		DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+		linha.getDataVector().removeAllElements();
+		linha.setRowCount(0);
 
-    private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo2ActionPerformed
-        //Voltar
-        //Principal principal = new Principal(idUsuario);
-        //principal.setVisible(true);
-        //dispose();
-        this.tela.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnNovo2ActionPerformed
+		int idCategoria = 0;
+		for (Categoria categoria : listaCategorias) {
+			if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
+				idCategoria = categoria.getIdCategoria();
+			}
+		}
 
-    private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
+		for (Produto produto : listaProdutos) {
+			if (produto.getIdCategoria() == idCategoria) {
+				Object[] dados = { produto.getNomeProduto() };
+				linha.addRow(dados);
+			}
+		}
+	}
 
-        for (Categoria categoria : listaCategorias) {
-            if (categoria.getNomeCategoria().equals(combobox_categoria.getSelectedItem())) {
-                Produto produto = new Produto(input_produto.getText(), categoria.getIdCategoria(), idUsuario);
+	private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnNovo2ActionPerformed
+		// Voltar
+		// Principal principal = new Principal(idUsuario);
+		// principal.setVisible(true);
+		// dispose();
+		this.tela.setVisible(true);
+		dispose();
+	}// GEN-LAST:event_btnNovo2ActionPerformed
 
-                facade.insereProdutos(produto);
+	private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnNovo3ActionPerformed
 
-                DefaultTableModel linha = (DefaultTableModel) grid.getModel();
-                Object[] dados = {
-                    produto.getNomeProduto()
-                };
-                linha.addRow(dados);
+		for (Categoria categoria : listaCategorias) {
+			if (categoria.getNomeCategoria().equals(combobox_categoria.getSelectedItem())) {
+				Produto produto = new Produto(input_produto.getText(), categoria.getIdCategoria(), idUsuario);
 
-                input_produto.setText("");
+				facade.insereProdutos(produto);
 
-                break;
-            }
-        }
+				DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+				Object[] dados = { produto.getNomeProduto() };
+				linha.addRow(dados);
 
-    }//GEN-LAST:event_btnNovo3ActionPerformed
+				input_produto.setText("");
 
-    private void input_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_produtoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_input_produtoActionPerformed
+				break;
+			}
+		}
 
-    private void combobox_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox_categoriaActionPerformed
-        DefaultTableModel linha = (DefaultTableModel) grid.getModel();
-        linha.getDataVector().removeAllElements();
-        linha.setRowCount(0);
+	}// GEN-LAST:event_btnNovo3ActionPerformed
 
-        int idCategoria = 0;
-        for (Categoria categoria : listaCategorias) {
-            if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
-                idCategoria = categoria.getIdCategoria();
-            }
-        }
+	private void input_produtoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_input_produtoActionPerformed
+		// TODO add your handling code here:
+	}// GEN-LAST:event_input_produtoActionPerformed
 
-        for (Produto produto : listaProdutos) {
-            if (produto.getIdCategoria() == idCategoria) {
-                Object[] dados = {
-                    produto.getNomeProduto()
-                };
-                linha.addRow(dados);
-            }
-        }
-    }//GEN-LAST:event_combobox_categoriaActionPerformed
+	private void combobox_categoriaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_combobox_categoriaActionPerformed
+		DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+		linha.getDataVector().removeAllElements();
+		linha.setRowCount(0);
+		if (combobox_categoria.getSelectedItem() != null) {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNovo2;
-    private javax.swing.JButton btnNovo3;
-    private javax.swing.JComboBox<String> combobox_categoria;
-    private javax.swing.JTable grid;
-    private javax.swing.JTextField input_produto;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    // End of variables declaration//GEN-END:variables
+			int idCategoria = 0;
+			for (Categoria categoria : listaCategorias) {
+				if (combobox_categoria.getSelectedItem().equals(categoria.getNomeCategoria())) {
+					idCategoria = categoria.getIdCategoria();
+				}
+			}
+
+			for (Produto produto : listaProdutos) {
+				if (produto.getIdCategoria() == idCategoria) {
+					Object[] dados = { produto.getNomeProduto() };
+					linha.addRow(dados);
+				}
+			}
+		}
+	}// GEN-LAST:event_combobox_categoriaActionPerformed
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton btnNovo2;
+	private javax.swing.JButton btnNovo3;
+	private javax.swing.JComboBox<String> combobox_categoria;
+	private javax.swing.JTable grid;
+	private javax.swing.JTextField input_produto;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel jLabel2;
+	private javax.swing.JMenuBar jMenuBar1;
+	private javax.swing.JScrollPane jScrollPane1;
+	// End of variables declaration//GEN-END:variables
 }

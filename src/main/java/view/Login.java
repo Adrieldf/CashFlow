@@ -251,7 +251,7 @@ public class Login extends JFrame {
         usuario = facade.buscaUsuarioPorLogin(input_user.getText());
         
         if(usuario == null || !(input_senha.getText().equals(usuario.getSenha())) ) {
-        	 JOptionPane.showMessageDialog(null, "Usuï¿½rio e/ou senha nï¿½o conferem! Tente novamente", "Erro ao fazer login", JOptionPane.INFORMATION_MESSAGE);
+        	 JOptionPane.showMessageDialog(null, "Usuário e/ou senha não conferem! Tente novamente", "Erro ao fazer login", JOptionPane.INFORMATION_MESSAGE);
         	 return;
         }
 

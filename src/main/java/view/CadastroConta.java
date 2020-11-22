@@ -9,6 +9,10 @@ import static java.time.DayOfWeek.WEDNESDAY;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static java.time.temporal.TemporalAdjusters.next;
+
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import static java.time.DayOfWeek.MONDAY;
 import java.util.List;
@@ -34,17 +38,37 @@ public class CadastroConta extends JFrame {
 	private List<Fornecedor> listaFornecedor;
 	private Facade facade = new Facade();
 	private JFrame tela;
+
 	public CadastroConta(int idUsuario, JFrame tela) {
 		initComponents();
 		this.idUsuario = idUsuario;
 		this.tela = tela;
 
-		listaCategorias = facade.buscaTodasCategorias(idUsuario);
-		listaProdutos = facade.buscaTodosProdutos(idUsuario);
-		listaFornecedor = facade.buscaTodosFornecedor(idUsuario);
+		this.atualizaDados();
+	}
+
+	public void atualizaDados() {
+		listaCategorias = facade.buscaTodasCategorias(this.idUsuario);
+		listaProdutos = facade.buscaTodosProdutos(this.idUsuario);
+		listaFornecedor = facade.buscaTodosFornecedor(this.idUsuario);
 
 		preencheComboboxCategoria();
 		preencheComboboxFornecedor();
+		//preencheComboboxProduto();
+	}
+	public String getRequisitosParaCriarConta() {
+		String msgText = "";
+		if (listaCategorias == null || listaCategorias.size() <= 0)
+			msgText += "Adicione pelo menos uma categoria.\n";
+		if (listaFornecedor == null || listaFornecedor.size() <= 0)
+			msgText += "Adicione pelo menos um fornecedor.\n";
+		if (listaProdutos == null || listaProdutos.size() <= 0)
+			msgText += "Adicione pelo menos um produto.\n";
+		
+		if(msgText.trim() != "") {
+			msgText = "Antes de continuar: \n" + msgText;
+		}
+		return msgText;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -332,12 +356,14 @@ public class CadastroConta extends JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void preencheComboboxCategoria() {
+		combobox_categoria.removeAllItems();
 		for (Categoria categoria : listaCategorias) {
 			combobox_categoria.addItem(categoria.getNomeCategoria());
 		}
 	}
 
 	private void preencheComboboxFornecedor() {
+		combobox_fornecedor.removeAllItems();
 		for (Fornecedor fornecedor : listaFornecedor) {
 			combobox_fornecedor.addItem(fornecedor.getNome());
 		}
@@ -345,7 +371,8 @@ public class CadastroConta extends JFrame {
 
 	private void preencheComboboxProduto() {
 		combobox_produto.removeAllItems();
-
+		if(combobox_categoria.getSelectedItem() == null)
+			return;
 		String nomeCategoria = combobox_categoria.getSelectedItem().toString();
 
 		for (Categoria categoria : listaCategorias) {
@@ -365,8 +392,9 @@ public class CadastroConta extends JFrame {
 
 	private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnNovo2ActionPerformed
 		// Voltar
-		/*Principal principal = new Principal(idUsuario);
-		principal.setVisible(true);*/
+		/*
+		 * Principal principal = new Principal(idUsuario); principal.setVisible(true);
+		 */
 		this.tela.setVisible(true);
 		dispose();
 	}// GEN-LAST:event_btnNovo2ActionPerformed

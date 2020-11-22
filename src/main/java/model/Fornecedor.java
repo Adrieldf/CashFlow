@@ -23,6 +23,13 @@ public class Fornecedor {
         this.setEndereco(endereco);
         this.setIdUsuario(idUsuario);
     }
+    public Fornecedor(String nome, String telefone, String email, String endereco, int idUsuario) {
+        this.setNome(nome);
+        this.setTelefone(telefone);
+        this.setEmail(email);
+        this.setEndereco(endereco);
+        this.setIdUsuario(idUsuario);
+    }
 
     public int getId() {
         return id;

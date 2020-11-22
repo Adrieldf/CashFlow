@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import model.Pessoa;
 import model.Usuario;
@@ -72,7 +73,7 @@ public class CadastroPessoa extends JFrame {
 
         jLabel3.setText("Email:");
 
-        jLabel4.setText("Endereï¿½o:");
+        jLabel4.setText("Endereço:");
 
         input_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,6 +166,10 @@ public class CadastroPessoa extends JFrame {
         
         Usuario usuario = new Usuario(input_nome.getText(), input_senha.getText(), input_nome.getText(), input_telefone.getText(), input_email.getText(), input_endereco.getText());
         facade.insereUsuario(usuario);
+        JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso!", "Sucesso",
+				JOptionPane.INFORMATION_MESSAGE);
+		this.tela.setVisible(true);
+		dispose();
     }//GEN-LAST:event_btnNovo3ActionPerformed
 
     private void input_telefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_input_telefoneActionPerformed
