@@ -48,13 +48,13 @@ public class RenegociarParcela extends javax.swing.JFrame {
 		btnVoltar = new javax.swing.JButton();
 		btnVoltar.setBounds(429, 341, 100, 21);
 		jLabel1 = new javax.swing.JLabel();
-		jLabel1.setBounds(106, 50, 30, 13);
+		jLabel1.setBounds(106, 50, 58, 13);
 		jLabel2 = new javax.swing.JLabel();
-		jLabel2.setBounds(174, 50, 34, 13);
+		jLabel2.setBounds(174, 50, 83, 13);
 		jLabel6 = new javax.swing.JLabel();
 		jLabel6.setBounds(106, 181, 60, 13);
 		jLabel7 = new javax.swing.JLabel();
-		jLabel7.setBounds(106, 214, 50, 13);
+		jLabel7.setBounds(106, 214, 58, 13);
 		txtNovoValor = new javax.swing.JTextField();
 		txtNovoValor.setBounds(176, 178, 81, 19);
 		txtNovaData = new javax.swing.JTextField();
@@ -90,11 +90,11 @@ public class RenegociarParcela extends javax.swing.JFrame {
 		setJMenuBar(jMenuBar1);
 		
 		JLabel jLabel5_1 = new JLabel();
-		jLabel5_1.setBounds(106, 73, 38, 13);
+		jLabel5_1.setBounds(106, 73, 58, 13);
 		jLabel5_1.setText("Parcela:");
 		
 		JLabel lblIdParcela = new JLabel();
-		lblIdParcela.setBounds(176, 73, 11, 13);
+		lblIdParcela.setBounds(176, 73, 81, 13);
 		lblIdParcela.setText("01");
 		
 		JLabel lblValor = new JLabel();
@@ -106,11 +106,11 @@ public class RenegociarParcela extends javax.swing.JFrame {
 		lblData.setText("Data:");
 		
 		JLabel lblValorParcela = new JLabel();
-		lblValorParcela.setBounds(174, 96, 11, 13);
+		lblValorParcela.setBounds(174, 96, 83, 13);
 		lblValorParcela.setText("01");
 		
 		JLabel lblDataParcela = new JLabel();
-		lblDataParcela.setBounds(174, 119, 11, 13);
+		lblDataParcela.setBounds(174, 119, 83, 13);
 		lblDataParcela.setText("01");
 		getContentPane().setLayout(null);
 		getContentPane().add(jLabel1);
