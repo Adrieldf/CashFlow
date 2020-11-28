@@ -398,6 +398,7 @@ public class CadastroConta extends JFrame {
 
 		facade.insereConta(conta);
 		int idConta = facade.buscaUltimoIdDaConta(this.idUsuario);
+                System.out.println(idConta);
 
 		List<Parcela> listaParcelas = montaParcelas();
 
@@ -406,6 +407,17 @@ public class CadastroConta extends JFrame {
 			parcela.setIdUsuario(this.idUsuario);
 			facade.insereParcelas(parcela);
 		}
+                
+                input_valor.setText("");
+                input_data.setText("");
+                input_parcelas.setText("");
+                input_data.setText("");
+                input_descricao.setText("");
+                
+                DefaultTableModel linha = (DefaultTableModel) grid.getModel();
+		linha.getDataVector().removeAllElements();
+		linha.setRowCount(0);
+                
 		JOptionPane.showMessageDialog(null, "Conta cadastrada com sucesso!", "Sucesso",
 				JOptionPane.INFORMATION_MESSAGE);
 		this.btnNovo2ActionPerformed(null);
@@ -500,7 +512,7 @@ public class CadastroConta extends JFrame {
 		preencheComboboxProduto();
 	}// GEN-LAST:event_combobox_categoriaActionPerformed
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
+	// Variables declaration - do not modify                     
 	private javax.swing.JButton btnNovo2;
 	private javax.swing.JButton btnNovo3;
 	private javax.swing.JButton btn_previsualizacao;
