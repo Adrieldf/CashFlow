@@ -194,7 +194,7 @@ public class ListaDeContas extends JFrame {
             }
         });
 
-        jLabel4.setText("Situação");
+        jLabel4.setText("Situa\u00E7\u00E3o");
 
         combobox_situacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Finalizada" }));
         combobox_situacao.addActionListener(new java.awt.event.ActionListener() {

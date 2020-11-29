@@ -3,12 +3,18 @@ package view;
 //import controller.Controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import facade.Facade;
+import model.Parcela;
+import model.Renegociacao;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.GroupLayout;
@@ -22,7 +28,9 @@ public class RenegociarParcela extends javax.swing.JFrame {
 	private int idConta;
 	private int idParcela;
 	private JFrame tela;
-
+	private Facade facade = new Facade();
+	Parcela parcela;
+	
 	public RenegociarParcela(int idUsuario, int idConta, int idParcela, JFrame tela) {
 		getContentPane().setPreferredSize(new Dimension(600, 400));
 		initComponents();
@@ -30,9 +38,12 @@ public class RenegociarParcela extends javax.swing.JFrame {
 		this.idConta = idConta;
 		this.idParcela = idParcela;
 		this.tela = tela;
-	
 		
-		
+		lblIdConta.setText(Integer.toString(this.idConta));
+		this.parcela = facade.buscaParcelaPorCodigo(this.idParcela, this.idConta, this.idUsuario);
+		lblIdParcela.setText(Integer.toString(this.idParcela));
+		lblValorParcela.setText(new DecimalFormat("#.##").format(this.parcela.getValor()));
+		lblDataParcela.setText(this.parcela.getData());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -48,17 +59,17 @@ public class RenegociarParcela extends javax.swing.JFrame {
 		btnVoltar = new javax.swing.JButton();
 		btnVoltar.setBounds(429, 341, 100, 21);
 		jLabel1 = new javax.swing.JLabel();
-		jLabel1.setBounds(106, 50, 58, 13);
-		jLabel2 = new javax.swing.JLabel();
-		jLabel2.setBounds(174, 50, 83, 13);
+		jLabel1.setBounds(91, 50, 73, 13);
+		lblIdConta = new javax.swing.JLabel();
+		lblIdConta.setBounds(174, 50, 83, 13);
 		jLabel6 = new javax.swing.JLabel();
-		jLabel6.setBounds(106, 181, 60, 13);
+		jLabel6.setBounds(91, 154, 75, 13);
 		jLabel7 = new javax.swing.JLabel();
-		jLabel7.setBounds(106, 214, 58, 13);
+		jLabel7.setBounds(91, 187, 75, 13);
 		txtNovoValor = new javax.swing.JTextField();
-		txtNovoValor.setBounds(176, 178, 81, 19);
+		txtNovoValor.setBounds(174, 151, 81, 19);
 		txtNovaData = new javax.swing.JTextField();
-		txtNovaData.setBounds(174, 211, 81, 19);
+		txtNovaData.setBounds(174, 184, 81, 19);
 		btnSalvar = new javax.swing.JButton();
 		btnSalvar.setBounds(106, 341, 100, 21);
 		jMenuBar1 = new javax.swing.JMenuBar();
@@ -75,7 +86,7 @@ public class RenegociarParcela extends javax.swing.JFrame {
 
 		jLabel1.setText("Conta:");
 
-		jLabel2.setText("000001");
+		lblIdConta.setText("000001");
 
 		jLabel6.setText("Novo valor:");
 
@@ -90,31 +101,31 @@ public class RenegociarParcela extends javax.swing.JFrame {
 		setJMenuBar(jMenuBar1);
 		
 		JLabel jLabel5_1 = new JLabel();
-		jLabel5_1.setBounds(106, 73, 58, 13);
+		jLabel5_1.setBounds(91, 73, 73, 13);
 		jLabel5_1.setText("Parcela:");
 		
-		JLabel lblIdParcela = new JLabel();
-		lblIdParcela.setBounds(176, 73, 81, 13);
+		lblIdParcela = new JLabel();
+		lblIdParcela.setBounds(174, 73, 81, 13);
 		lblIdParcela.setText("01");
 		
 		JLabel lblValor = new JLabel();
-		lblValor.setBounds(106, 96, 52, 13);
+		lblValor.setBounds(91, 96, 73, 13);
 		lblValor.setText("Valor:");
 		
 		JLabel lblData = new JLabel();
-		lblData.setBounds(106, 119, 50, 13);
+		lblData.setBounds(91, 119, 73, 13);
 		lblData.setText("Data:");
 		
-		JLabel lblValorParcela = new JLabel();
-		lblValorParcela.setBounds(174, 96, 83, 13);
+		lblValorParcela = new JLabel();
+		lblValorParcela.setBounds(174, 96, 178, 13);
 		lblValorParcela.setText("01");
 		
-		JLabel lblDataParcela = new JLabel();
+		lblDataParcela = new JLabel();
 		lblDataParcela.setBounds(174, 119, 83, 13);
 		lblDataParcela.setText("01");
 		getContentPane().setLayout(null);
 		getContentPane().add(jLabel1);
-		getContentPane().add(jLabel2);
+		getContentPane().add(lblIdConta);
 		getContentPane().add(lblData);
 		getContentPane().add(lblDataParcela);
 		getContentPane().add(jLabel6);
@@ -130,11 +141,11 @@ public class RenegociarParcela extends javax.swing.JFrame {
 		
 		lblDescrio = new JLabel();
 		lblDescrio.setText("Descri\u00E7\u00E3o:");
-		lblDescrio.setBounds(106, 251, 50, 13);
+		lblDescrio.setBounds(91, 224, 75, 13);
 		getContentPane().add(lblDescrio);
 		
 		txtDescricao = new JTextField();
-		txtDescricao.setBounds(176, 248, 352, 19);
+		txtDescricao.setBounds(174, 221, 352, 19);
 		getContentPane().add(txtDescricao);
 
 		pack();
@@ -151,6 +162,17 @@ public class RenegociarParcela extends javax.swing.JFrame {
 				JOptionPane.INFORMATION_MESSAGE);
 		this.tela.setVisible(true);
 		dispose();
+		
+		Renegociacao r = new Renegociacao();
+		r.setId(this.parcela.getId());
+		r.setIdConta(this.parcela.getIdConta());
+		r.setNovaData(txtNovaData.getText());
+		r.setNovoValor(Double.parseDouble(txtNovoValor.getText()));
+		r.setDescricao(txtDescricao.getText());
+		r.setValida(true);
+		r.setIdUsuario(this.parcela.getIdUsuario());
+		
+		facade.insereRenegociacao(r);
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
@@ -162,7 +184,10 @@ public class RenegociarParcela extends javax.swing.JFrame {
 	private javax.swing.ButtonGroup buttonGroup5;
 	private javax.swing.JButton btnSalvar;
 	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
+	private javax.swing.JLabel lblIdConta;
+	private javax.swing.JLabel lblIdParcela;
+	private javax.swing.JLabel lblValorParcela;
+	private javax.swing.JLabel lblDataParcela;
 	private javax.swing.JLabel jLabel6;
 	private javax.swing.JLabel jLabel7;
 	private javax.swing.JMenuBar jMenuBar1;
