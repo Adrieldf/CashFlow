@@ -214,7 +214,7 @@ public class Facade {
         return contaDAO.buscaContaPorTipo(tipo, idUsuario);
     }
 
-    public void insereConta(Conta conta){
+	public void insereConta(Conta conta){
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
         ContaDAO contaDAO = fabrica.getContaDAO();
         contaDAO.insere(conta);
@@ -244,10 +244,10 @@ public class Facade {
         return parcelaDAO.buscaParcelasDaConta(idConta,idUsuario);
     }
     
-    public void insereParcelas(Parcela parcela){
+    public void insereParcelas(List<Parcela> parcelas){
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
         ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
-        parcelaDAO.insere(parcela);
+        parcelaDAO.insere(parcelas);
     }
 
     public void removeParcelas(Parcela parcela){

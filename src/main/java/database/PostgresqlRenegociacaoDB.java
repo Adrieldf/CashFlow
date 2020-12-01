@@ -134,7 +134,7 @@ public class PostgresqlRenegociacaoDB implements RenegociacaoDAO {
 				r.setNovaData(rs.getString("data"));
 				r.setNovoValor(rs.getDouble("valor"));
 				r.setDescricao(rs.getString("descricao"));
-				r.setValida(rs.getInt("descricao") == 1 ? true : false);
+				r.setValida(rs.getInt("valida") == 1 ? true : false);
 				renegociacoes.add(r);
 			}
 

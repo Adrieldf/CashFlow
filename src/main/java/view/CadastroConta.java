@@ -401,13 +401,12 @@ public class CadastroConta extends JFrame {
                 System.out.println(idConta);
 
 		List<Parcela> listaParcelas = montaParcelas();
-
 		for (Parcela parcela : listaParcelas) {
 			parcela.setIdConta(idConta);
 			parcela.setIdUsuario(this.idUsuario);
-			facade.insereParcelas(parcela);
 		}
-                
+		facade.insereParcelas(listaParcelas);  
+		
                 input_valor.setText("");
                 input_data.setText("");
                 input_parcelas.setText("");

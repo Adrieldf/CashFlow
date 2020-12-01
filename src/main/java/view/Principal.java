@@ -197,6 +197,7 @@ public class Principal extends javax.swing.JFrame {
 	}// GEN-LAST:event_jMenu1ActionPerformed
 
 	private void btnContasActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnContasActionPerformed
+		listaDeContas.atualizaDados();
 		listaDeContas.setVisible(true);
 		this.setVisible(false);
 	}// GEN-LAST:event_btnContasActionPerformed

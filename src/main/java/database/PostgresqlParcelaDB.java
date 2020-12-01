@@ -106,25 +106,32 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
     }
 
     @Override
-    public void insere(Parcela parcela) {
-    	if (parcela == null) {
+    public void insere(List<Parcela> parcelas) {
+    	if (parcelas == null || parcelas.size() == 0) {
 			return;
 		}
 
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement(
-					"insert into parcela (\"idConta\", data, valor, \"valorPago\", desconto, \"idUsuario\") values (?, ?, ?, ?, ?, ?)");
+			int index = 1;
+			for (Parcela parcela : parcelas) {
+				
+				pstmt = conn.prepareStatement(
+						"insert into parcela (id, \"idConta\", data, valor, \"valorPago\", desconto, \"idUsuario\") values (?, ?, ?, ?, ?, ?, ?)");
+				
+				pstmt.setInt(1, index);
+				pstmt.setInt(2, parcela.getIdConta());
+				pstmt.setString(3, parcela.getData());
+				pstmt.setDouble(4, parcela.getValor());
+				pstmt.setDouble(5, parcela.getValorPago());
+				pstmt.setDouble(6, parcela.getDesconto());
+				pstmt.setInt(7,  parcela.getIdUsuario());
 
-			pstmt.setInt(1, parcela.getIdConta());
-			pstmt.setString(2, parcela.getData());
-			pstmt.setDouble(3, parcela.getValor());
-			pstmt.setDouble(4, parcela.getValorPago());
-			pstmt.setDouble(5, parcela.getDesconto());
-			pstmt.setInt(6,  parcela.getIdUsuario());
-
-			pstmt.executeUpdate();
+				pstmt.executeUpdate();
+				index++;
+			}
+			
 
 		} catch (SQLException se) {
 			System.out.println("Ocorreu um erro : " + se.getMessage());

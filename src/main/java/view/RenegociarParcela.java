@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import facade.Facade;
 import model.Parcela;
 import model.Renegociacao;
+import utils.MathConverter;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -42,7 +43,7 @@ public class RenegociarParcela extends javax.swing.JFrame {
 		lblIdConta.setText(Integer.toString(this.idConta));
 		this.parcela = facade.buscaParcelaPorCodigo(this.idParcela, this.idConta, this.idUsuario);
 		lblIdParcela.setText(Integer.toString(this.idParcela));
-		lblValorParcela.setText(new DecimalFormat("#.##").format(this.parcela.getValor()));
+		lblValorParcela.setText(MathConverter.DoubleToString(this.parcela.getValor()));
 		lblDataParcela.setText(this.parcela.getData());
 	}
 
@@ -160,19 +161,21 @@ public class RenegociarParcela extends javax.swing.JFrame {
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		JOptionPane.showMessageDialog(null, "Renegociação salva com sucesso!", "Sucesso",
 				JOptionPane.INFORMATION_MESSAGE);
-		this.tela.setVisible(true);
-		dispose();
+		
 		
 		Renegociacao r = new Renegociacao();
 		r.setId(this.parcela.getId());
 		r.setIdConta(this.parcela.getIdConta());
 		r.setNovaData(txtNovaData.getText());
-		r.setNovoValor(Double.parseDouble(txtNovoValor.getText()));
+		r.setNovoValor(MathConverter.StringToDouble(txtNovoValor.getText()));
 		r.setDescricao(txtDescricao.getText());
 		r.setValida(true);
 		r.setIdUsuario(this.parcela.getIdUsuario());
 		
 		facade.insereRenegociacao(r);
+		((DetalheConta)this.tela).atualizaDados();
+		this.tela.setVisible(true);
+		dispose();
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables

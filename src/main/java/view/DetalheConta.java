@@ -32,6 +32,11 @@ public class DetalheConta extends javax.swing.JFrame {
 		this.tela = tela;
 		this.idUsuario = idUsuario;
 		this.idConta = idConta;
+		
+		this.atualizaDados();
+	}
+
+	public void atualizaDados() {
 		List<Parcela> listaParcelas = facade.buscaParcelasDaConta(idConta, idUsuario);
 		List<Renegociacao> listaRenegociacao = facade.buscaRenegociacaoPorConta(idConta, idUsuario);
 
@@ -43,27 +48,28 @@ public class DetalheConta extends javax.swing.JFrame {
 
 		boolean pago = false;
 		boolean renegociado = false;
+		Renegociacao renegociacao = null;
 		for (Parcela parcela : listaParcelas) {
 			pago = false;
 			if (parcela.getValor() == parcela.getValorPago()) {
 				pago = true;
 			}
 			renegociado = false;
+			
 			for (Renegociacao r : listaRenegociacao) {
 				if (r.getId() == parcela.getId()) {
 					renegociado = true;
+					renegociacao = r;
 					break;
 				}
 			}
 
-			Object[] dados = { parcela.getId(), parcela.getValor(), parcela.getData(), pago, renegociado
+			Object[] dados = { parcela.getId(), renegociado ? renegociacao.getNovoValor() : parcela.getValor(), renegociado ? renegociacao.getNovaData() : parcela.getData(), pago, renegociado
 
 			};
 			linha.addRow(dados);
 		}
-
 	}
-
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
