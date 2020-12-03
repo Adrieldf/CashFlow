@@ -473,6 +473,8 @@ public class ListaDeContas extends JFrame {
 		String nomeProduto = "";
 		boolean efetuado = false;
 		boolean renegociado = false;
+                
+                //atualizaDados();
 
 		for (Conta conta : listaContas) {
 			String tipo = "A receber";
