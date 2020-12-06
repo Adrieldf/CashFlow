@@ -14,6 +14,8 @@ public interface ParcelaDAO {
 
     List<Parcela> buscaParcelasDaConta(int idConta, int idUsuario);
     
+    List<Parcela> buscaParcelasDoUsuario(int idUsuario);
+    
     void insere(List<Parcela> parcelas);
 
     void remove(Parcela parcela);

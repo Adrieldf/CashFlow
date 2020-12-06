@@ -104,7 +104,45 @@ public class PostgresqlParcelaDB implements ParcelaDAO{
 
 		return parcelas;
     }
+    @Override
+    public List<Parcela> buscaParcelasDoUsuario(int idUsuario) {
+    	List<Parcela> parcelas = new ArrayList<Parcela>();
 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			pstmt = conn.prepareStatement("select * from parcela where \"idUsuario\" = ?");
+		
+			pstmt.setInt(1, idUsuario);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Parcela p = new Parcela();
+				p.setId(rs.getInt("id"));
+				p.setIdConta(rs.getInt("idConta"));
+				p.setData(rs.getString("data"));
+				p.setValor(rs.getDouble("valor"));
+				p.setValorPago(rs.getDouble("valorPago"));
+				p.setDesconto(rs.getDouble("desconto"));
+				p.setIdUsuario(rs.getInt("idUsuario"));
+				parcelas.add(p);
+			}
+
+		} catch (SQLException se) {
+			System.out.println("Ocorreu um erro : " + se.getMessage());
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return parcelas;
+    }
     @Override
     public void insere(List<Parcela> parcelas) {
     	if (parcelas == null || parcelas.size() == 0) {

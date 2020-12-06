@@ -49,7 +49,7 @@ public class Projecoes extends JFrame {
     public Projecoes(int idUsuario, JFrame tela) {
         initComponents();
         this.tela = tela;
-        listaContas = facade.buscaTodos(idUsuario);
+        listaContas = facade.buscaTodasContas(idUsuario);
         listaParcelas = new ArrayList<Parcela>();
         
         for (Conta conta : listaContas) {

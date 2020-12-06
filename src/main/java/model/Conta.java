@@ -63,5 +63,13 @@ public class Conta {
 	public void setIdProduto(int idProduto) {
 		this.idProduto = idProduto;
 	}
-
+	
+	public String getTipoString() {
+		if(this.getTipo() == 2)
+			return "A receber";
+		if(this.getTipo() == 1)
+			return "A pagar";
+		
+		return "";
+	}
 }

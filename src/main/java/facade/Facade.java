@@ -195,7 +195,7 @@ public class Facade {
         return contaDAO.buscaConta(id, idUsuario);
     }
 
-    public List<Conta> buscaTodos(int idUsuario)
+    public List<Conta> buscaTodasContas(int idUsuario)
     {
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
         ContaDAO contaDAO = fabrica.getContaDAO();
@@ -243,6 +243,12 @@ public class Facade {
         ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
         return parcelaDAO.buscaParcelasDaConta(idConta,idUsuario);
     }
+    public List<Parcela> buscaParcelasDoUsuario(int idUsuario){
+        DAOFactory fabrica = PostgresqlDBFactory.getInstancia();
+        ParcelaDAO parcelaDAO = fabrica.getParcelaDAO();
+        return parcelaDAO.buscaParcelasDoUsuario(idUsuario);
+    }
+    
     
     public void insereParcelas(List<Parcela> parcelas){
         DAOFactory fabrica = PostgresqlDBFactory.getInstancia();

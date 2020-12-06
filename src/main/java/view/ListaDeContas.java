@@ -45,7 +45,7 @@ public class ListaDeContas extends JFrame {
 		listaCategorias = facade.buscaTodasCategorias(idUsuario);
 		listaProdutos = facade.buscaTodosProdutos(idUsuario);
 		listaFornecedor = facade.buscaTodosFornecedor(idUsuario);
-		listaContas = facade.buscaTodos(idUsuario);
+		listaContas = facade.buscaTodasContas(idUsuario);
 		listaParcelas = new ArrayList<Parcela>();
 
 		for (Conta conta : listaContas) {
