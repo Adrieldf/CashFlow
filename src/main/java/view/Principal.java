@@ -272,7 +272,7 @@ public class Principal extends javax.swing.JFrame {
 			}
 			Conta c = facade.buscaConta(p.getIdConta(), this.idUsuario);
 			@SuppressWarnings("deprecation")
-			Object[] linha = { c.getTipoString(), c.getDescricao(), valorParcela, p.getValorPago(),
+			Object[] linha = { c.getTipoString(), c.getId(), valorParcela, p.getValorPago(),
 					dataParcela.getDate() };
 
 			tableModel.addRow(linha);

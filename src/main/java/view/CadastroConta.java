@@ -396,7 +396,6 @@ public class CadastroConta extends JFrame {
 
 		facade.insereConta(conta);
 		int idConta = facade.buscaUltimoIdDaConta(this.idUsuario);
-                System.out.println(idConta);
 
 		List<Parcela> listaParcelas = montaParcelas();
 		for (Parcela parcela : listaParcelas) {

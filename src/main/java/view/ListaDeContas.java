@@ -17,6 +17,7 @@ import model.Fornecedor;
 import model.Produto;
 import model.Conta;
 import model.Parcela;
+import model.Renegociacao;
 
 public class ListaDeContas extends JFrame {
 
@@ -27,6 +28,7 @@ public class ListaDeContas extends JFrame {
 	private List<Conta> listaContasFiltro;
 	private List<Conta> listaContas;
 	private List<Parcela> listaParcelas;
+        private List<Renegociacao> listaRenegociacao;
 	private Facade facade = new Facade();
 	private JFrame tela;
 	public ListaDeContasController contasController = new ListaDeContasController();
@@ -45,11 +47,16 @@ public class ListaDeContas extends JFrame {
 		listaFornecedor = facade.buscaTodosFornecedor(idUsuario);
 		listaContas = facade.buscaTodasContas(idUsuario);
 		listaParcelas = new ArrayList<Parcela>();
+                listaRenegociacao = new ArrayList<Renegociacao>();
 
 		for (Conta conta : listaContas) {
 			for (Parcela parcela : facade.buscaParcelaPorConta(conta.getId(), idUsuario)) {
 				listaParcelas.add(parcela);
 			}
+                        
+                        for(Renegociacao r: facade.buscaRenegociacaoPorConta(conta.getId(), idUsuario)){
+                            listaRenegociacao.add(r);
+                        }
 		}
 
 		preencheComboboxCategoria();
@@ -472,7 +479,7 @@ public class ListaDeContas extends JFrame {
 		boolean efetuado = false;
 		boolean renegociado = false;
                 
-                //atualizaDados();
+                atualizaDados();
 
 		for (Conta conta : listaContas) {
 			String tipo = "A receber";
@@ -487,9 +494,12 @@ public class ListaDeContas extends JFrame {
 				if (parcela.getIdConta() == conta.getId()) {
 					valor = valor + parcela.getValor();
 					valorPago = valorPago + parcela.getValorPago();
-					if (parcela.isRenegociada()) {
-						renegociado = true;
-					}
+                                        for(Renegociacao renegociacao:listaRenegociacao){
+                                            if(renegociacao.getId()==parcela.getId() && renegociacao.getIdConta() == parcela.getIdConta()){
+                                                renegociado = true;
+                                                break;
+                                            }
+                                        }
 				}
 			}
 
