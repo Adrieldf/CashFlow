@@ -9,9 +9,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
-import controller.ContaController;
 import controller.ListaDeContasController;
-import controller.TelaPrincipalController;
 import facade.Facade;
 import java.util.ArrayList;
 import model.Categoria;

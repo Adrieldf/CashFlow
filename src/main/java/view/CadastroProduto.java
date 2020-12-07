@@ -1,8 +1,5 @@
 package view;
 
-//import controller.Controller;
-import controller.CadastroProdutoController;
-import controller.TelaPrincipalController;
 import facade.Facade;
 import java.io.FileNotFoundException;
 import java.io.IOException;

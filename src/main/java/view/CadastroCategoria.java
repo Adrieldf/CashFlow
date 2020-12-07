@@ -1,12 +1,9 @@
 package view;
 
-//import controller.Controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import controller.CadastroCategoriaController;
-import controller.TelaPrincipalController;
 import java.util.List;
 
 import javax.swing.JFrame;

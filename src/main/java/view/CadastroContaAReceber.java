@@ -1,7 +1,6 @@
 package view;
 
 //import controller.Controller;
-import controller.TelaPrincipalController;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;

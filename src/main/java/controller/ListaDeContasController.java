@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Conta;
 import view.ListaDeContas;
-import controller.ContaController;
 import model.Parcela;
 
 public class ListaDeContasController {

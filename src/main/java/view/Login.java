@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import controller.TelaPrincipalController;
 import facade.Facade;
 import model.Usuario;
 import javax.swing.JButton;
@@ -251,7 +250,7 @@ public class Login extends JFrame {
         usuario = facade.buscaUsuarioPorLogin(input_user.getText());
         
         if(usuario == null || !(input_senha.getText().equals(usuario.getSenha())) ) {
-        	 JOptionPane.showMessageDialog(null, "Usuário e/ou senha não conferem! Tente novamente", "Erro ao fazer login", JOptionPane.INFORMATION_MESSAGE);
+        	 JOptionPane.showMessageDialog(null, "Usuï¿½rio e/ou senha nï¿½o conferem! Tente novamente", "Erro ao fazer login", JOptionPane.INFORMATION_MESSAGE);
         	 return;
         }
 

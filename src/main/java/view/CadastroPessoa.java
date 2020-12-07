@@ -1,7 +1,5 @@
 package view;
 
-//import controller.Controller;
-import controller.TelaPrincipalController;
 import facade.Facade;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -73,7 +71,7 @@ public class CadastroPessoa extends JFrame {
 
         jLabel3.setText("Email:");
 
-        jLabel4.setText("Endereço:");
+        jLabel4.setText("Endereï¿½o:");
 
         input_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
