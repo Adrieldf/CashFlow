@@ -258,15 +258,19 @@ public class Principal extends javax.swing.JFrame {
 					}
 				}
 			}
-			if (dataParcela.after(maxdate) || (dataParcela.before(today) && p.getValorPago() >= valorParcela)) {
+			/*if (dataParcela.after(maxdate) || (dataParcela.before(today) && p.getValorPago() >= valorParcela) || p.getValorPago() >= valorParcela) {
 				continue;
-			}
-			Conta c = facade.buscaConta(p.getIdConta(), this.idUsuario);
-			@SuppressWarnings("deprecation")
-			Object[] linha = { c.getTipoString(), c.getId(), valorParcela, p.getValorPago(),
-					dataParcela.getDate() };
+			}*/
+			//se estiver aparecendo registros que nao for para aparecer na tela principal testar o if acima com o continue daí (é para ser a logica inversa)
+			if((dataParcela.before(today) && p.getValorPago() < valorParcela) || (dataParcela.before(maxdate) && p.getValorPago() < valorParcela)) {
+				Conta c = facade.buscaConta(p.getIdConta(), this.idUsuario);
+				@SuppressWarnings("deprecation")
+				Object[] linha = { c.getTipoString(), c.getId(), valorParcela, p.getValorPago(),
+						dataParcela.getDate() };
 
-			tableModel.addRow(linha);
+				tableModel.addRow(linha);
+			}
+			
 		}
 
 		gridContas.setViewportView(grid);
