@@ -7,7 +7,6 @@ public class Pessoa {
     private String telefone;
     private String email;
     private String endereco;
-    private int idUsuario;
 
     public Pessoa() {
 
@@ -20,7 +19,13 @@ public class Pessoa {
         this.email = email;
         this.endereco = endereco;
     }
-
+    
+    public Pessoa( String nome, String telefone, String email, String endereco) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+    }
     public int getId() {
         return id;
     }
