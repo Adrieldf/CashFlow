@@ -192,7 +192,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 				linha.addRow(dados);
 
 				input_produto.setText("");
-
+				atualizaDados();
 				break;
 			}
 		}
