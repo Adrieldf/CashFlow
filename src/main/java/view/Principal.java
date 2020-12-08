@@ -129,7 +129,6 @@ public class Principal extends javax.swing.JFrame {
 		btnContasAPagar = new javax.swing.JMenuItem();
 		jMenu1 = new javax.swing.JMenu();
 		btnContas = new javax.swing.JMenuItem();
-		btnProjecoes = new javax.swing.JMenuItem();
 		grid = new javax.swing.JTable();
 		gridContas = new javax.swing.JScrollPane();
 
@@ -198,14 +197,6 @@ public class Principal extends javax.swing.JFrame {
 			}
 		});
 		jMenu1.add(btnContas);
-
-		btnProjecoes.setText("Projeções");
-		btnProjecoes.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				btnProjecoesActionPerformed(evt);
-			}
-		});
-		jMenu1.add(btnProjecoes);
 
 		jMenuBar1.add(jMenu1);
 
@@ -363,11 +354,6 @@ public class Principal extends javax.swing.JFrame {
 		this.setVisible(false);
 	}// GEN-LAST:event_btnContasActionPerformed
 
-	private void btnProjecoesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnProjecoesActionPerformed
-		projecoes.setVisible(true);
-		this.setVisible(false);
-	}// GEN-LAST:event_btnProjecoesActionPerformed
-
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -403,7 +389,6 @@ public class Principal extends javax.swing.JFrame {
 	private javax.swing.JMenuItem btnFornecedor;
 	private javax.swing.JMenuItem btnPessoa;
 	private javax.swing.JMenuItem btnProduto;
-	private javax.swing.JMenuItem btnProjecoes;
 	private javax.swing.JMenu jMenu1;
 	private javax.swing.JMenuBar jMenuBar1;
 	private JScrollPane gridContas;
