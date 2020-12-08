@@ -228,10 +228,9 @@ public class Principal extends javax.swing.JFrame {
 		});
 
 		gridContas.setViewportView(grid);
-		this.atualizaGrid();
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void atualizaGrid() {
+	public void atualizaGrid() {
 
 		DefaultTableModel tableModel = (DefaultTableModel) grid.getModel();
 		tableModel.getDataVector().removeAllElements();

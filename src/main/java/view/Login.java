@@ -255,6 +255,7 @@ public class Login extends JFrame {
         }
 
         Principal principal = new Principal(usuario.getId());
+        principal.atualizaGrid();
         principal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
