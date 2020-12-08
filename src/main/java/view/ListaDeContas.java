@@ -410,10 +410,12 @@ public class ListaDeContas extends JFrame {
 				return true;
 			}
 		}
-
+		encontrou = false;
 		if (combobox_situacao.getSelectedItem().equals("Finalizada")) {
 			for (Parcela parcela : listaParcelas) {
 				if (parcela.getValor() != parcela.getValorPago()) {
+					System.out.println(parcela.getValor());
+					System.out.println(parcela.getValorPago());
 					encontrou = true;
 					break;
 				}
@@ -479,8 +481,6 @@ public class ListaDeContas extends JFrame {
 		boolean efetuado = false;
 		boolean renegociado = false;
                 
-                atualizaDados();
-
 		for (Conta conta : listaContas) {
 			String tipo = "A receber";
 			if (conta.getTipo() == 1) {
@@ -531,6 +531,7 @@ public class ListaDeContas extends JFrame {
 	}
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
+		atualizaDados();
 		exibeTodasContas(false);
 	}// GEN-LAST:event_jButton2ActionPerformed
 
