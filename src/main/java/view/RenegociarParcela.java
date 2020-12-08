@@ -173,7 +173,7 @@ public class RenegociarParcela extends javax.swing.JFrame {
 		r.setIdUsuario(this.parcela.getIdUsuario());
 		
 		this.parcela.setValor(MathConverter.StringToDouble(txtNovoValor.getText()));
-		
+		facade.alteraParcelas(this.parcela);
 		facade.insereRenegociacao(r);
 		((DetalheConta)this.tela).atualizaDados();
 		this.tela.setVisible(true);
