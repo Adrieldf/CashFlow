@@ -195,6 +195,7 @@ public class DetalheConta extends javax.swing.JFrame {
 		facade.alteraParcelas(parcela);
 		((ListaDeContas) this.tela).atualizaDados();
 		atualizaDados();
+		((ListaDeContas) this.tela).exibeTodasContas(true);
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	private void btnRenegociarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnRenegociarActionPerformed
@@ -212,6 +213,8 @@ public class DetalheConta extends javax.swing.JFrame {
 
 	private void btnNovo2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnNovo2ActionPerformed
 		this.tela.setVisible(true);
+		((ListaDeContas) this.tela).atualizaDados();
+		((ListaDeContas) this.tela).exibeTodasContas(true);
 		dispose();
 	}// GEN-LAST:event_btnNovo2ActionPerformed
 

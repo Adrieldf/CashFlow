@@ -468,7 +468,7 @@ public class ListaDeContas extends JFrame {
 		// TODO add your handling code here:
 	}// GEN-LAST:event_combobox_situacaoActionPerformed
 
-	private void exibeTodasContas(boolean filtro) {
+	public void exibeTodasContas(boolean filtro) {
 		DefaultTableModel linha = (DefaultTableModel) grid.getModel();
 		linha.getDataVector().removeAllElements();
 		linha.setRowCount(0);

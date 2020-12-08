@@ -19,6 +19,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -264,10 +266,14 @@ public class Principal extends javax.swing.JFrame {
 			//se estiver aparecendo registros que nao for para aparecer na tela principal testar o if acima com o continue daí (é para ser a logica inversa)
 			if((dataParcela.before(today) && p.getValorPago() < valorParcela) || (dataParcela.before(maxdate) && p.getValorPago() < valorParcela)) {
 				Conta c = facade.buscaConta(p.getIdConta(), this.idUsuario);
+				
+				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy");
+				DecimalFormat nf = new DecimalFormat("#0,00");  //nao funcionou muito bem
+				
 				@SuppressWarnings("deprecation")
 				Object[] linha = { c.getTipoString(), c.getId(), valorParcela, p.getValorPago(),
-						dataParcela.getDate() };
-
+						df.format(dataParcela)};
+			
 				tableModel.addRow(linha);
 			}
 			
